@@ -1,0 +1,67 @@
+---
+import ExperienceCard from "./ExperienceCard.tsx";
+import type { Experience } from "@types/index";
+import type { Lang } from "i18n";
+import { useTranslations } from "@i18n/utils";
+
+interface Props {
+  experiences: Experience[];
+  lang: Lang;
+}
+
+const { experiences, lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="relative w-full max-w-6xl mx-auto mt-12 px-4 pb-8">
+  <div class="relative py-4">
+    <div class="relative">
+      <!-- Ligne verticale centrale continue - utilise style inline pour éviter conflit Tailwind -->
+      <div
+        class="absolute left-1/2 top-0 bottom-0 w-2 transform -translate-x-1/2 z-0"
+        style="background-color: #6366f1;"
+      >
+      </div>
+
+      {
+        experiences.map((experience, index) => {
+          // Alternance gauche/droite selon le schéma : index pair = gauche, impair = droite
+          const side = index % 2 === 0 ? "left" : "right";
+          const isLast = index === experiences.length - 1;
+
+          // Préparer les traductions pour cette expérience
+          const translations = {
+            company: t(`experience.list.${experience.id}.company` as any),
+            position: t(`experience.list.${experience.id}.position` as any),
+            period: t(`experience.list.${experience.id}.period` as any),
+            description: t(
+              `experience.list.${experience.id}.description` as any,
+            ),
+            technologiesLabel: t("experience.tech_used"),
+          };
+
+          return (
+            <div class={`relative flex items-center ${!isLast ? "mb-20" : ""}`}>
+              <!-- Point rempli - utilise style inline pour éviter conflit Tailwind -->
+              <div 
+                class="absolute left-1/2 w-8 h-8 rounded-full transform -translate-x-1/2 z-10 shadow-lg" 
+                style="background-color: #6366f1;"
+              />
+
+              <div
+                class={`w-full md:w-[calc(50%-2rem)] ${side === "left" ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"} ml-8 md:ml-0`}
+              >
+                <ExperienceCard
+                  client:load
+                  experience={experience}
+                  translations={translations}
+                  side={side}
+                />
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>

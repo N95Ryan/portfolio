@@ -9,6 +9,9 @@ export interface Project {
   github?: string;
   demo?: string;
   featured?: boolean;
+  bgcolor: string;
+  textColor: string;
+  link: string;
 }
 
 export interface Experience {

@@ -1,0 +1,25 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import BackgroundAnimation from "@components/ui/BackgroundAnimation.astro";
+import ExperienceTimeline from "@components/experience/ExperienceTimeline.astro";
+import { experiences } from "@data/experience";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const title = "Expérience - Ryan PINA-SILASSE";
+const description = "Mon expérience professionnelle";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<MainLayout title={title} description={description}>
+  <BackgroundAnimation />
+  <div class="flex flex-col min-h-screen py-16 px-4">
+    <div id="experience">
+      <h3 class="text-5xl font-semibold text-indigo-500 text-center">
+        {t("experience.title")}
+      </h3>
+      <hr class="my-8 border-t border-indigo-700 w-1/2 mx-auto" />
+    </div>
+    <ExperienceTimeline experiences={experiences} lang={lang} />
+  </div>
+</MainLayout>

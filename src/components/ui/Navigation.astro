@@ -7,7 +7,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+<nav
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out"
+>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Navigation Desktop -->
@@ -78,6 +81,7 @@ const t = useTranslations(lang);
 <script>
   const mobileMenuButton = document.getElementById("mobile-menu-button");
   const mobileMenu = document.getElementById("mobile-menu");
+  const mainNav = document.getElementById("main-nav");
 
   mobileMenuButton?.addEventListener("click", () => {
     mobileMenu?.classList.toggle("hidden");
@@ -90,4 +94,39 @@ const t = useTranslations(lang);
       mobileMenu?.classList.add("hidden");
     });
   });
+
+  // Hide/show navigation on scroll (desktop only)
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function handleScroll() {
+    if (window.innerWidth < 768) return; // Mobile: pas de masquage
+
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY < 50) {
+      // En haut de la page, toujours afficher
+      mainNav?.classList.remove("-translate-y-full");
+    } else if (currentScrollY > lastScrollY) {
+      // Scroll vers le bas: cacher
+      mainNav?.classList.add("-translate-y-full");
+    } else {
+      // Scroll vers le haut: afficher
+      mainNav?.classList.remove("-translate-y-full");
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    },
+    { passive: true },
+  );
 </script>
