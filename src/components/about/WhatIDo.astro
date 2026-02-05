@@ -1,0 +1,59 @@
+---
+import { useTranslations } from "@i18n/utils";
+import type { Lang } from "@types/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="mt-12 w-full max-w-5xl mx-auto">
+  <h2 class="text-3xl sm:text-4xl font-bold text-white mb-8 text-center">
+    {t("about.whatIDo.title")}
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Frontend & Web -->
+    <div class="bg-gray-800 hover:bg-opacity-50 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-indigo-400 mb-3">
+        {t("about.whatIDo.frontend.title")}
+      </h3>
+      <p class="text-white text-sm leading-relaxed mb-3">
+        {t("about.whatIDo.frontend.description")}
+      </p>
+    </div>
+
+    <!-- Backend & APIs -->
+    <div class="bg-gray-800 hover:bg-opacity-50 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-indigo-400 mb-3">
+        {t("about.whatIDo.backend.title")}
+      </h3>
+      <p class="text-white text-sm leading-relaxed mb-3">
+        {t("about.whatIDo.backend.description")}
+      </p>
+    </div>
+
+    <!-- Mobile Development -->
+    <div class="bg-gray-800 hover:bg-opacity-50 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-indigo-400 mb-3">
+        {t("about.whatIDo.mobile.title")}
+      </h3>
+      <p class="text-white text-sm leading-relaxed mb-3">
+        {t("about.whatIDo.mobile.description")}
+      </p>
+    </div>
+
+    <!-- Testing & Quality -->
+    <div class="bg-gray-800 hover:bg-opacity-50 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-indigo-400 mb-3">
+        {t("about.whatIDo.testing.title")}
+      </h3>
+      <p class="text-white text-sm leading-relaxed mb-3">
+        {t("about.whatIDo.testing.description")}
+      </p>
+    </div>
+  </div>
+</div>
