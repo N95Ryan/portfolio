@@ -1,7 +1,7 @@
 ---
 // src/components/about/AboutInfos.astro
-import { useTranslations } from '@i18n/utils';
-import type { Lang } from '@types/i18n';
+import { useTranslations } from "@i18n/utils";
+import type { Lang } from "@types/i18n";
 
 interface Props {
   lang: Lang;
@@ -11,11 +11,13 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<div class="flex flex-col items-center justify-center md:w-1/2 mx-6 animate-fade-left animate-once animate-duration-[1300ms]">
-  <h2 class="text-2xl sm:text-3xl font-bold text-white mb-8">
-    {t('about.introduction')}
+<div class="flex flex-col items-start justify-center w-full">
+  <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
+    {t("about.introduction")}
   </h2>
-  <p class="text-white text-base sm:text-lg mb-6 w-full sm:w-auto leading-relaxed tracking-wide whitespace-pre-wrap">
-    {t('about.description')}
+  <p
+    class="text-white text-base sm:text-lg leading-relaxed tracking-wide whitespace-pre-wrap"
+  >
+    {t("about.description")}
   </p>
 </div>

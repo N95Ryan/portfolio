@@ -1,0 +1,41 @@
+---
+import SkillsGrid from "./SkillsGrid";
+import type { SkillItem } from "@utils/skillDetails";
+import type { Lang } from "@types/i18n";
+import { useTranslations } from "@i18n/utils";
+
+interface Props {
+  skills: SkillItem[];
+  category: string;
+  lang: Lang;
+}
+
+const { skills, category, lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Préparer les traductions pour le composant React
+const translations: Record<string, string> = {};
+// Préparer les données sérialisables (sans les composants React)
+const serializableSkills = skills.map((skill) => ({ key: skill.key }));
+
+skills.forEach((skill) => {
+  const key = `skills.list.${category}.${skill.key}`;
+  translations[key] = t(key as any);
+});
+---
+
+<div class="my-6">
+  <p class="text-white text-3xl text-center my-4">
+    {t(`skills.${category}` as any)}
+  </p>
+  <div
+    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 justify-items-center mx-8 lg:mx-[20rem] gap-6"
+  >
+    <SkillsGrid
+      client:load
+      skills={serializableSkills}
+      category={category}
+      translations={translations}
+    />
+  </div>
+</div>
