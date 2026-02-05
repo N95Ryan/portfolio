@@ -1,19 +1,16 @@
 ---
-import SocialLinks from '@components/ui/SocialLinks.astro';
-
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-gray-50 border-t border-gray-200 mt-20">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-      <!-- Copyright -->
-      <p class="text-gray-600 text-sm">
-        © {currentYear} Ryan Pina. All rights reserved.
-      </p>
-
-      <!-- Social Links -->
-      <SocialLinks />
-    </div>
+<footer class="w-full bg-[#070707] text-center overflow-hidden">
+  <div class="text-sm font-extralight p-4 text-center text-white">
+    ©{currentYear} Copyright :
+    <a 
+      href="https://ryan-pina.com/" 
+      rel="noopener noreferrer"
+      class="hover:text-purple-400 transition-colors duration-300"
+    >
+      {" "}Ryan Pina-Silasse
+    </a>
   </div>
 </footer>
