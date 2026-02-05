@@ -1,0 +1,34 @@
+---
+import { languages } from '@i18n/ui';
+import { getLangFromUrl, useTranslatedPath } from '@i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+---
+
+<div class="relative group">
+  <button
+    class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+    aria-label="Change language"
+  >
+    <span class="text-sm font-medium uppercase">{lang}</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div class="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+    {Object.entries(languages).map(([code, name]) => (
+      <a
+        href={translatePath(currentPath, code)}
+        class:list={[
+          'block px-4 py-2 text-sm hover:bg-gray-100 transition-colors first:rounded-t-lg last:rounded-b-lg',
+          { 'bg-blue-50 text-blue-600 font-medium': lang === code }
+        ]}
+      >
+        {name}
+      </a>
+    ))}
+  </div>
+</div>

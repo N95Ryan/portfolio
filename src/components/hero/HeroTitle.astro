@@ -1,0 +1,60 @@
+---
+// src/components/hero/HeroTitle.astro
+import CTAButtons from "./CTAButtons.astro";
+---
+
+<div class="flex flex-col items-center justify-center min-h-screen">
+  <h1
+    class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 mb-4 animate-fade-down animate-duration-800"
+  >
+    Ryan PINA-SILASSE
+  </h1>
+  <h2
+    class="flex justify-center text-2xl md:text-3xl text-white tracking-tight"
+  >
+    <span class="inline-block animate-fade-up animate-delay-[50ms]">S</span>
+    <span class="inline-block animate-fade-up animate-delay-[100ms]">o</span>
+    <span class="inline-block animate-fade-up animate-delay-[150ms]">f</span>
+    <span class="inline-block animate-fade-up animate-delay-[200ms]">t</span>
+    <span class="inline-block animate-fade-up animate-delay-[250ms]">w</span>
+    <span class="inline-block animate-fade-up animate-delay-[300ms]">a</span>
+    <span class="inline-block animate-fade-up animate-delay-[350ms]">r</span>
+    <span class="inline-block animate-fade-up animate-delay-[400ms]">e</span>
+    <span class="inline-block animate-fade-up animate-delay-[450ms]"
+      >&nbsp;</span
+    >
+    <span class="inline-block animate-fade-up animate-delay-[500ms]">E</span>
+    <span class="inline-block animate-fade-up animate-delay-[550ms]">n</span>
+    <span class="inline-block animate-fade-up animate-delay-[600ms]">g</span>
+    <span class="inline-block animate-fade-up animate-delay-[650ms]">i</span>
+    <span class="inline-block animate-fade-up animate-delay-[700ms]">n</span>
+    <span class="inline-block animate-fade-up animate-delay-[750ms]">e</span>
+    <span class="inline-block animate-fade-up animate-delay-[800ms]">e</span>
+    <span class="inline-block animate-fade-up animate-delay-[850ms]">r</span>
+  </h2>
+  <h3
+    class="text-lg md:text-xl text-white tracking-tight flex items-center space-x-2 mt-4"
+  >
+    <span
+      class="inline-block animate-fade-right animate-delay-[900ms] animate-duration-500"
+      >Needs</span
+    >
+    <span
+      class="inline-block animate-fade-right animate-delay-[1100ms] animate-duration-500 text-cyan-400"
+      >{`→`}</span
+    >
+    <span
+      class="inline-block animate-fade-right animate-delay-[1300ms] animate-duration-500"
+      >Problems</span
+    >
+    <span
+      class="inline-block animate-fade-right animate-delay-[1500ms] animate-duration-500 text-cyan-400"
+      >{`→`}</span
+    >
+    <span
+      class="inline-block animate-fade-right animate-delay-[1700ms] animate-duration-500"
+      >Solutions</span
+    >
+  </h3>
+  <CTAButtons />
+</div>

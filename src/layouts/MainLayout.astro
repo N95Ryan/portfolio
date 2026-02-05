@@ -1,0 +1,22 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Navigation from '@components/ui/Navigation.astro';
+import Footer from '@components/sections/Footer.astro';
+import { getLangFromUrl } from '@i18n/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <Navigation />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>

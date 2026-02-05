@@ -1,0 +1,93 @@
+---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { NAVIGATION_ITEMS } from "@utils/constants";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Navigation Desktop -->
+      <ul class="hidden md:flex items-center space-x-8">
+        {
+          NAVIGATION_ITEMS.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-white hover:text-purple-400 transition-colors font-medium"
+              >
+                {t(item.key)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Mobile Menu Button (Left) -->
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors text-white"
+        aria-label="Toggle menu"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <!-- Language Switcher (Right) -->
+      <div class="flex items-center">
+        <LanguageSwitcher />
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden pb-4 bg-black/80 backdrop-blur-md rounded-lg mt-2"
+    >
+      <ul class="space-y-2 p-2">
+        {
+          NAVIGATION_ITEMS.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="block py-2 px-4 text-white hover:bg-white/10 rounded-lg transition-colors"
+              >
+                {t(item.key)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+  });
+
+  // Close mobile menu when clicking on a link
+  const mobileLinks = mobileMenu?.querySelectorAll("a");
+  mobileLinks?.forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu?.classList.add("hidden");
+    });
+  });
+</script>
