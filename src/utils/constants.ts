@@ -11,10 +11,10 @@ export const SOCIAL_LINKS = {
 } as const;
 
 export const NAVIGATION_ITEMS = [
-  { key: 'nav.home', href: '#home' },
-  { key: 'nav.about', href: '#about' },
-  { key: 'nav.skills', href: '#skills' },
-  { key: 'nav.experience', href: '#experience' },
-  { key: 'nav.projects', href: '#projects' },
-  { key: 'nav.contact', href: '#contact' },
+  { key: 'nav.home', href: "/" },
+  { key: 'nav.about', href: "/about" },
+  { key: 'nav.skills', href: 'skills' },
+  { key: 'nav.experience', href: "/experience" },
+  { key: 'nav.projects', href: "/projects" },
+  { key: 'nav.contact', href: "/contact" },
 ] as const;
