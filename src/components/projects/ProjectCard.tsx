@@ -1,20 +1,16 @@
 import { projects } from "@data/projects";
+import type { Language } from "@types/index";
 
 interface ProjectCardProps {
   projectId: string;
-  image: string;
-  translations: {
-    name: string;
-    description: string;
-    technologies: string;
-    buttonLabel: string;
-  };
+  lang: Language;
+  buttonLabel: string;
 }
 
 export default function ProjectCard({
   projectId,
-  image,
-  translations,
+  lang,
+  buttonLabel,
 }: ProjectCardProps) {
   // Récupérer les données du projet depuis projects.ts
   const project = projects.find((p) => p.id === projectId);
@@ -23,22 +19,36 @@ export default function ProjectCard({
     return null;
   }
 
-  const {
-    name: projectName,
-    description: projectDescription,
-    technologies: projectTechnologies,
-    buttonLabel,
-  } = translations;
+  // Utiliser les données multilingues directement depuis projects.ts
+  const projectName = project.name[lang];
+  const projectDescription = project.description[lang];
+  const projectTechnologies = project.technologies;
 
   // Utiliser les couleurs directement depuis projects.ts
   const bgColor = project.bgcolor || "#ffffff";
   const textColor = project.textColor || "#000000";
+  const linkColor = project.linkColor || "#343a40";
+  const linkTextColor = project.linkTextColor || "#ffffff";
+
+  // Calculer une couleur hover légèrement plus foncée
+  const getHoverColor = (color: string): string => {
+    // Convertir hex en RGB
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    
+    // Assombrir de 15%
+    const darken = (val: number) => Math.max(0, Math.floor(val * 0.85));
+    
+    return `rgb(${darken(r)}, ${darken(g)}, ${darken(b)})`;
+  };
 
   return (
     <div className="w-full max-w-xs mx-auto">
       <div className="relative h-40 md:h-48 lg:h-56 group rounded-t-xl overflow-hidden">
         <img
-          src={image}
+          src={project.image}
           alt={projectName}
           className="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
         />
@@ -77,7 +87,17 @@ export default function ProjectCard({
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-8 py-2 bg-[#343a40] hover:bg-[#212529] transition text-white self-end text-xs md:text-sm font-semibold rounded-lg mt-6 md:mt-0"
+          className="px-8 py-2 transition self-end text-xs md:text-sm font-semibold rounded-lg mt-6 md:mt-0"
+          style={{
+            backgroundColor: linkColor,
+            color: linkTextColor,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = getHoverColor(linkColor);
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = linkColor;
+          }}
         >
           {buttonLabel}
         </a>

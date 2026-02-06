@@ -24,7 +24,6 @@ import {
   SiLighthouse,
 } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
-// import PlaywrightIcon from "@components/skills/PlaywrightIcon";
 import type { IconType } from "react-icons";
 
 export type SkillItem = {
@@ -75,7 +74,6 @@ const devops: SkillItem[] = [
 ];
 
 const testing: SkillItem[] = [
-  // { key: "playwright", icon: PlaywrightIcon as IconType, color: "#45ba4b" },
   { key: "vitest", icon: SiVitest, color: "#6E9F18" },
   { key: "lighthouse", icon: SiLighthouse, color: "#F44B21" },
 ];

@@ -3,7 +3,15 @@
 export interface Project {
   id: string;
   title: string;
-  description: string;
+  name: {
+    en: string;
+    fr: string;
+  };
+  description: {
+    en: string;
+    fr: string;
+  };
+  technologies: string;
   image: string;
   tags: string[];
   github?: string;
@@ -12,6 +20,8 @@ export interface Project {
   bgcolor: string;
   textColor: string;
   link: string;
+  linkColor?: string;
+  linkTextColor?: string;
 }
 
 export interface Experience {

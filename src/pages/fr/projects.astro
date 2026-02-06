@@ -4,43 +4,11 @@ import BackgroundAnimation from "@components/ui/BackgroundAnimation.astro";
 import ProjectCard from "@components/projects/ProjectCard.tsx";
 import { projects } from "@data/projects";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import leafImage from "@assets/projects/Leaf.jpg";
-import neatImage from "@assets/projects/Neat.jpg";
-import hangmanImage from "@assets/projects/The-8bits-hangman.jpg";
-import spotrImage from "@assets/projects/Spotr.jpg";
-import bumbleImage from "@assets/projects/Bumble-B.jpg";
-import konbiniImage from "@assets/projects/Konbini.jpg";
 
 const title = "Projets - Ryan PINA-SILASSE";
 const description = "Une vitrine de mes projets récents et de mon travail";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// Mapping des images
-const imageMap: Record<string, string> = {
-  "0": leafImage.src,
-  "1": neatImage.src,
-  "2": hangmanImage.src,
-  "3": spotrImage.src,
-  "4": bumbleImage.src,
-  "5": konbiniImage.src,
-};
-
-// Préparer les données pour chaque projet
-const projectsData = projects.map((project) => {
-  const translations = {
-    name: t(`projects.list.${project.id}.name` as any),
-    description: t(`projects.list.${project.id}.description` as any),
-    technologies: t(`projects.list.${project.id}.technologies` as any),
-    buttonLabel: t('projects.button_label'),
-  };
-  
-  return {
-    projectId: project.id,
-    image: imageMap[project.id] || project.image,
-    translations,
-  };
-});
 ---
 
 <MainLayout title={title} description={description}>
@@ -53,15 +21,15 @@ const projectsData = projects.map((project) => {
       <hr class="my-8 border-t border-indigo-700 w-1/2 mx-auto" />
     </div>
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 animate-fade-up grow"
+      class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto px-4 animate-fade-up"
     >
       {
-        projectsData.map((projectData) => (
+        projects.map((project) => (
           <ProjectCard 
             client:load 
-            projectId={projectData.projectId} 
-            image={projectData.image} 
-            translations={projectData.translations} 
+            projectId={project.id}
+            lang={lang}
+            buttonLabel={t('projects.button_label')}
           />
         ))
       }
