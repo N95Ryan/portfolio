@@ -27,29 +27,31 @@ const t = useTranslations(lang);
         {t("contact.description")}
       </p>
 
+      <div class="w-full mb-12">
+        <ContactForm 
+          client:load
+          lang={lang}
+          translations={{
+            form: {
+              name: t("contact.form.name"),
+              email: t("contact.form.email"),
+              subject: t("contact.form.subject"),
+              message: t("contact.form.message"),
+              send: t("contact.form.send"),
+            },
+            messages: {
+              success: t("contact.messages.success"),
+              error_email_send: t("contact.messages.error_email_send"),
+            },
+          }}
+        />
+      </div>
+
       <div class="text-center">
         <h4 class="text-2xl font-semibold text-indigo-400 mb-6">
           {t("contact.social.title")}
         </h4>
-        <div class="w-full mb-12">
-          <ContactForm
-            client:load
-            lang={lang}
-            translations={{
-              form: {
-                name: t("contact.form.name"),
-                email: t("contact.form.email"),
-                subject: t("contact.form.subject"),
-                message: t("contact.form.message"),
-                send: t("contact.form.send"),
-              },
-              messages: {
-                success: t("contact.messages.success"),
-                error_email_send: t("contact.messages.error_email_send"),
-              },
-            }}
-          />
-        </div>
+        <ContactSocialLinks client:load />
       </div>
     </div>
   </div>

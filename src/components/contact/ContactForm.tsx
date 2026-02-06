@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Language } from "@types/index";
+import { Resend } from "resend";
 
 interface ContactFormProps {
   lang: Language;

@@ -3,6 +3,8 @@ import type { APIRoute } from "astro";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     const { name, email, subject, message, lang } = await request.json();
@@ -26,19 +28,42 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Envoi de l'email via Resend
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>", // À remplacer par votre domaine vérifié
-      to: ["contact@ryan-pina.dev"], // Votre adresse email
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: ["n95jsryan@gmail.com"],
       replyTo: email,
-      subject: `[Portfolio] ${subject}`,
+      subject: `${subject}`,
       html: `
-        <h2>Nouveau message depuis le portfolio</h2>
-        <p><strong>Nom:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Sujet:</strong> ${subject}</p>
-        <p><strong>Langue:</strong> ${lang === "fr" ? "Français" : "English"}</p>
-        <hr>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Nouveau message</title>
+        </head>
+        <body style="margin: 0; padding: 0; font-family: 'Google Sans', Roboto, Arial, sans-serif; background-color: #ffffff;">
+          <div style="max-width: 100%; margin: 0; padding: 0;">
+            
+            <!-- Message Content -->
+            <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #202124;">
+              <p style="margin: 0 0 16px; white-space: pre-wrap;">${message}</p>
+            </div>
+            
+            <!-- Separator -->
+            <div style="margin: 32px 20px; border-top: 1px solid #e8eaed;"></div>
+            
+            <!-- Footer Info -->
+            <div style="padding: 0 20px 20px; font-size: 12px; color: #5f6368;">
+              <p style="margin: 0 0 8px;">
+                <strong style="color: #202124;">Message envoyé depuis le portfolio</strong>
+              </p>
+              <p style="margin: 0;">
+                Langue: ${lang === "fr" ? "Français" : "English"}
+              </p>
+            </div>
+            
+          </div>
+        </body>
+        </html>
       `,
       text: `
 Nouveau message depuis le portfolio

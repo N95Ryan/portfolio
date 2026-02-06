@@ -17,6 +17,8 @@ export default {
       },
       animation: {
         ripple: 'ripple 3400ms ease infinite',
+        'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
+        'fade-in-right': 'fadeInRight 0.8s ease-out forwards',
       },
       keyframes: {
         ripple: {
@@ -25,6 +27,26 @@ export default {
           },
           '50%': {
             transform: 'translate(-50%, -50%) scale(0.9)',
+          },
+        },
+        fadeInLeft: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateX(-50px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateX(0)',
+          },
+        },
+        fadeInRight: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateX(50px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateX(0)',
           },
         },
       },
