@@ -20,16 +20,16 @@ With several years of experience in software development, I have built a pragmat
 
 💻 As a Software Engineer by profession, I work on web and application projects bringing a global vision: analysis, architecture, performance, and maintainability. Naturally curious, I combine technical rigor and product sense to design reliable, scalable solutions aligned with business challenges.
 
-🎯 Currently freelancing, I support teams and companies on ambitious projects with a clear goal: transforming complex needs into effective and sustainable solutions. I place particular importance on code quality, clarity of technical decisions, and the real impact of deliverables.
+🎯 Currently freelancing, I support teams and companies on ambitious projects with a clear goal: transforming complex needs into effective and sustainable solutions. I place particular importance on code simplicity, quality, clarity of technical decisions, and the real impact of deliverables.
 
 📍 Based in Quebec`,
     'about.whatIDo.title': 'What I do',
     'about.whatIDo.frontend.title': 'Frontend & Web',
-    'about.whatIDo.frontend.description': 'Building modern, responsive web applications with clean architecture and intuitive user experiences. I tend to code in a way that\'s simple, maintainable and performant.',
+    'about.whatIDo.frontend.description': 'I specialize in building responsive, user-focused web applications designed to be fast, clear and easy to evolve. My work emphasizes clean architecture, intuitive UX and frontend performance that scales with the product.',
     'about.whatIDo.backend.title': 'Backend & APIs',
-    'about.whatIDo.backend.description': 'Designing robust, scalable and maintainable backend systems and APIs using the best practices and tools available, RESTful services, GraphQL endpoints, and microservices architecture.',
+    'about.whatIDo.backend.description': 'Developing backend solutions using Go, building reliable APIs and services designed for performance and clarity. I focus on clean architecture, explicit data flows and systems you can reason about months later without friction.',
     'about.whatIDo.mobile.title': 'Mobile Development',
-    'about.whatIDo.mobile.description': 'Creating cross-platform mobile applications with React Native and Expo, focusing on performance and user experience.',
+    'about.whatIDo.mobile.description': 'Designing and developing cross-platform mobile applications using React Native and Expo, focusing on performance and user experience.',
     'about.whatIDo.testing.title': 'Testing & Quality',
     'about.whatIDo.testing.description': 'Writing comprehensive tests and ensuring code quality. If something breaks, I\'ll find it and fix it before users notice.',
     'cta.open_cv': 'Open CV',

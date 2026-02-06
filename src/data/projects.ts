@@ -52,7 +52,7 @@ export const projects: Project[] = [
       en: 'React Native mobile application that displays popular movies from The Movie Database (TMDB) API. Features include welcome screen, search functionality, animated carousels, and detailed movie views.',
       fr: 'Application mobile React Native qui affiche les films populaires depuis l\'API The Movie Database (TMDB). Fonctionnalités : écran d\'accueil, recherche, carrousels animés et vues détaillées des films.',
     },
-    technologies: 'React Native • Expo • TypeScript • TMDB API',
+    technologies: 'React Native • Expo • TMDB API',
     image: '/images/projects/Loading.jpg', // Placeholder en attendant l'image Movie-Mate.jpg
     link: 'https://github.com/N95Ryan/movie-mate',
     bgcolor: '#1a1a1a',
