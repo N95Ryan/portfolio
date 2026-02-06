@@ -25,7 +25,6 @@ import {
   SiLighthouse,
 } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
-// import PlaywrightIcon from "./PlaywrightIcon";
 import type { IconType } from "react-icons";
 
 // Mapping des icônes par clé
@@ -53,7 +52,6 @@ const iconMap: Record<string, IconType> = {
   docker: SiDocker,
   githubActions: SiGithubactions,
   vercel: SiVercel,
-  // playwright: PlaywrightIcon as IconType,
   vitest: SiVitest,
   lighthouse: SiLighthouse,
 };
@@ -83,7 +81,6 @@ const colorMap: Record<string, string> = {
   docker: "#2496ED",
   githubActions: "#2088FF",
   vercel: "#fff",
-  playwright: "#45ba4b",
   vitest: "#6E9F18",
   lighthouse: "#F44B21",
 };
