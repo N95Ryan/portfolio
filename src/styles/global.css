@@ -61,3 +61,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
+
+/* Styles pour les cartes de projets - force les couleurs depuis les styles inline */
+.project-card-content * {
+  color: inherit;
+}

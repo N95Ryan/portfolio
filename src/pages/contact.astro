@@ -1,0 +1,58 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import BackgroundAnimation from "@components/ui/BackgroundAnimation.astro";
+import ContactForm from "@components/contact/ContactForm.tsx";
+import ContactSocialLinks from "@components/contact/ContactSocialLinks.tsx";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const title = "Contact - Ryan PINA-SILASSE";
+const description = "Get in touch with Ryan PINA-SILASSE";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<MainLayout title={title} description={description}>
+  <BackgroundAnimation />
+  <div class="flex flex-col min-h-screen py-16 px-4">
+    <div id="contact" class="max-w-5xl mx-auto w-full">
+      <h3 class="text-5xl font-semibold text-indigo-500 text-center">
+        {t("contact.title")}
+      </h3>
+      <hr class="my-8 border-t border-indigo-700 w-1/2 mx-auto" />
+      
+      <p class="text-center text-gray-300 text-lg mb-4">
+        {t("contact.subtitle")}
+      </p>
+      <p class="text-center text-gray-400 mb-12">
+        {t("contact.description")}
+      </p>
+
+      <div class="w-full mb-12">
+        <ContactForm 
+          client:load
+          lang={lang}
+          translations={{
+            form: {
+              name: t("contact.form.name"),
+              email: t("contact.form.email"),
+              subject: t("contact.form.subject"),
+              message: t("contact.form.message"),
+              send: t("contact.form.send"),
+            },
+            messages: {
+              success: t("contact.messages.success"),
+              error_email_send: t("contact.messages.error_email_send"),
+            },
+          }}
+        />
+      </div>
+
+      <div class="text-center">
+        <h4 class="text-2xl font-semibold text-indigo-400 mb-6">
+          {t("contact.social.title")}
+        </h4>
+        <ContactSocialLinks client:load />
+      </div>
+    </div>
+  </div>
+</MainLayout>
