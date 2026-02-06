@@ -6,7 +6,8 @@ import ContactSocialLinks from "@components/contact/ContactSocialLinks.tsx";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const title = "Contact - Ryan PINA-SILASSE";
-const description = "Get in touch with Ryan PINA-SILASSE";
+const description =
+  "Get in touch for software engineering opportunities in Toronto, Ontario, or across Canada. Available for full-time positions and freelance projects. React and Go specialist.";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -19,7 +20,7 @@ const t = useTranslations(lang);
         {t("contact.title")}
       </h3>
       <hr class="my-8 border-t border-indigo-700 w-1/2 mx-auto" />
-      
+
       <p class="text-center text-gray-300 text-lg mb-4">
         {t("contact.subtitle")}
       </p>
@@ -28,7 +29,7 @@ const t = useTranslations(lang);
       </p>
 
       <div class="w-full mb-12">
-        <ContactForm 
+        <ContactForm
           client:load
           lang={lang}
           translations={{

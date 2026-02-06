@@ -9,14 +9,53 @@ interface Props {
 }
 
 const {
-  title = "Ryan PINA-SILASSE - Software Engineer",
-  description = "Software Engineer specialized in web and mobile development | React, Next.js, Go.",
+  title = "Ryan PINA-SILASSE - Software Engineer | React & Go Developer",
+  description = "Software Engineer specialized in React and Go. Based in Quebec, seeking opportunities in Toronto and across Canada. 5+ years experience in web development, mobile apps, and full stack development.",
   lang = "en",
 } = Astro.props;
 
 const canonicalURL = Astro.site
   ? new URL(Astro.url.pathname, Astro.site)
   : `${Astro.url.origin}${Astro.url.pathname}`;
+
+// Hreflang URLs
+const currentPath = Astro.url.pathname;
+const enURL = currentPath.startsWith("/fr/")
+  ? new URL(currentPath.replace("/fr/", "/"), Astro.site || Astro.url.origin)
+  : new URL(currentPath, Astro.site || Astro.url.origin);
+const frURL = currentPath.startsWith("/fr/")
+  ? new URL(currentPath, Astro.site || Astro.url.origin)
+  : new URL(`/fr${currentPath}`, Astro.site || Astro.url.origin);
+
+// Schema.org JSON-LD
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Ryan PINA-SILASSE",
+  jobTitle: "Software Engineer",
+  url: Astro.site?.toString() || Astro.url.origin,
+  sameAs: [
+    "https://github.com/N95Ryan",
+    "https://linkedin.com/in/ryan-pina",
+    "https://x.com/BigNayru",
+    "https://www.linkedin.com/in/ryan-pina-silasse-7b2b33211/",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Drummondville",
+    addressRegion: "QC",
+    addressCountry: "CA",
+  },
+  knowsAbout: [
+    "React",
+    "Go",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Full Stack Development",
+  ],
+  alumniOf: "Software Engineering",
+};
 ---
 
 <!doctype html>
@@ -29,7 +68,23 @@ const canonicalURL = Astro.site
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="Software Engineer Toronto, React Developer Canada, Go Developer Toronto, Full Stack Developer Ontario, Web Developer Quebec, Ryan PINA-SILASSE, Next.js Developer, TypeScript Developer, Mobile Developer Canada, Backend Engineer Toronto"
+    />
+    <meta name="author" content="Ryan PINA-SILASSE" />
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="fr" href={frURL} />
+    <link rel="alternate" hreflang="x-default" href={enURL} />
+
+    <!-- Geo tags -->
+    <meta name="geo.region" content="CA-QC" />
+    <meta name="geo.placename" content="Drummondville" />
+    <meta name="geo.position" content="45.888179;-72.483898" />
+    <meta name="ICBM" content="45.888179, -72.483898" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -37,11 +92,19 @@ const canonicalURL = Astro.site
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Ryan PINA-SILASSE Portfolio" />
+    <meta property="og:locale" content={lang === "fr" ? "fr_CA" : "en_CA"} />
+    <meta
+      property="og:locale:alternate"
+      content={lang === "fr" ? "en_CA" : "fr_CA"}
+    />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" />

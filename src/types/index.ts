@@ -34,15 +34,4 @@ export interface Experience {
   location?: string;
 }
 
-export interface Skill {
-  category: string;
-  items: string[];
-}
-
-export interface Social {
-  name: string;
-  url: string;
-  icon: string;
-}
-
 export type Language = 'en' | 'fr';

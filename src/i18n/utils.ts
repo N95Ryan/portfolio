@@ -19,24 +19,6 @@ export function useTranslations(lang: keyof typeof ui) {
   };
 }
 
-export function getRouteFromUrl(url: URL): string | undefined {
-  const pathname = new URL(url).pathname;
-  const parts = pathname?.split('/');
-  const path = parts.pop() || parts.pop();
-
-  if (path === undefined) {
-    return undefined;
-  }
-
-  const currentLang = getLangFromUrl(url);
-
-  if (defaultLang === currentLang) {
-    return path;
-  }
-
-  return path === '' ? undefined : path;
-}
-
 export function useTranslatedPath(lang: keyof typeof ui) {
   return function translatePath(path: string, l: string = lang) {
     return l === defaultLang ? path : `/${l}${path}`;

@@ -13,7 +13,6 @@ interface ExperienceCardProps {
     position: string;
     period: string;
     description: string;
-    technologiesLabel: string;
   };
   side: "left" | "right";
 }
@@ -24,8 +23,8 @@ export default function ExperienceCard({
   side,
 }: ExperienceCardProps) {
   const technologiesString = experience.technologies.join(" - ");
-  // Utiliser directement les descriptions de experience.ts (tableau) au lieu des traductions
-  const descriptionText = experience.description.join(" ");
+  // Utiliser les traductions au lieu des descriptions de experience.ts
+  const descriptionText = translations.description;
 
   // Classes d'animation selon le côté (uniquement sur desktop md:)
   const animationClasses =
@@ -61,9 +60,7 @@ export default function ExperienceCard({
 
       {/* Technologies utilisées */}
       <p className="text-gray-300 text-sm sm:text-base mb-2 sm:mb-3">
-        <span className="font-medium text-indigo-300">
-          {translations.technologiesLabel}:{" "}
-        </span>
+        Stack : <span className="font-medium text-indigo-300"></span>
         <span className="block sm:inline mt-1 sm:mt-0">
           {technologiesString}
         </span>
