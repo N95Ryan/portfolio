@@ -4,11 +4,11 @@ import BackgroundAnimation from "@components/ui/BackgroundAnimation.astro";
 import AboutPicture from "@components/about/AboutPicture.astro";
 import AboutInfos from "@components/about/AboutInfos.astro";
 import WhatIDo from "@components/about/WhatIDo.astro";
-import SocialLinks from "@components/ui/SocialLinks.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
-const title = "À propos - Ryan PINA-SILASSE";
-const description = "En savoir plus sur Ryan PINA-SILASSE, Ingénieur Logiciel";
+const title = "À propos de Ryan PINA-SILASSE - Software Engineer";
+const description =
+  "25-year-old Software Engineer based in Drummondville, Quebec. 5 years of experience in web development. Currently working at Midbec, seeking opportunities in Toronto. Specialized in React and Go.";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -24,7 +24,7 @@ const t = useTranslations(lang);
     </div>
 
     <div
-      class="flex flex-col sm:flex-row items-center justify-center max-w-5xl mx-auto w-full mb-8"
+      class="flex flex-col sm:flex-row items-center justify-center w-full mb-8"
     >
       <AboutPicture />
       <div class="flex flex-col md:w-1/2 mx-6">
@@ -33,9 +33,5 @@ const t = useTranslations(lang);
     </div>
 
     <WhatIDo lang={lang} />
-
-    <div class="flex justify-center mt-8">
-      <SocialLinks />
-    </div>
   </div>
 </MainLayout>

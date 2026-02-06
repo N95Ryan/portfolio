@@ -1,24 +1,25 @@
 ---
 // src/components/hero/CTAButtons.astro
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const cvPath = lang === "fr" ? "/CV_fr.pdf" : "/CV_en.pdf";
 ---
 
 <div
   class="flex flex-col md:flex-row justify-center items-center gap-4 mt-16 md:mt-24 animate-fade-up animate-delay-[2000ms] animate-duration-700"
 >
   <a
-    href="/CV_en.pdf"
+    href={cvPath}
     target="_blank"
     rel="noopener noreferrer"
     class="w-full md:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition-colors duration-300 text-center"
   >
-    Open my resume
+    {t("cta.open_cv")}
   </a>
-  <a
-    href="mailto:n95jsryan@gmail.com"
-    class="w-full md:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition-colors duration-300 text-center"
-  >
-    Contact me
-  </a>
+
   <a
     href="https://codebynayru.com/en/"
     target="_blank"

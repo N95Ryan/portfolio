@@ -45,62 +45,147 @@ export default function ProjectCard({
   };
 
   return (
-    <div className="w-full max-w-xs mx-auto">
-      <div className="relative h-40 md:h-48 lg:h-56 group rounded-t-xl overflow-hidden">
-        <img
-          src={project.image}
-          alt={projectName}
-          className="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
-        />
-        <div className="absolute inset-0 rounded-t-xl bg-black bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <p className="text-white text-center mx-4 text-xs lg:text-sm">
-            {projectDescription}
-          </p>
-        </div>
-      </div>
-      <div
-        className="flex flex-col items-start p-3 rounded-b-xl project-card-content"
+    <div className="w-full max-w-xs mx-auto group perspective-1000">
+      <div 
+        className="relative rounded-3xl overflow-hidden transition-all duration-700 ease-out backdrop-blur-sm"
         style={{
-          backgroundColor: bgColor,
-          color: textColor,
-          minHeight: "14px",
-          height: "auto",
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.06), 0 16px 48px rgba(0, 0, 0, 0.03)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          transform: 'translateZ(0)',
+          willChange: 'transform, box-shadow',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-8px) translateZ(0)';
+          e.currentTarget.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.07), 0 20px 40px rgba(0, 0, 0, 0.12), 0 32px 64px rgba(0, 0, 0, 0.08)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0) translateZ(0)';
+          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.06), 0 16px 48px rgba(0, 0, 0, 0.03)';
         }}
       >
-        <h2
-          className="text-base md:text-lg lg:text-xl font-bold mb-1 project-card-title"
+        {/* Image Container with Parallax Effect */}
+        <div className="relative h-48 md:h-56 lg:h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
+          <img
+            src={project.image}
+            alt={projectName}
+            className="w-full h-full object-cover transition-all duration-[800ms] ease-out group-hover:scale-[1.08]"
+            style={{
+              filter: 'contrast(1.02) saturate(1.05)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.filter = 'contrast(1.05) saturate(1.1) brightness(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.filter = 'contrast(1.02) saturate(1.05)';
+            }}
+          />
+          
+          {/* Sophisticated Gradient Overlay */}
+          <div 
+            className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-[600ms] ease-out backdrop-blur-[2px]"
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.94) 0%, rgba(20, 20, 30, 0.92) 50%, rgba(0, 0, 0, 0.94) 100%)',
+            }}
+          >
+            <div className="transform scale-90 group-hover:scale-100 transition-transform duration-500">
+              <p className="text-white text-center mx-6 text-sm md:text-base leading-relaxed font-light tracking-wide px-3" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
+                {projectDescription}
+              </p>
+            </div>
+          </div>
+
+          {/* Subtle top gradient for depth */}
+          <div 
+            className="absolute top-0 left-0 right-0 h-24 pointer-events-none opacity-60"
+            style={{
+              background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, transparent 100%)',
+            }}
+          />
+        </div>
+
+        {/* Content Container with refined spacing */}
+        <div
+          className="flex flex-col p-6 md:p-7 project-card-content relative"
           style={{
+            backgroundColor: bgColor,
             color: textColor,
           }}
         >
-          {projectName}
-        </h2>
-        <p
-          className="text-xs md:text-sm mb-1 project-card-text"
-          style={{
-            color: textColor,
-          }}
-        >
-          {projectTechnologies}
-        </p>
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-8 py-2 transition self-end text-xs md:text-sm font-semibold rounded-lg mt-6 md:mt-0"
-          style={{
-            backgroundColor: linkColor,
-            color: linkTextColor,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = getHoverColor(linkColor);
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = linkColor;
-          }}
-        >
-          {buttonLabel}
-        </a>
+          {/* Subtle inner shadow for depth */}
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{
+              background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.05) 50%, transparent 100%)',
+            }}
+          />
+
+          <h2
+            className="text-xl md:text-2xl font-semibold mb-4 project-card-title tracking-tight"
+            style={{
+              color: textColor,
+              letterSpacing: '-0.02em',
+              lineHeight: '1.2',
+            }}
+          >
+            {projectName}
+          </h2>
+          
+          {/* Refined technology badge */}
+          <div className="mb-5 flex-grow">
+            <span
+              className="text-xs md:text-sm font-medium px-4 py-2 rounded-full inline-flex items-center gap-1.5 project-card-text tracking-wide"
+              style={{
+                color: textColor,
+                backgroundColor: `${textColor}12`,
+                border: `1px solid ${textColor}18`,
+                letterSpacing: '0.01em',
+              }}
+            >
+              {projectTechnologies}
+            </span>
+          </div>
+
+          {/* Premium button with micro-interactions */}
+          <div className="flex justify-end w-full">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative px-7 py-3 transition-all duration-300 text-sm font-medium rounded-xl overflow-hidden group/btn"
+              style={{
+                backgroundColor: linkColor,
+                color: linkTextColor,
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06)',
+                letterSpacing: '0.02em',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = getHoverColor(linkColor);
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = linkColor;
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06)';
+              }}
+              onMouseDown={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(0.98)';
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1)';
+              }}
+            >
+              {/* Subtle shine effect */}
+              <span 
+                className="absolute inset-0 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-500"
+                style={{
+                  background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
+                }}
+              />
+              <span className="relative">{buttonLabel}</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -5,8 +5,8 @@ import ProjectCard from "@components/projects/ProjectCard.tsx";
 import { projects } from "@data/projects";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
-const title = "Projets - Ryan PINA-SILASSE";
-const description = "Une vitrine de mes projets récents et de mon travail";
+const title = "Portfolio Projets - Développement React, Go & Full Stack | Ryan PINA-SILASSE";
+const description = "Vitrine de projets de développement web et mobile utilisant React, Next.js, Go, TypeScript et technologies modernes. Applications réelles et exemples de travaux professionnels.";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -14,7 +14,7 @@ const t = useTranslations(lang);
 <MainLayout title={title} description={description}>
   <BackgroundAnimation />
   <div class="flex flex-col min-h-screen py-16 px-4">
-    <div id="projects" class="grow">
+    <div id="projects">
       <h3 class="text-5xl font-semibold text-indigo-500 text-center">
         {t("projects.title")}
       </h3>
@@ -25,11 +25,11 @@ const t = useTranslations(lang);
     >
       {
         projects.map((project) => (
-          <ProjectCard 
-            client:load 
+          <ProjectCard
+            client:load
             projectId={project.id}
             lang={lang}
-            buttonLabel={t('projects.button_label')}
+            buttonLabel={t("projects.button_label")}
           />
         ))
       }

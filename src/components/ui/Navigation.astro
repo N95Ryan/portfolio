@@ -1,10 +1,11 @@
 ---
-import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { getLangFromUrl, useTranslations, useTranslatedPath } from "@i18n/utils";
 import { NAVIGATION_ITEMS } from "@utils/constants";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <nav
@@ -19,7 +20,7 @@ const t = useTranslations(lang);
           NAVIGATION_ITEMS.map((item) => (
             <li>
               <a
-                href={item.href}
+                href={translatePath(item.href)}
                 class="text-white hover:text-purple-400 transition-colors font-medium"
               >
                 {t(item.key)}
@@ -65,7 +66,7 @@ const t = useTranslations(lang);
           NAVIGATION_ITEMS.map((item) => (
             <li>
               <a
-                href={item.href}
+                href={translatePath(item.href)}
                 class="block py-2 px-4 text-white hover:bg-white/10 rounded-lg transition-colors"
               >
                 {t(item.key)}
@@ -95,13 +96,11 @@ const t = useTranslations(lang);
     });
   });
 
-  // Hide/show navigation on scroll (desktop only)
+  // Hide/show navigation on scroll
   let lastScrollY = window.scrollY;
   let ticking = false;
 
   function handleScroll() {
-    if (window.innerWidth < 768) return; // Mobile: pas de masquage
-
     const currentScrollY = window.scrollY;
 
     if (currentScrollY < 50) {
@@ -110,6 +109,10 @@ const t = useTranslations(lang);
     } else if (currentScrollY > lastScrollY) {
       // Scroll vers le bas: cacher
       mainNav?.classList.add("-translate-y-full");
+      // Fermer le menu mobile si ouvert
+      if (window.innerWidth < 768) {
+        mobileMenu?.classList.add("hidden");
+      }
     } else {
       // Scroll vers le haut: afficher
       mainNav?.classList.remove("-translate-y-full");

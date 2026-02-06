@@ -1,10 +1,4 @@
-import {
-  SiGithub,
-  SiLinkedin,
-  SiBluesky,
-  SiBento,
-  SiMalt,
-} from "react-icons/si";
+import { SiGithub, SiLinkedin, SiX, SiBento, SiMalt } from "react-icons/si";
 
 export default function ContactSocialLinks() {
   return (
@@ -38,14 +32,14 @@ export default function ContactSocialLinks() {
 
       <a
         className="icon"
-        href="https://bsky.app/profile/n95ryan.bsky.social"
+        href="https://x.com/BigNayru"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="BlueSky"
+        aria-label="X (Twitter)"
       >
-        <SiBluesky
+        <SiX
           className="text-3xl text-black hover:text-gray-600 transition duration-300"
-          title="BlueSky"
+          title="X (Twitter)"
         />
       </a>
 

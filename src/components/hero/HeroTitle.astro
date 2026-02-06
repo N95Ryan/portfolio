@@ -1,6 +1,10 @@
 ---
 // src/components/hero/HeroTitle.astro
 import CTAButtons from "./CTAButtons.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div class="flex flex-col items-center justify-center min-h-screen">
@@ -37,7 +41,7 @@ import CTAButtons from "./CTAButtons.astro";
   >
     <span
       class="inline-block animate-fade-right animate-delay-[900ms] animate-duration-500"
-      >Needs</span
+      >{t("hero.tagline.needs")}</span
     >
     <span
       class="inline-block animate-fade-right animate-delay-[1100ms] animate-duration-500 text-cyan-400"
@@ -45,7 +49,7 @@ import CTAButtons from "./CTAButtons.astro";
     >
     <span
       class="inline-block animate-fade-right animate-delay-[1300ms] animate-duration-500"
-      >Problems</span
+      >{t("hero.tagline.challenges")}</span
     >
     <span
       class="inline-block animate-fade-right animate-delay-[1500ms] animate-duration-500 text-cyan-400"
@@ -53,7 +57,7 @@ import CTAButtons from "./CTAButtons.astro";
     >
     <span
       class="inline-block animate-fade-right animate-delay-[1700ms] animate-duration-500"
-      >Solutions</span
+      >{t("hero.tagline.solutions")}</span
     >
   </h3>
   <CTAButtons />

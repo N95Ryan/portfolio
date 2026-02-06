@@ -13,7 +13,6 @@ interface ExperienceCardProps {
     position: string;
     period: string;
     description: string;
-    technologiesLabel: string;
   };
   side: "left" | "right";
 }
@@ -21,31 +20,56 @@ interface ExperienceCardProps {
 export default function ExperienceCard({
   experience,
   translations,
+  side,
 }: ExperienceCardProps) {
   const technologiesString = experience.technologies.join(" - ");
-  // Utiliser directement les descriptions de experience.ts (tableau) au lieu des traductions
-  const descriptionText = experience.description.join(" ");
+  // Utiliser les traductions au lieu des descriptions de experience.ts
+  const descriptionText = translations.description;
+
+  // Classes d'animation selon le côté (uniquement sur desktop md:)
+  const animationClasses =
+    side === "left" ? "md:animate-fade-in-left" : "md:animate-fade-in-right";
 
   return (
-    <div className="bg-gray-800 hover:bg-opacity-50 p-6 rounded-lg w-full max-w-3xl">
-      {/* Titre: Company - Role (Period) - utilise directement experience.period */}
-      <h1 className="text-xl font-semibold text-white mb-3">
+    <div
+      className={`
+        ${animationClasses}
+        bg-gradient-to-br from-gray-800 to-gray-900 
+        hover:from-gray-700 hover:to-gray-800
+        p-4 sm:p-5 md:p-6 rounded-lg w-full max-w-3xl 
+         hover:border-indigo-500
+        shadow-xl hover:shadow-2xl
+        transition-all duration-500 ease-out
+        hover:scale-105
+        backdrop-blur-sm
+      `}
+      style={{
+        boxShadow:
+          "0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(99, 102, 241, 0.1)",
+      }}
+    >
+      {/* Titre: Company - Role */}
+      <h1 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
         {translations.company} - {translations.position}
       </h1>
 
-      {/* Titre: Company - Role (Period) - utilise directement experience.period */}
-      <p className="text-lg font-semibold text-indigo-400 mb-3">
+      {/* Location et période */}
+      <p className="text-base sm:text-lg font-semibold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent mb-2 sm:mb-3">
         {experience.location} | {experience.period}
       </p>
 
       {/* Technologies utilisées */}
-      <p className="text-white text-base mb-3">
-        <span className="font-medium">{translations.technologiesLabel}: </span>
-        {technologiesString}
+      <p className="text-gray-300 text-sm sm:text-base mb-2 sm:mb-3">
+        Stack : <span className="font-medium text-indigo-300"></span>
+        <span className="block sm:inline mt-1 sm:mt-0">
+          {technologiesString}
+        </span>
       </p>
 
-      {/* Description - utilise directement experience.description */}
-      <p className="text-white text-base leading-relaxed">{descriptionText}</p>
+      {/* Description */}
+      <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+        {descriptionText}
+      </p>
     </div>
   );
 }

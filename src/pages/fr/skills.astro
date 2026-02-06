@@ -5,9 +5,9 @@ import SkillsSection from "@components/skills/SkillsSection.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { skillsDetails } from "@/data/skillDetails";
 
-const title = "Compétences - Ryan PINA-SILASSE";
+const title = "Compétences Techniques - React, Go, Next.js | Ryan PINA-SILASSE";
 const description =
-  "Compétences techniques et technologies utilisées par Ryan PINA-SILASSE";
+  "Développeur full stack maîtrisant React, Go, Next.js, TypeScript, Node.js, Python et les technologies web modernes. Expérience en développement mobile, plateformes cloud et outils DevOps.";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -18,8 +18,8 @@ const { languages, frameworks, mobile, tools, databaseCloud, testing, devops } =
 <MainLayout title={title} description={description}>
   <BackgroundAnimation />
   <div class="flex flex-col min-h-screen py-16 px-4">
-    <div id="skills" class="mt-[5rem]">
-      <h3 class="text-5xl font-semibold text-indigo-500 text-center mt-[3rem]">
+    <div id="skills">
+      <h3 class="text-5xl font-semibold text-indigo-500 text-center">
         {t("skills.title")}
       </h3>
       <hr class="my-8 border-t border-indigo-700 w-1/2 mx-auto" />

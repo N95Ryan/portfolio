@@ -1,7 +1,7 @@
 ---
 import ExperienceCard from "./ExperienceCard.tsx";
 import type { Experience } from "@types/index";
-import type { Lang } from "i18n";
+import type { Lang } from "@types/i18n";
 import { useTranslations } from "@i18n/utils";
 
 interface Props {
@@ -13,13 +13,13 @@ const { experiences, lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<div class="relative w-full max-w-6xl mx-auto mt-12 px-4 pb-8">
+<div class="relative w-full max-w-6xl mx-auto mt-12 px-4 sm:px-6 lg:px-8 pb-8">
   <div class="relative py-4">
     <div class="relative">
-      <!-- Ligne verticale centrale continue - utilise style inline pour éviter conflit Tailwind -->
+      <!-- Ligne verticale : à gauche sur mobile, centrée sur desktop -->
       <div
-        class="absolute left-1/2 top-0 bottom-0 w-2 transform -translate-x-1/2 z-0"
-        style="background-color: #6366f1;"
+        class="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 md:transform md:-translate-x-1/2 z-0 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 shadow-lg"
+        style="box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);"
       >
       </div>
 
@@ -41,15 +41,28 @@ const t = useTranslations(lang);
           };
 
           return (
-            <div class={`relative flex items-center ${!isLast ? "mb-20" : ""}`}>
-              <!-- Point rempli - utilise style inline pour éviter conflit Tailwind -->
-              <div 
-                class="absolute left-1/2 w-8 h-8 rounded-full transform -translate-x-1/2 z-10 shadow-lg" 
-                style="background-color: #6366f1;"
-              />
+            <div class={`relative flex items-center ${!isLast ? "mb-12 md:mb-20" : ""}`}>
+              <!-- Point avec effet de pulsation et glow : à gauche sur mobile, centré sur desktop -->
+              <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 z-10">
+                <div class="relative">
+                  {/* Cercle extérieur animé - uniquement pour l'expérience actuelle (index 0) */}
+                  {index === 0 && (
+                    <div class="absolute inset-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-600 opacity-40 animate-ping"></div>
+                  )}
+                  <!-- Cercle principal : plus petit sur mobile -->
+                  <div 
+                    class={`relative w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br ${index === 0 ? 'from-indigo-500 to-purple-600' : 'from-gray-600 to-gray-700'} shadow-2xl border-2 md:border-4 border-gray-900`}
+                    style={index === 0 ? "box-shadow: 0 0 20px rgba(139, 92, 246, 0.8), 0 0 40px rgba(139, 92, 246, 0.4);" : "box-shadow: 0 0 10px rgba(75, 85, 99, 0.4);"}
+                  >
+                    <!-- Point intérieur lumineux -->
+                    <div class={`absolute inset-1.5 md:inset-2 rounded-full ${index === 0 ? 'bg-white opacity-80' : 'bg-gray-400 opacity-60'}`}></div>
+                  </div>
+                </div>
+              </div>
 
+              <!-- Conteneur de la carte : toujours à droite sur mobile, alternance sur desktop -->
               <div
-                class={`w-full md:w-[calc(50%-2rem)] ${side === "left" ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"} ml-8 md:ml-0`}
+                class={`w-full pl-14 md:pl-0 md:w-[calc(50%-2rem)] ${side === "left" ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"}`}
               >
                 <ExperienceCard
                   client:load

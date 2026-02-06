@@ -4,17 +4,23 @@
 
 <div class="flex flex-col items-center justify-center p-8">
   <div class="relative p-6">
+    <!-- Effet de cadre avec dégradé et glow -->
     <div
-      class="absolute inset-8 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 transform -translate-x-6 -translate-y-6 -skew-y-6"
+      class="absolute inset-8 rounded-md bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 transform -translate-x-6 -translate-y-6 -skew-y-6 opacity-80"
+      style="box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 0 80px rgba(139, 92, 246, 0.3);"
     >
     </div>
-    <div class="relative z-10">
+    <!-- Conteneur de l'image avec bordure et effets -->
+    <div
+      class="relative z-10 rounded-md border-4 border-gray-700 hover:border-indigo-500 shadow-2xl transition-all duration-500 ease-out hover:scale-105 backdrop-blur-sm bg-gradient-to-br from-gray-800 to-gray-900 p-1"
+      style="box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.2);"
+    >
       <img
         src="/photo.jpg"
         width={500}
         height={500}
         alt="Ryan"
-        class="object-cover rounded-md sm:w-96 sm:h-96 md:w-[400px] md:h-[400px]"
+        class="object-cover rounded-sm sm:w-96 sm:h-96 md:w-[400px] md:h-[400px]"
       />
     </div>
   </div>

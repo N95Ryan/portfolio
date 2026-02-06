@@ -52,7 +52,7 @@ export const projects: Project[] = [
       en: 'React Native mobile application that displays popular movies from The Movie Database (TMDB) API. Features include welcome screen, search functionality, animated carousels, and detailed movie views.',
       fr: 'Application mobile React Native qui affiche les films populaires depuis l\'API The Movie Database (TMDB). Fonctionnalités : écran d\'accueil, recherche, carrousels animés et vues détaillées des films.',
     },
-    technologies: 'React Native • Expo • TypeScript • TMDB API',
+    technologies: 'React Native • Expo',
     image: '/images/projects/Loading.jpg', // Placeholder en attendant l'image Movie-Mate.jpg
     link: 'https://github.com/N95Ryan/movie-mate',
     bgcolor: '#1a1a1a',
@@ -110,10 +110,10 @@ export const projects: Project[] = [
       fr: 'Bitjutsu',
     },
     description: {
-      en: 'AI-powered image editor that allows you to edit pictures using written instructions. Built with Next.js and powered by Replicate\'s InstructPix2Pix model.',
-      fr: 'Éditeur d\'images alimenté par l\'IA qui permet de modifier des photos en utilisant des instructions écrites. Construit avec Next.js et alimenté par le modèle InstructPix2Pix de Replicate.',
+      en: 'AI-powered image editor that allows you to edit pictures using written instructions. Built with Next.js and powered by Replicate\'s API.',
+      fr: 'Éditeur d\'images alimenté par l\'IA qui permet de modifier des photos en utilisant des instructions écrites. Construit avec Next.js et alimenté par l\'API de Replicate.',
     },
-    technologies: 'Next.js • Tailwind CSS • Replicate API',
+    technologies: 'Next.js • Tailwind CSS',
     image: '/images/projects/Bitjutsu.jpg',
     link: 'https://bijutsu.vercel.app/',
     bgcolor: '#ffffff',
