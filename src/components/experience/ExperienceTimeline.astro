@@ -30,14 +30,15 @@ const t = useTranslations(lang);
           const isLast = index === experiences.length - 1;
 
           // Préparer les traductions pour cette expérience
+          const descriptionValue = t(
+            `experience.list.${experience.id}.description` as any,
+          );
           const translations = {
-            company: t(`experience.list.${experience.id}.company` as any),
-            position: t(`experience.list.${experience.id}.position` as any),
-            period: t(`experience.list.${experience.id}.period` as any),
-            description: t(
-              `experience.list.${experience.id}.description` as any,
-            ),
-            technologiesLabel: t("experience.tech_used"),
+            company: t(`experience.list.${experience.id}.company` as any) as string,
+            position: t(`experience.list.${experience.id}.position` as any) as string,
+            period: t(`experience.list.${experience.id}.period` as any) as string,
+            description: Array.isArray(descriptionValue) ? descriptionValue : [descriptionValue],
+            technologiesLabel: t("experience.tech_used") as string,
           };
 
           return (

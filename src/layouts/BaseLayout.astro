@@ -51,8 +51,17 @@ const schemaData = {
     "Go",
     "Next.js",
     "TypeScript",
-    "Node.js",
+    "Expo",
+    "React Native",
     "Full Stack Development",
+    "Tailwind CSS",
+    "GraphQL",
+    "WordPress",
+    "Cloudinary",
+    "Playwright",
+    "Docker",
+    "GitHub Actions",
+    "Vercel",
   ],
   alumniOf: "Software Engineering",
 };
@@ -70,9 +79,13 @@ const schemaData = {
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="Software Engineer Toronto, React Developer Canada, Go Developer Toronto, Full Stack Developer Ontario, Web Developer Quebec, Ryan PINA-SILASSE, Next.js Developer, TypeScript Developer, Mobile Developer Canada, Backend Engineer Toronto"
+      content="Ryan PINA-SILASSE, Software Engineer Toronto, React Developer Canada, Go Developer Toronto, Full Stack Developer Ontario, TypeScript Developer, Next.js Developer, Node.js Developer, Python Developer, React Native Developer, Mobile Developer Canada, Frontend Developer Toronto, Backend Engineer Toronto, Web Developer Quebec, Astro Developer, PostgreSQL Developer, Docker Engineer, GraphQL Developer, Tailwind CSS Developer, Supabase Developer, Cloudinary Developer, Canada, Freelance Developer Toronto, Remote Developer Canada, Software Engineer Quebec, Drummondville Developer, Available Developer Toronto, Contract Developer Ontario, Web Development Services Canada, React Expert Toronto, Go Lang Developer, TypeScript Expert, Full Stack Engineer Canada, Mobile App Developer, API Developer Toronto, Cloud Developer Canada"
     />
     <meta name="author" content="Ryan PINA-SILASSE" />
+    <meta
+      name="google-site-verification"
+      content="hD4SETMM_ap0JLg82dzOFSJOmB2H7GrOIOjxWf_8L-U"
+    />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Hreflang for multilingual -->
@@ -113,5 +126,9 @@ const schemaData = {
   </head>
   <body>
     <slot />
+    <script>
+      import { inject } from "@vercel/analytics";
+      inject();
+    </script>
   </body>
 </html>
