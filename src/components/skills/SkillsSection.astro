@@ -2,12 +2,12 @@
 import SkillsList from "./SkillsList";
 import type { SkillItem } from "@/data/skillDetails";
 import { useTranslations } from "@i18n/utils";
-import { ui } from "@i18n/ui";
+import { translations } from "@i18n/translations";
 
 interface Props {
   skills: SkillItem[];
   category: string;
-  lang: keyof typeof ui;
+  lang: keyof typeof translations;
 }
 
 const { skills, category, lang } = Astro.props;

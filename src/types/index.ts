@@ -26,10 +26,6 @@ export interface Project {
 
 export interface Experience {
   id: string;
-  company: string;
-  position: string;
-  period: string;
-  description: string[];
   technologies: string[];
   location?: string;
 }

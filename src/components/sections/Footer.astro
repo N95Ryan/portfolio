@@ -1,16 +1,34 @@
 ---
+import FooterSocialLinks from "./FooterSocialLinks.tsx";
+
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full bg-[#070707] text-center overflow-hidden">
-  <div class="text-sm font-extralight p-4 text-center text-white">
-    ©{currentYear} Copyright :
-    <a
-      href="https://ryan-pina.com/"
-      rel="noopener noreferrer"
-      class="hover:text-purple-400 transition-colors duration-300"
-    >
-      {" "}Ryan PINA-SILASSE
-    </a>
+<footer
+  class="w-full bg-[#070707] text-white overflow-hidden border-t border-gray-800"
+>
+  <div class="max-w-7xl mx-auto px-4 py-4 md:py-12">
+    <!-- Social Links Section -->
+
+    <FooterSocialLinks client:load />
+  </div>
+
+  <!-- Copyright Section -->
+  <div class="text-center border-t border-gray-800 pt-6 mb-6">
+    <div class="text-sm font-extralight text-gray-400">
+      <p class="mb-2">
+        ©{currentYear} Copyright :{" "}
+        <a
+          href="https://www.ryan-pina.dev/"
+          rel="noopener noreferrer"
+          class="hover:text-purple-400 transition-colors duration-300 text-white"
+        >
+          Ryan PINA-SILASSE
+        </a>
+      </p>
+      <p class="text-xs text-gray-500">
+        Built with Astro, Tailwind CSS & TypeScript
+      </p>
+    </div>
   </div>
 </footer>

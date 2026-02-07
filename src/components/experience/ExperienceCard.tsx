@@ -1,10 +1,6 @@
 interface ExperienceCardProps {
   experience: {
     id: string;
-    company: string;
-    position: string;
-    period: string;
-    description: string[];
     technologies: string[];
     location?: string;
   };
@@ -12,7 +8,7 @@ interface ExperienceCardProps {
     company: string;
     position: string;
     period: string;
-    description: string;
+    description: string[];
   };
   side: "left" | "right";
 }
@@ -23,8 +19,6 @@ export default function ExperienceCard({
   side,
 }: ExperienceCardProps) {
   const technologiesString = experience.technologies.join(" - ");
-  // Utiliser les traductions au lieu des descriptions de experience.ts
-  const descriptionText = translations.description;
 
   // Classes d'animation selon le côté (uniquement sur desktop md:)
   const animationClasses =
@@ -55,21 +49,25 @@ export default function ExperienceCard({
 
       {/* Location et période */}
       <p className="text-base sm:text-lg font-semibold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent mb-2 sm:mb-3">
-        {experience.location} | {experience.period}
+        {experience.location} | {translations.period}
       </p>
 
       {/* Technologies utilisées */}
       <p className="text-gray-300 text-sm sm:text-base mb-2 sm:mb-3">
-        Stack : <span className="font-medium text-indigo-300"></span>
+        Stack: <span className="font-medium text-indigo-300"></span>
         <span className="block sm:inline mt-1 sm:mt-0">
           {technologiesString}
         </span>
       </p>
 
-      {/* Description */}
-      <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-        {descriptionText}
-      </p>
+      {/* Description - Liste à puces */}
+      <ul className="text-gray-300 text-sm sm:text-base leading-relaxed list-disc list-inside space-y-1 sm:space-y-2">
+        {translations.description.map((task, index) => (
+          <li key={index} className="pl-2">
+            {task}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
