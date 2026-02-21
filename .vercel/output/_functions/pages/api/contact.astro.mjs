@@ -1,18 +1,17 @@
-import { Resend } from 'resend';
 export { renderers } from '../../renderers.mjs';
 
-const resendApiKey = "re_VAUbdh8M_3ha9czReHvUX6i1pMMTeTgH2";
-const resendToEmail = "n95jsryan@gmail.com";
-const resendFromEmail = "Portfolio Contact <contact@ryan-pina.dev>";
-let resend = null;
-try {
-  if (resendApiKey) {
-    resend = new Resend(resendApiKey);
-  }
-} catch (resendInitError) {
-  console.error("Erreur lors de l'initialisation de Resend:", resendInitError);
-}
 const prerender = false;
+async function getResendClient() {
+  try {
+    const { Resend } = await import('resend');
+    const resendApiKey = "re_VAUbdh8M_3ha9czReHvUX6i1pMMTeTgH2";
+    if (!resendApiKey) ;
+    return new Resend(resendApiKey);
+  } catch (error) {
+    console.error("Erreur lors de l'import/initialisation de Resend:", error);
+    return null;
+  }
+}
 const POST = async ({ request }) => {
   const jsonResponse = (message, status = 500, details) => {
     return new Response(
@@ -30,7 +29,11 @@ const POST = async ({ request }) => {
     );
   };
   try {
+    const resendApiKey = "re_VAUbdh8M_3ha9czReHvUX6i1pMMTeTgH2";
+    const resendToEmail = "n95jsryan@gmail.com";
+    const resendFromEmail = "Portfolio Contact <contact@ryan-pina.dev>";
     if (!resendApiKey) ;
+    const resend = await getResendClient();
     if (!resend) {
       console.error("Resend n'est pas initialisé");
       return jsonResponse("Configuration serveur invalide - Resend non initialisé", 500);
@@ -63,9 +66,6 @@ const POST = async ({ request }) => {
     console.log("To:", [resendToEmail]);
     console.log("Subject:", subject);
     console.log("Données reçues:", { name, email, subject, messageLength: message?.length, lang });
-    if (!resend) {
-      return jsonResponse("Service d'envoi d'email non disponible", 500);
-    }
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
       to: [resendToEmail],
