@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import type { APIRoute } from "astro";
 
-// Récupération des variables d'environnement avec logging
+// Récupération des variables d'environnement
 const resendApiKey = import.meta.env.RESEND_API_KEY;
 const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
 const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
