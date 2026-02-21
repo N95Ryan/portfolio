@@ -32,7 +32,7 @@ const schemaData = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Ryan PINA-SILASSE",
-  jobTitle: "Software Engineer",
+  jobTitle: lang === "fr" ? "Ingénieur Logiciel" : "Software Engineer",
   url: Astro.site?.toString() || Astro.url.origin,
   sameAs: [
     "https://github.com/N95Ryan",
