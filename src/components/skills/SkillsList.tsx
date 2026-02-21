@@ -29,7 +29,10 @@ import { TbApi } from "react-icons/tb";
 import type { IconType } from "react-icons";
 
 // Mapping centralisé des icônes, couleurs et noms d'affichage
-const skillsMap: Record<string, { icon: IconType; color: string; name: string }> = {
+const skillsMap: Record<
+  string,
+  { icon: IconType; color: string; name: string }
+> = {
   javascript: { icon: SiJavascript, color: "#F0DB4F", name: "JavaScript" },
   typescript: { icon: SiTypescript, color: "#007acc", name: "TypeScript" },
   golang: { icon: SiGo, color: "#00acd7", name: "Go" },
@@ -37,7 +40,7 @@ const skillsMap: Record<string, { icon: IconType; color: string; name: string }>
   react: { icon: SiReact, color: "#61DAFB", name: "React" },
   nextjs: { icon: SiNextdotjs, color: "#fff", name: "Next.js" },
   astro: { icon: SiAstro, color: "#e93dc9", name: "Astro" },
-  tanstack: { icon: SiReactquery, color: "#FF4154", name: "TanStack Query" },
+  tanstack: { icon: SiReactquery, color: "#FF4154", name: "TanStack" },
   tailwind: { icon: SiTailwindcss, color: "#06B6D4", name: "Tailwind CSS" },
   nodedotjs: { icon: SiNodedotjs, color: "#539e43", name: "Node.js" },
   gin: { icon: SiGin, color: "#00acd7", name: "Gin" },
@@ -51,7 +54,11 @@ const skillsMap: Record<string, { icon: IconType; color: string; name: string }>
   graphql: { icon: SiGraphql, color: "#E10098", name: "GraphQL" },
   postman: { icon: SiPostman, color: "#FF6C37", name: "Postman" },
   docker: { icon: SiDocker, color: "#2496ED", name: "Docker" },
-  githubActions: { icon: SiGithubactions, color: "#2088FF", name: "GitHub Actions" },
+  githubActions: {
+    icon: SiGithubactions,
+    color: "#2088FF",
+    name: "GitHub Actions",
+  },
   vercel: { icon: SiVercel, color: "#fff", name: "Vercel" },
   vitest: { icon: SiVitest, color: "#6E9F18", name: "Vitest" },
   playwright: { icon: SiCypress, color: "#2EAD33", name: "Playwright" },

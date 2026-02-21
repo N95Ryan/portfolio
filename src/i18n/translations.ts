@@ -35,6 +35,7 @@ With several years of experience in software development, I have built a pragmat
     'hero.tagline.needs': 'Needs',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
+    'hero.jobTitle': 'Software Engineer',
     'cta.open_cv': 'Open CV',
     'cta.mail_contact': 'Contact Me',
     'skills.title': 'Skills',
@@ -52,9 +53,9 @@ With several years of experience in software development, I have built a pragmat
     'experience.list.midbec-2025.position': 'Software Engineer',
     'experience.list.midbec-2025.period': '2025 - Present',
     'experience.list.midbec-2025.description': [
-      'Sole engineer modernizing 20-year legacy PHP/Python system.',
-      'Leading React frontend migration interfacing with Python ETL and ERP API handling 500K+ inventory records.',
-      'Established development workflow, security practices.',
+      'Sole engineer at the company, full ownership over architecture and technical decisions.',
+      'Modernizing a 10+ year old PHP monolith: migrating to Next.js frontend and Gin backend, replacing legacy Python ETL connected to Delphi ERP managing 2M+ inventory records.',
+      'Designing a Go ETL pipeline to synchronize ERP data into PostgreSQL, handling catalog reconciliation, pricing resolution and inventory management at scale.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
     'experience.list.neat-2025.position': 'Full Stack Developer (Freelance)',
@@ -104,7 +105,7 @@ With several years of experience in software development, I have built a pragmat
     'about.description': `🎒 La technologie n'a jamais été un simple intérêt, mais un terrain de jeu et de réflexion permanent.
 Avec plusieurs années d'expérience en développement logiciel, j'ai construit une approche pragmatique, orientée compréhension des besoins réels et résolution de problématiques concrètes.
 
-💻 Software Engineer de profession, j'interviens sur des projets web et applicatifs en apportant une vision globale : analyse, architecture, performance et maintenabilité. Curieux par nature, je combine rigueur technique et sens du produit pour concevoir des solutions fiables, évolutives et alignées avec les enjeux business.
+💻 Ingénieur Logiciel de profession, j'interviens sur des projets web et applicatifs en apportant une vision globale : analyse, architecture, performance et maintenabilité. Curieux par nature, je combine rigueur technique et sens du produit pour concevoir des solutions fiables, évolutives et alignées avec les enjeux business.
 
 🎯 Aujourd'hui freelance, j'accompagne des équipes et des entreprises sur des projets ambitieux, avec un objectif clair : transformer des besoins complexes en solutions efficaces et durables. J'accorde une importance particulière à la qualité du code, à la clarté des décisions techniques et à l'impact réel des livrables.
 
@@ -121,6 +122,7 @@ Avec plusieurs années d'expérience en développement logiciel, j'ai construit 
     'hero.tagline.needs': 'Besoins',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
+    'hero.jobTitle': 'Ingénieur Logiciel',
     'cta.open_cv': 'Ouvrir le CV',
     'cta.mail_contact': 'Me contacter',
     'skills.title': 'Compétences',
@@ -135,12 +137,12 @@ Avec plusieurs années d'expérience en développement logiciel, j'ai construit 
     'projects.button_label': 'Lien',
     'experience.title': 'Expérience',
     'experience.list.midbec-2025.company': 'Midbec',
-    'experience.list.midbec-2025.position': 'Software Engineer',
+    'experience.list.midbec-2025.position': 'Ingénieur Logiciel',
     'experience.list.midbec-2025.period': '2025 - Actuellement',
     'experience.list.midbec-2025.description': [
-      'Unique ingénieur en charge de la modernisation d\'un système legacy PHP/Python de plus de 20 ans.',
-      'Migration du frontend vers React, interfacé avec une couche ETL Python et une API ERP gérant plus de 500 000 références produits.',
-      'Mise en place du workflow de développement et des pratiques de sécurité.',
+      'Unique ingénieur de l\'entreprise, responsabilité complète sur l\'architecture et les décisions techniques.',
+      'Modernisation d\'un monolithe PHP de plus de 10 ans : migration vers un frontend Next.js et un backend Gin, remplacement de l\'ETL Python legacy connecté à un ERP Delphi gérant plus de 2 millions de références.',
+      'Conception d\'un pipeline ETL Go pour synchroniser les données ERP dans PostgreSQL : réconciliation catalogue, résolution des prix et gestion des stocks à grande échelle.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
     'experience.list.neat-2025.position': 'Développeur Full Stack (Freelance)',

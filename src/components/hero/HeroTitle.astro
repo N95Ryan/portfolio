@@ -5,6 +5,8 @@ import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const jobTitle = t("hero.jobTitle") as string;
+const jobTitleChars = jobTitle.split("");
 ---
 
 <div class="flex flex-col items-center justify-center min-h-screen">
@@ -14,27 +16,16 @@ const t = useTranslations(lang);
     Ryan PINA-SILASSE
   </h1>
   <h2
-    class="flex justify-center text-2xl md:text-3xl text-white tracking-tight"
+    class="flex flex-wrap justify-center text-2xl md:text-3xl text-white tracking-tight"
   >
-    <span class="inline-block animate-fade-up animate-delay-[50ms]">S</span>
-    <span class="inline-block animate-fade-up animate-delay-[100ms]">o</span>
-    <span class="inline-block animate-fade-up animate-delay-[150ms]">f</span>
-    <span class="inline-block animate-fade-up animate-delay-[200ms]">t</span>
-    <span class="inline-block animate-fade-up animate-delay-[250ms]">w</span>
-    <span class="inline-block animate-fade-up animate-delay-[300ms]">a</span>
-    <span class="inline-block animate-fade-up animate-delay-[350ms]">r</span>
-    <span class="inline-block animate-fade-up animate-delay-[400ms]">e</span>
-    <span class="inline-block animate-fade-up animate-delay-[450ms]"
-      >&nbsp;</span
-    >
-    <span class="inline-block animate-fade-up animate-delay-[500ms]">E</span>
-    <span class="inline-block animate-fade-up animate-delay-[550ms]">n</span>
-    <span class="inline-block animate-fade-up animate-delay-[600ms]">g</span>
-    <span class="inline-block animate-fade-up animate-delay-[650ms]">i</span>
-    <span class="inline-block animate-fade-up animate-delay-[700ms]">n</span>
-    <span class="inline-block animate-fade-up animate-delay-[750ms]">e</span>
-    <span class="inline-block animate-fade-up animate-delay-[800ms]">e</span>
-    <span class="inline-block animate-fade-up animate-delay-[850ms]">r</span>
+    {jobTitleChars.map((char: string, i: number) => (
+      <span
+        class="inline-block animate-fade-up"
+        style={`animation-delay: ${50 + i * 50}ms`}
+      >
+        {char === " " ? "\u00A0" : char}
+      </span>
+    ))}
   </h2>
   <h3
     class="text-lg md:text-xl text-white tracking-tight flex items-center space-x-2 mt-4"
