@@ -8,7 +8,9 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.ryan-pina.dev',
-  adapter: vercel(),
+  adapter: vercel({
+    functionPerRoute: false,
+  }),
   integrations: [
     tailwind(), 
     react(),
