@@ -1,24 +1,7 @@
+import { Resend } from "resend";
 import type { APIRoute } from "astro";
 
 export const prerender = false;
-
-// Fonction helper pour initialiser Resend de manière sécurisée
-async function getResendClient() {
-  try {
-    const { Resend } = await import("resend");
-    const resendApiKey = import.meta.env.RESEND_API_KEY;
-    
-    if (!resendApiKey) {
-      console.error("RESEND_API_KEY n'est pas définie dans les variables d'environnement");
-      return null;
-    }
-    
-    return new Resend(resendApiKey);
-  } catch (error) {
-    console.error("Erreur lors de l'import/initialisation de Resend:", error);
-    return null;
-  }
-}
 
 export const POST: APIRoute = async ({ request }) => {
   // Fonction helper pour garantir une réponse JSON
@@ -44,14 +27,6 @@ export const POST: APIRoute = async ({ request }) => {
     const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
     const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
 
-    // Logging pour diagnostic
-    console.log("=== Configuration Resend ===");
-    console.log("RESEND_API_KEY présente:", !!resendApiKey);
-    console.log("RESEND_API_KEY longueur:", resendApiKey?.length || 0);
-    console.log("RESEND_API_KEY commence par 're_':", resendApiKey?.startsWith("re_") || false);
-    console.log("RESEND_TO_EMAIL:", resendToEmail);
-    console.log("RESEND_FROM_EMAIL:", resendFromEmail);
-
     // Vérification de la clé API
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
@@ -64,13 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Initialisation de Resend
-    console.log("Tentative d'initialisation de Resend...");
-    const resend = await getResendClient();
-    if (!resend) {
-      console.error("Resend n'est pas initialisé");
-      return jsonResponse("Configuration serveur invalide - Resend non initialisé", 500);
-    }
-    console.log("Resend initialisé avec succès");
+    const resend = new Resend(resendApiKey);
 
     // Vérification du Content-Type
     const contentType = request.headers.get("content-type");
@@ -101,15 +70,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Envoi de l'email via Resend
-    console.log("=== Début de l'envoi d'email ===");
-    console.log("RESEND_API_KEY présente:", !!resendApiKey);
-    console.log("RESEND_FROM_EMAIL:", resendFromEmail);
-    console.log("RESEND_TO_EMAIL:", resendToEmail);
-    console.log("From:", resendFromEmail);
-    console.log("To:", [resendToEmail]);
-    console.log("Subject:", subject);
-    console.log("Données reçues:", { name, email, subject, messageLength: message?.length, lang });
-    
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
       to: [resendToEmail],
@@ -166,8 +126,6 @@ ${message}
     });
 
     if (error) {
-      console.error("Resend error details:", JSON.stringify(error, null, 2));
-      console.error("Resend error type:", typeof error);
       console.error("Resend error:", error);
       
       // Extraire le message d'erreur de manière plus détaillée
@@ -196,16 +154,10 @@ ${message}
         ...(import.meta.env.DEV && { error })
       });
     }
-    
-    console.log("Email envoyé avec succès:", data);
 
     return jsonResponse("Email envoyé avec succès", 200, { data });
   } catch (error) {
-    console.error("=== Erreur API ===");
-    console.error("Type d'erreur:", error instanceof Error ? error.constructor.name : typeof error);
-    console.error("Message:", error instanceof Error ? error.message : String(error));
-    console.error("Stack:", error instanceof Error ? error.stack : "N/A");
-    console.error("Erreur complète:", error);
+    console.error("Erreur API:", error);
     
     return jsonResponse(
       "Erreur serveur",
