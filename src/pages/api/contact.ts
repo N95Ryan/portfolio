@@ -20,7 +20,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
       return new Response(
-        JSON.stringify({ message: "Configuration serveur invalide" }),
+        JSON.stringify({ message: "Configuration serveur invalide - RESEND_API_KEY manquante" }),
         { 
           status: 500,
           headers: { "Content-Type": "application/json" }
@@ -28,7 +28,34 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const { name, email, subject, message, lang } = await request.json();
+    // Vérification du Content-Type
+    const contentType = request.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      console.error("Content-Type invalide:", contentType);
+      return new Response(
+        JSON.stringify({ message: "Content-Type doit être application/json" }),
+        { 
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
+
+    let body;
+    try {
+      body = await request.json();
+    } catch (jsonError) {
+      console.error("Erreur lors du parsing JSON:", jsonError);
+      return new Response(
+        JSON.stringify({ message: "Format de données invalide" }),
+        { 
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
+
+    const { name, email, subject, message, lang } = body;
 
     // Validation
     if (!name || !email || !subject || !message) {
@@ -54,10 +81,14 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Envoi de l'email via Resend
-    console.log("Tentative d'envoi d'email via Resend...");
+    console.log("=== Début de l'envoi d'email ===");
+    console.log("RESEND_API_KEY présente:", !!resendApiKey);
+    console.log("RESEND_FROM_EMAIL:", resendFromEmail);
+    console.log("RESEND_TO_EMAIL:", resendToEmail);
     console.log("From:", resendFromEmail);
     console.log("To:", [resendToEmail]);
     console.log("Subject:", subject);
+    console.log("Données reçues:", { name, email, subject, messageLength: message?.length, lang });
     
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
@@ -164,11 +195,17 @@ ${message}
       }
     );
   } catch (error) {
-    console.error("API error:", error);
+    console.error("=== Erreur API ===");
+    console.error("Type d'erreur:", error instanceof Error ? error.constructor.name : typeof error);
+    console.error("Message:", error instanceof Error ? error.message : String(error));
+    console.error("Stack:", error instanceof Error ? error.stack : "N/A");
+    console.error("Erreur complète:", error);
+    
     return new Response(
       JSON.stringify({ 
         message: "Erreur serveur",
-        error: error instanceof Error ? error.message : String(error)
+        error: error instanceof Error ? error.message : String(error),
+        type: error instanceof Error ? error.constructor.name : typeof error
       }),
       { 
         status: 500,
