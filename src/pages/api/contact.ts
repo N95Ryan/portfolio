@@ -1,19 +1,39 @@
 import { Resend } from "resend";
 import type { APIRoute } from "astro";
 
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
+const resendApiKey = import.meta.env.RESEND_API_KEY;
+if (!resendApiKey) {
+  console.error("RESEND_API_KEY n'est pas définie dans les variables d'environnement");
+}
+
+const resend = new Resend(resendApiKey);
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Vérification de la clé API
+    if (!resendApiKey) {
+      console.error("RESEND_API_KEY manquante");
+      return new Response(
+        JSON.stringify({ message: "Configuration serveur invalide" }),
+        { 
+          status: 500,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
+
     const { name, email, subject, message, lang } = await request.json();
 
     // Validation
     if (!name || !email || !subject || !message) {
       return new Response(
         JSON.stringify({ message: "Tous les champs sont requis" }),
-        { status: 400 }
+        { 
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        }
       );
     }
 
@@ -22,7 +42,10 @@ export const POST: APIRoute = async ({ request }) => {
     if (!emailRegex.test(email)) {
       return new Response(
         JSON.stringify({ message: "Adresse email invalide" }),
-        { status: 400 }
+        { 
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        }
       );
     }
 
@@ -81,20 +104,35 @@ ${message}
     if (error) {
       console.error("Resend error:", error);
       return new Response(
-        JSON.stringify({ message: "Erreur lors de l'envoi de l'email" }),
-        { status: 500 }
+        JSON.stringify({ 
+          message: "Erreur lors de l'envoi de l'email",
+          error: error 
+        }),
+        { 
+          status: 500,
+          headers: { "Content-Type": "application/json" }
+        }
       );
     }
 
     return new Response(
       JSON.stringify({ message: "Email envoyé avec succès", data }),
-      { status: 200 }
+      { 
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      }
     );
   } catch (error) {
     console.error("API error:", error);
     return new Response(
-      JSON.stringify({ message: "Erreur serveur" }),
-      { status: 500 }
+      JSON.stringify({ 
+        message: "Erreur serveur",
+        error: error instanceof Error ? error.message : String(error)
+      }),
+      { 
+        status: 500,
+        headers: { "Content-Type": "application/json" }
+      }
     );
   }
 };
