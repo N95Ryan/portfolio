@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { Language } from "@types/index";
-import { Resend } from "resend";
 
 interface ContactFormProps {
   lang: Language;
@@ -42,7 +41,15 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, subject, message, lang }),
       });
-      const data = await res.json();
+
+      let data;
+      try {
+        data = await res.json();
+      } catch (jsonError) {
+        console.error("Erreur lors du parsing de la réponse JSON:", jsonError);
+        setError(tMessages.error_email_send);
+        return;
+      }
 
       if (res.ok) {
         setResponse(tMessages.success);
@@ -51,10 +58,12 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
         setSubject("");
         setMessage("");
       } else {
-        const errorMsg = data.message || tMessages.error_email_send;
+        const errorMsg = data?.message || tMessages.error_email_send;
+        console.error("Erreur API:", errorMsg, data);
         setError(errorMsg);
       }
     } catch (err) {
+      console.error("Erreur lors de l'envoi du formulaire:", err);
       setError(tMessages.error_email_send);
     } finally {
       setIsSubmitting(false);
