@@ -36,11 +36,13 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
     setIsSubmitting(true);
 
     try {
+      console.log("Envoi de la requête au serveur...");
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, subject, message, lang }),
       });
+      console.log("Réponse reçue - Status:", res.status, res.statusText);
 
       let data;
       try {
@@ -59,7 +61,9 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
         setMessage("");
       } else {
         const errorMsg = data?.message || tMessages.error_email_send;
-        console.error("Erreur API:", errorMsg, data);
+        console.error("Erreur API - Status:", res.status);
+        console.error("Erreur API - Message:", errorMsg);
+        console.error("Erreur API - Données complètes:", data);
         setError(errorMsg);
       }
     } catch (err) {
