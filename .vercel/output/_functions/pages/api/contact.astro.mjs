@@ -4,54 +4,56 @@ export { renderers } from '../../renderers.mjs';
 const resendApiKey = "re_VAUbdh8M_3ha9czReHvUX6i1pMMTeTgH2";
 const resendToEmail = "n95jsryan@gmail.com";
 const resendFromEmail = "Portfolio Contact <contact@ryan-pina.dev>";
-const resend = new Resend(resendApiKey);
+let resend = null;
+try {
+  if (resendApiKey) {
+    resend = new Resend(resendApiKey);
+  }
+} catch (resendInitError) {
+  console.error("Erreur lors de l'initialisation de Resend:", resendInitError);
+}
 const prerender = false;
 const POST = async ({ request }) => {
+  const jsonResponse = (message, status = 500, details) => {
+    return new Response(
+      JSON.stringify({
+        message,
+        ...details && { details }
+      }),
+      {
+        status,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        }
+      }
+    );
+  };
   try {
     if (!resendApiKey) ;
+    if (!resend) {
+      console.error("Resend n'est pas initialisé");
+      return jsonResponse("Configuration serveur invalide - Resend non initialisé", 500);
+    }
     const contentType = request.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       console.error("Content-Type invalide:", contentType);
-      return new Response(
-        JSON.stringify({ message: "Content-Type doit être application/json" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Content-Type doit être application/json", 400);
     }
     let body;
     try {
       body = await request.json();
     } catch (jsonError) {
       console.error("Erreur lors du parsing JSON:", jsonError);
-      return new Response(
-        JSON.stringify({ message: "Format de données invalide" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Format de données invalide", 400);
     }
     const { name, email, subject, message, lang } = body;
     if (!name || !email || !subject || !message) {
-      return new Response(
-        JSON.stringify({ message: "Tous les champs sont requis" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Tous les champs sont requis", 400);
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return new Response(
-        JSON.stringify({ message: "Adresse email invalide" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Adresse email invalide", 400);
     }
     console.log("=== Début de l'envoi d'email ===");
     console.log("RESEND_API_KEY présente:", !!resendApiKey);
@@ -61,6 +63,9 @@ const POST = async ({ request }) => {
     console.log("To:", [resendToEmail]);
     console.log("Subject:", subject);
     console.log("Données reçues:", { name, email, subject, messageLength: message?.length, lang });
+    if (!resend) {
+      return jsonResponse("Service d'envoi d'email non disponible", 500);
+    }
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
       to: [resendToEmail],
@@ -132,42 +137,26 @@ ${message}
       if (errorMessage.includes("only send testing emails to your own email address") || errorCode === "validation_error" || errorMessage.includes("domain") || errorMessage.includes("not verified")) {
         errorMessage = "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS.";
       }
-      return new Response(
-        JSON.stringify({
-          message: errorMessage,
-          error,
-          errorCode,
-          details: process.env.NODE_ENV === "development" ? error : void 0
-        }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse(errorMessage, 500, {
+        errorCode,
+        ...false
+      });
     }
     console.log("Email envoyé avec succès:", data);
-    return new Response(
-      JSON.stringify({ message: "Email envoyé avec succès", data }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" }
-      }
-    );
+    return jsonResponse("Email envoyé avec succès", 200, { data });
   } catch (error) {
     console.error("=== Erreur API ===");
     console.error("Type d'erreur:", error instanceof Error ? error.constructor.name : typeof error);
     console.error("Message:", error instanceof Error ? error.message : String(error));
     console.error("Stack:", error instanceof Error ? error.stack : "N/A");
     console.error("Erreur complète:", error);
-    return new Response(
-      JSON.stringify({
-        message: "Erreur serveur",
-        error: error instanceof Error ? error.message : String(error),
-        type: error instanceof Error ? error.constructor.name : typeof error
-      }),
+    return jsonResponse(
+      "Erreur serveur",
+      500,
       {
-        status: 500,
-        headers: { "Content-Type": "application/json" }
+        error: error instanceof Error ? error.message : String(error),
+        type: error instanceof Error ? error.constructor.name : typeof error,
+        ...false
       }
     );
   }
