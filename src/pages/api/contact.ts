@@ -2,6 +2,10 @@ import { Resend } from "resend";
 import type { APIRoute } from "astro";
 
 const resendApiKey = import.meta.env.RESEND_API_KEY;
+const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
+// Utilise le domaine vérifié une fois configuré, sinon fallback sur onboarding@resend.dev pour les tests
+const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
+
 if (!resendApiKey) {
   console.error("RESEND_API_KEY n'est pas définie dans les variables d'environnement");
 }
@@ -50,9 +54,14 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Envoi de l'email via Resend
+    console.log("Tentative d'envoi d'email via Resend...");
+    console.log("From:", resendFromEmail);
+    console.log("To:", [resendToEmail]);
+    console.log("Subject:", subject);
+    
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["n95jsryan@gmail.com"],
+      from: resendFromEmail,
+      to: [resendToEmail],
       replyTo: email,
       subject: `${subject}`,
       html: `
@@ -68,7 +77,11 @@ export const POST: APIRoute = async ({ request }) => {
             
             <!-- Message Content -->
             <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #202124;">
-              <p style="margin: 0 0 16px; white-space: pre-wrap;">${message}</p>
+              <p style="margin: 0 0 8px;"><strong>De:</strong> ${name} (${email})</p>
+              <p style="margin: 0 0 16px;"><strong>Sujet:</strong> ${subject}</p>
+              <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e8eaed;">
+                <p style="margin: 0 0 16px; white-space: pre-wrap;">${message}</p>
+              </div>
             </div>
             
             <!-- Separator -->
@@ -102,11 +115,37 @@ ${message}
     });
 
     if (error) {
+      console.error("Resend error details:", JSON.stringify(error, null, 2));
+      console.error("Resend error type:", typeof error);
       console.error("Resend error:", error);
+      
+      // Extraire le message d'erreur de manière plus détaillée
+      let errorMessage = "Erreur lors de l'envoi de l'email";
+      let errorCode = null;
+      
+      if (error && typeof error === 'object') {
+        if ('message' in error) {
+          errorMessage = String(error.message);
+        }
+        if ('name' in error) {
+          errorCode = String(error.name);
+        }
+      }
+      
+      // Message spécifique pour l'erreur de domaine non vérifié
+      if (errorMessage.includes("only send testing emails to your own email address") || 
+          errorCode === 'validation_error' ||
+          errorMessage.includes("domain") ||
+          errorMessage.includes("not verified")) {
+        errorMessage = "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS.";
+      }
+      
       return new Response(
         JSON.stringify({ 
-          message: "Erreur lors de l'envoi de l'email",
-          error: error 
+          message: errorMessage,
+          error: error,
+          errorCode: errorCode,
+          details: process.env.NODE_ENV === 'development' ? error : undefined
         }),
         { 
           status: 500,
@@ -114,6 +153,8 @@ ${message}
         }
       );
     }
+    
+    console.log("Email envoyé avec succès:", data);
 
     return new Response(
       JSON.stringify({ message: "Email envoyé avec succès", data }),
