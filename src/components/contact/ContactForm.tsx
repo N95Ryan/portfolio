@@ -43,10 +43,22 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
         body: JSON.stringify({ name, email, subject, message, lang }),
       });
       console.log("Réponse reçue - Status:", res.status, res.statusText);
+      console.log("Content-Type:", res.headers.get("content-type"));
+
+      // Vérifier le Content-Type avant de parser
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await res.text();
+        console.error("Réponse non-JSON reçue:", text.substring(0, 200));
+        setError(tMessages.error_email_send);
+        return;
+      }
 
       let data;
       try {
-        data = await res.json();
+        const text = await res.text();
+        console.log("Réponse brute:", text.substring(0, 500));
+        data = JSON.parse(text);
       } catch (jsonError) {
         console.error("Erreur lors du parsing de la réponse JSON:", jsonError);
         setError(tMessages.error_email_send);

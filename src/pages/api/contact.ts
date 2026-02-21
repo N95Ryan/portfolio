@@ -1,44 +1,60 @@
 import { Resend } from "resend";
 import type { APIRoute } from "astro";
 
+// Récupération des variables d'environnement avec logging
 const resendApiKey = import.meta.env.RESEND_API_KEY;
 const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
-// Utilise le domaine vérifié une fois configuré, sinon fallback sur onboarding@resend.dev pour les tests
 const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
 
-if (!resendApiKey) {
-  console.error("RESEND_API_KEY n'est pas définie dans les variables d'environnement");
+// Initialisation de Resend uniquement si la clé API est présente
+let resend: Resend | null = null;
+try {
+  if (resendApiKey) {
+    resend = new Resend(resendApiKey);
+  } else {
+    console.error("RESEND_API_KEY n'est pas définie dans les variables d'environnement");
+  }
+} catch (resendInitError) {
+  console.error("Erreur lors de l'initialisation de Resend:", resendInitError);
 }
-
-const resend = new Resend(resendApiKey);
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
+  // Fonction helper pour garantir une réponse JSON
+  const jsonResponse = (message: string, status: number = 500, details?: any) => {
+    return new Response(
+      JSON.stringify({ 
+        message,
+        ...(details && { details })
+      }),
+      { 
+        status,
+        headers: { 
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        }
+      }
+    );
+  };
+
   try {
-    // Vérification de la clé API
+    // Vérification de la clé API et de Resend
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
-      return new Response(
-        JSON.stringify({ message: "Configuration serveur invalide - RESEND_API_KEY manquante" }),
-        { 
-          status: 500,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Configuration serveur invalide - RESEND_API_KEY manquante", 500);
+    }
+
+    if (!resend) {
+      console.error("Resend n'est pas initialisé");
+      return jsonResponse("Configuration serveur invalide - Resend non initialisé", 500);
     }
 
     // Vérification du Content-Type
     const contentType = request.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       console.error("Content-Type invalide:", contentType);
-      return new Response(
-        JSON.stringify({ message: "Content-Type doit être application/json" }),
-        { 
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Content-Type doit être application/json", 400);
     }
 
     let body;
@@ -46,38 +62,20 @@ export const POST: APIRoute = async ({ request }) => {
       body = await request.json();
     } catch (jsonError) {
       console.error("Erreur lors du parsing JSON:", jsonError);
-      return new Response(
-        JSON.stringify({ message: "Format de données invalide" }),
-        { 
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Format de données invalide", 400);
     }
 
     const { name, email, subject, message, lang } = body;
 
     // Validation
     if (!name || !email || !subject || !message) {
-      return new Response(
-        JSON.stringify({ message: "Tous les champs sont requis" }),
-        { 
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Tous les champs sont requis", 400);
     }
 
     // Validation email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return new Response(
-        JSON.stringify({ message: "Adresse email invalide" }),
-        { 
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse("Adresse email invalide", 400);
     }
 
     // Envoi de l'email via Resend
@@ -89,6 +87,10 @@ export const POST: APIRoute = async ({ request }) => {
     console.log("To:", [resendToEmail]);
     console.log("Subject:", subject);
     console.log("Données reçues:", { name, email, subject, messageLength: message?.length, lang });
+    
+    if (!resend) {
+      return jsonResponse("Service d'envoi d'email non disponible", 500);
+    }
     
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
@@ -171,29 +173,15 @@ ${message}
         errorMessage = "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS.";
       }
       
-      return new Response(
-        JSON.stringify({ 
-          message: errorMessage,
-          error: error,
-          errorCode: errorCode,
-          details: process.env.NODE_ENV === 'development' ? error : undefined
-        }),
-        { 
-          status: 500,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
+      return jsonResponse(errorMessage, 500, {
+        errorCode,
+        ...(import.meta.env.DEV && { error })
+      });
     }
     
     console.log("Email envoyé avec succès:", data);
 
-    return new Response(
-      JSON.stringify({ message: "Email envoyé avec succès", data }),
-      { 
-        status: 200,
-        headers: { "Content-Type": "application/json" }
-      }
-    );
+    return jsonResponse("Email envoyé avec succès", 200, { data });
   } catch (error) {
     console.error("=== Erreur API ===");
     console.error("Type d'erreur:", error instanceof Error ? error.constructor.name : typeof error);
@@ -201,15 +189,13 @@ ${message}
     console.error("Stack:", error instanceof Error ? error.stack : "N/A");
     console.error("Erreur complète:", error);
     
-    return new Response(
-      JSON.stringify({ 
-        message: "Erreur serveur",
+    return jsonResponse(
+      "Erreur serveur",
+      500,
+      {
         error: error instanceof Error ? error.message : String(error),
-        type: error instanceof Error ? error.constructor.name : typeof error
-      }),
-      { 
-        status: 500,
-        headers: { "Content-Type": "application/json" }
+        type: error instanceof Error ? error.constructor.name : typeof error,
+        ...(import.meta.env.DEV && { stack: error instanceof Error ? error.stack : undefined })
       }
     );
   }
