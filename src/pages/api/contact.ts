@@ -1,24 +1,24 @@
-import { Resend } from "resend";
 import type { APIRoute } from "astro";
 
-// Récupération des variables d'environnement
-const resendApiKey = import.meta.env.RESEND_API_KEY;
-const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
-const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
-
-// Initialisation de Resend uniquement si la clé API est présente
-let resend: Resend | null = null;
-try {
-  if (resendApiKey) {
-    resend = new Resend(resendApiKey);
-  } else {
-    console.error("RESEND_API_KEY n'est pas définie dans les variables d'environnement");
-  }
-} catch (resendInitError) {
-  console.error("Erreur lors de l'initialisation de Resend:", resendInitError);
-}
-
 export const prerender = false;
+
+// Fonction helper pour initialiser Resend de manière sécurisée
+async function getResendClient() {
+  try {
+    const { Resend } = await import("resend");
+    const resendApiKey = import.meta.env.RESEND_API_KEY;
+    
+    if (!resendApiKey) {
+      console.error("RESEND_API_KEY n'est pas définie dans les variables d'environnement");
+      return null;
+    }
+    
+    return new Resend(resendApiKey);
+  } catch (error) {
+    console.error("Erreur lors de l'import/initialisation de Resend:", error);
+    return null;
+  }
+}
 
 export const POST: APIRoute = async ({ request }) => {
   // Fonction helper pour garantir une réponse JSON
@@ -39,12 +39,19 @@ export const POST: APIRoute = async ({ request }) => {
   };
 
   try {
-    // Vérification de la clé API et de Resend
+    // Récupération des variables d'environnement
+    const resendApiKey = import.meta.env.RESEND_API_KEY;
+    const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
+    const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
+
+    // Vérification de la clé API
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
       return jsonResponse("Configuration serveur invalide - RESEND_API_KEY manquante", 500);
     }
 
+    // Initialisation de Resend
+    const resend = await getResendClient();
     if (!resend) {
       console.error("Resend n'est pas initialisé");
       return jsonResponse("Configuration serveur invalide - Resend non initialisé", 500);
@@ -87,10 +94,6 @@ export const POST: APIRoute = async ({ request }) => {
     console.log("To:", [resendToEmail]);
     console.log("Subject:", subject);
     console.log("Données reçues:", { name, email, subject, messageLength: message?.length, lang });
-    
-    if (!resend) {
-      return jsonResponse("Service d'envoi d'email non disponible", 500);
-    }
     
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
