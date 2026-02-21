@@ -44,18 +44,33 @@ export const POST: APIRoute = async ({ request }) => {
     const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
     const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
 
+    // Logging pour diagnostic
+    console.log("=== Configuration Resend ===");
+    console.log("RESEND_API_KEY présente:", !!resendApiKey);
+    console.log("RESEND_API_KEY longueur:", resendApiKey?.length || 0);
+    console.log("RESEND_API_KEY commence par 're_':", resendApiKey?.startsWith("re_") || false);
+    console.log("RESEND_TO_EMAIL:", resendToEmail);
+    console.log("RESEND_FROM_EMAIL:", resendFromEmail);
+
     // Vérification de la clé API
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
       return jsonResponse("Configuration serveur invalide - RESEND_API_KEY manquante", 500);
     }
 
+    if (!resendApiKey.startsWith("re_")) {
+      console.error("RESEND_API_KEY format invalide (doit commencer par 're_')");
+      return jsonResponse("Configuration serveur invalide - Format de clé API invalide", 500);
+    }
+
     // Initialisation de Resend
+    console.log("Tentative d'initialisation de Resend...");
     const resend = await getResendClient();
     if (!resend) {
       console.error("Resend n'est pas initialisé");
       return jsonResponse("Configuration serveur invalide - Resend non initialisé", 500);
     }
+    console.log("Resend initialisé avec succès");
 
     // Vérification du Content-Type
     const contentType = request.headers.get("content-type");
