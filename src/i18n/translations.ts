@@ -54,7 +54,7 @@ With several years of experience in software development, I have built a pragmat
     'experience.list.midbec-2025.period': '2025 - Present',
     'experience.list.midbec-2025.description': [
       'Sole engineer at the company, full ownership over architecture and technical decisions.',
-      'Modernizing a 10+ year old PHP monolith: migrating to Next.js frontend and Gin backend, replacing legacy Python ETL connected to Delphi ERP managing 2M+ inventory records.',
+      'Modernizing a 50 years old website. Migrating to a Next.js frontend and Chi backend, while replacing legacy Python ETL connected to Delphi ERP managing 2M+ inventory records.',
       'Designing a Go ETL pipeline to synchronize ERP data into PostgreSQL, handling catalog reconciliation, pricing resolution and inventory management at scale.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
@@ -140,8 +140,8 @@ Avec plusieurs années d'expérience en développement logiciel, j'ai construit 
     'experience.list.midbec-2025.position': 'Ingénieur Logiciel',
     'experience.list.midbec-2025.period': '2025 - Actuellement',
     'experience.list.midbec-2025.description': [
-      'Unique ingénieur de l\'entreprise, responsabilité complète sur l\'architecture et les décisions techniques.',
-      'Modernisation d\'un monolithe PHP de plus de 10 ans : migration vers un frontend Next.js et un backend Gin, remplacement de l\'ETL Python legacy connecté à un ERP Delphi gérant plus de 2 millions de références.',
+      'Unique développeur de l\'entreprise, responsabilité complète sur l\'architecture et les décisions techniques.',
+      'Modernisation d\'un site web de plus de 50 ans : migration vers un frontend Next.js et un backend Chi, remplacement de l\'ETL Python legacy connecté à un ERP Delphi gérant plus de 2 millions de références.',
       'Conception d\'un pipeline ETL Go pour synchroniser les données ERP dans PostgreSQL : réconciliation catalogue, résolution des prix et gestion des stocks à grande échelle.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
