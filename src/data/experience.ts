@@ -4,7 +4,7 @@ export const experiences: Experience[] = [
   {
     id: 'midbec-2025',
     location: 'Drummondville, Quebec (Hybrid)',
-    technologies: ['Next.js', 'Chi', 'PostgreSQL', 'LXC containers'],
+    technologies: ['Next.js', 'Chi', 'PostgreSQL', 'UnoPim', 'LXC containers'],
   },
   {
     id: 'neat-2025',
