@@ -3,14 +3,54 @@ import type { Project } from '@types/index';
 export const projects: Project[] = [
   {
     id: '0',
+    title: 'Flip',
+    name: {
+      en: 'Flip',
+      fr: 'Flip',
+    },
+    description: {
+      en: 'Judo companion app — technique library & premium training journal powered by Stripe subscriptions and Go backend.',
+      fr: 'Application compagnon pour judokas — bibliothèque de techniques et journal d\'entraînement premium avec abonnements Stripe et backend Go.',
+    },
+    technologies: 'Go • Chi • Expo • Supabase • Stripe',
+    image: '/images/projects/placeholder.jpg',
+    link: 'https://github.com/N95Ryan/Flip',
+    bgcolor: '#0F0F0F',
+    textColor: '#F5F0E8',
+    linkColor: '#C0392B',
+    linkTextColor: '#ffffff',
+    tags: [],
+  },
+  {
+    id: '1',
+    title: 'Midbec Journey',
+    name: {
+      en: 'Midbec Journey',
+      fr: 'Midbec Journey',
+    },
+    description: {
+      en: 'Documentation of my work as sole engineer at Midbec — legacy migration to Go + Next.js, architecture decisions, 2M+ inventory records.',
+      fr: 'Documentation de mon travail en tant qu\'ingénieur solo chez Midbec — migration legacy vers Go + Next.js, décisions d\'architecture, 2M+ références.',
+    },
+    technologies: 'Go • Next.js • PostgreSQL',
+    image: '/images/projects/placeholder.jpg',
+    link: 'https://github.com/N95Ryan/midbec-journey',
+    bgcolor: '#1a1a2e',
+    textColor: '#ffffff',
+    linkColor: '#4a90d9',
+    linkTextColor: '#ffffff',
+    tags: [],
+  },
+  {
+    id: '2',
     title: 'Leaf',
     name: {
       en: 'Leaf',
       fr: 'Leaf',
     },
     description: {
-      en: 'Elegant and fast markdown note manager that runs entirely in your terminal. Allows you to create, edit, and organize markdown notes within the terminal.',
-      fr: 'Gestionnaire de notes markdown élégant et rapide qui fonctionne entièrement dans votre terminal. Permet de créer, modifier et organiser des notes markdown dans le terminal.',
+      en: 'Elegant and fast markdown note manager that runs entirely in your terminal. Create, edit, and organize markdown notes within the terminal.',
+      fr: 'Gestionnaire de notes markdown élégant et rapide qui fonctionne entièrement dans votre terminal.',
     },
     technologies: 'Go • Bubbletea • Lipgloss',
     image: '/images/projects/Leaf.jpg',
@@ -22,17 +62,17 @@ export const projects: Project[] = [
     tags: [],
   },
   {
-    id: '1',
+    id: '3',
     title: 'The 8bits Hangman',
     name: {
       en: 'The 8bits Hangman',
       fr: 'The 8bits Hangman',
     },
     description: {
-      en: 'The 8bits Hangman is a hangman game online. You have to find words in the retro-gaming domain.',
-      fr: 'The 8bits Hangman est un jeu de pendu en ligne. Vous devez trouver des mots dans le domaine du retro-gaming.',
+      en: 'Fullstack retro hangman game with cleanly separated frontend and Go REST API backend.',
+      fr: 'Jeu de pendu rétro fullstack avec frontend et backend Go REST API clairement séparés.',
     },
-    technologies: 'React • Vite • Gin',
+    technologies: 'React • Vite • Go • Chi',
     image: '/images/projects/The-8bits-hangman.jpg',
     link: 'https://the-8bits-hangman.vercel.app/',
     bgcolor: '#ffffff',
@@ -42,47 +82,6 @@ export const projects: Project[] = [
     tags: [],
   },
   {
-    id: '2',
-    title: 'Movie Mate',
-    name: {
-      en: 'Movie Mate',
-      fr: 'Movie Mate',
-    },
-    description: {
-      en: 'Mobile app that displays popular movies from The Movie Database (TMDB) API.',
-      fr: 'Application mobile qui affiche les films populaires depuis l\'API The Movie Database (TMDB).',
-    },
-    technologies: 'React Native • Expo',
-    image: '/images/projects/Movie-Mate.jpg', 
-    link: 'https://github.com/N95Ryan/movie-mate',
-    bgcolor: '#1a1a1a',
-    textColor: '#ffffff',
-    linkColor: '#d22e2c',
-    linkTextColor: '#ffffff',
-    tags: [],
-  },
-  {
-    id: '3',
-    title: 'Spotr',
-    name: {
-      en: 'Spotr',
-      fr: 'Spotr',
-    },
-    description: {
-      en: 'Mobile app designed for photographers in search of unique locations. Allows users to easily scout, save, and explore photo spots around the world.',
-      fr: 'Spotr est une application mobile conçue pour les photographes à la recherche d\'emplacements uniques. Elle permet aux utilisateurs de repérer, sauvegarder et explorer facilement des spots photo à travers le monde.',
-    },
-    technologies: 'Swift • GraphQL • Firebase',
-    image: '/images/projects/Spotr.jpg',
-    link: 'https://apps.apple.com/fr/app/spotr-tous-les-spots-photo/id1151859681',
-    bgcolor: '#ffffff',
-    textColor: '#000000',
-    linkColor: '#07e7a8',
-    linkTextColor: '#000000',
-    tags: [],
-  },
-    
-  {
     id: '4',
     title: 'Bumble B',
     name: {
@@ -90,8 +89,8 @@ export const projects: Project[] = [
       fr: 'Bumble B',
     },
     description: {
-      en: 'Developed as part of my final school project, Bumble B is a mobile application that controls a small car equipped with an ESP32 module provided by the school.',
-      fr: 'Développé dans le cadre de mon projet de fin d\'études, Bumble B est une application mobile qui contrôle une petite voiture équipée d\'un module ESP32 fourni par l\'école.',
+      en: 'Mobile application controlling a small car equipped with an ESP32 module — real-time communication, end-to-end ownership.',
+      fr: 'Application mobile contrôlant une voiture équipée d\'un module ESP32 — communication temps réel, ownership end-to-end.',
     },
     technologies: 'React Native • Expo • C++',
     image: '/images/projects/Bumble-B.jpg',
@@ -102,25 +101,4 @@ export const projects: Project[] = [
     linkTextColor: '#000000',
     tags: [],
   },
-  {
-    id: '5',
-    title: 'Bitjutsu',
-    name: {
-      en: 'Bitjutsu',
-      fr: 'Bitjutsu',
-    },
-    description: {
-      en: 'AI-powered image editor that allows you to edit pictures using written instructions, powered by Replicate\'s API.',
-      fr: 'Éditeur d\'images alimenté par l\'IA qui permet de modifier des photos en utilisant des instructions écrites, alimenté par l\'API de Replicate.',
-    },
-    technologies: 'Next.js • Tailwind CSS',
-    image: '/images/projects/Bitjutsu.jpg',
-    link: 'https://bijutsu.vercel.app/',
-    bgcolor: '#ffffff',
-    textColor: '#000000',
-    linkColor: '#1d1d1d',
-    linkTextColor: '#ffffff',
-    tags: [],
-  },
-  
 ];

@@ -6,7 +6,6 @@ const languages: SkillItem[] = [
   { key: "javascript" },
   { key: "typescript" },
   { key: "golang" },
-  { key: "python" },
 ];
 
 const frameworks: SkillItem[] = [
@@ -15,11 +14,10 @@ const frameworks: SkillItem[] = [
   { key: "astro" },
   { key: "tanstack" },
   { key: "tailwind" },
-  { key: "nodedotjs" },
+  // { key: "nodedotjs" },
   { key: "gin" },
-  { key: "echo" },
+  { key: "chi" },
 ];
-
 const databaseCloud: SkillItem[] = [
   { key: "postgresql" },
   { key: "supabase" },

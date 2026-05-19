@@ -15,14 +15,14 @@ export const translations = {
     'nav.contact': 'Contact',
     'about.title': 'About Me',
     'about.introduction': 'Let me introduce myself',
-    'about.description': `💼 Technology has never been just an interest, but a permanent playground and space for reflection.
-With several years of experience in software development, I have built a pragmatic approach, focused on understanding real needs and solving concrete problems.
+    'about.description': `💼 Software Engineer based in Canada, specialized in Go, TypeScript, and React.
+I own projects end-to-end — requirements → architecture → production — and thrive as the sole engineer making technical decisions that ship.
 
-💻 As a Software Engineer by profession, I work on web and application projects bringing a global vision: analysis, architecture, performance, and maintainability. Naturally curious, I combine technical rigor and product sense to design reliable, scalable solutions aligned with business challenges.
+💻 Currently building production systems at Midbec (Drummondville, QC): migrating a legacy stack to Go + Next.js, designing ETL pipelines at scale, and owning the full technical roadmap.
 
-🎯 Currently freelancing, I support teams and companies on ambitious projects with a clear goal: transforming complex needs into effective and sustainable solutions. I place particular importance on code simplicity, quality, clarity of technical decisions, and the real impact of deliverables.
+🎯 I place particular importance on code simplicity, clear technical decisions, and the real impact of deliverables. KISS is not just a principle — it's how I work.
 
-📍 Based in Quebec 🇨🇦`,
+📍 Based in Drummondville, Quebec 🇨🇦 — open to opportunities in Toronto starting 2027.`,
     'about.whatIDo.title': 'What I do',
     'about.whatIDo.frontend.title': 'Frontend & Web',
     'about.whatIDo.frontend.description': 'I specialize in building responsive, user-focused web applications designed to be fast, clear and easy to evolve. My work emphasizes clean architecture, intuitive UX and performance that scales with the product.',
@@ -46,25 +46,27 @@ With several years of experience in software development, I have built a pragmat
     'skills.testing': 'Testing',
     'skills.devops': 'DevOps',
     'skills.tools': 'Tools',
+    'skills.frameworks.chi': 'Chi',
+    'skills.frameworks.gin': 'Gin',
     'projects.title': 'My projects',
     'projects.button_label': 'Link',
     'experience.title': 'Experience',
-    'experience.list.midbec-2025.company': 'Midbec',
-    'experience.list.midbec-2025.position': 'Software Engineer',
-    'experience.list.midbec-2025.period': '2025 - Present',
-    'experience.list.midbec-2025.description': [
-      'Sole engineer at the company, full ownership over architecture and technical decisions.',
-      'Modernizing a 50 years old website. Migrating to a Next.js frontend and Chi backend, while replacing legacy Python ETL connected to Delphi ERP managing 2M+ inventory records.',
-      'Designing a Go ETL pipeline to synchronize ERP data into PostgreSQL, handling catalog reconciliation, pricing resolution and inventory management at scale.',
-      'Migrated over a hundred SCSS files to Tailwind CSS with zero visual regressions. Live platform, never taken offline.',
+    'experience.list.midbec-2026.company': 'Midbec',
+    'experience.list.midbec-2026.position': 'Software Engineer',
+    'experience.list.midbec-2026.period': 'March 2026 - Present',
+    'experience.list.midbec-2026.description': [
+      'Sole engineer at the company — full ownership over architecture, infrastructure, and all technical decisions.',
+      'Migrating a legacy PHP/Python stack to a Go (Chi) backend and Next.js frontend, replacing an ETL connected to a Delphi ERP managing 2M+ inventory records.',
+      'Designing a Go ETL pipeline to synchronize ERP data into PostgreSQL: catalog reconciliation, pricing resolution, and inventory management at scale.',
+      'Migrated 100+ SCSS files to Tailwind CSS with zero visual regressions on a live platform, never taken offline.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
     'experience.list.neat-2025.position': 'Full Stack Developer (Freelance)',
     'experience.list.neat-2025.period': '2025',
     'experience.list.neat-2025.description': [
       'Led the transformation of a legacy jQuery site into a modern platform using Astro and TypeScript.',
-      'Designed a headless CMS architecture powered by WordPress GraphQL API, with automated image optimization and a robust CI/CD pipeline for quality and reliability.',
-      'Improved performance, maintainability, and provided a far better mobile user experience.',
+      'Designed a headless CMS architecture powered by WordPress GraphQL API, with automated image optimization via Cloudinary and a CI/CD pipeline using Playwright for quality and reliability.',
+      '93% JavaScript reduction, +25% organic traffic growth, improved mobile UX and maintainability.',
     ],
     'experience.list.konbini-2022.company': 'Konbini',
     'experience.list.konbini-2022.position': 'Frontend Developer',
@@ -103,14 +105,14 @@ With several years of experience in software development, I have built a pragmat
     'nav.contact': 'Contact',
     'about.title': 'À propos de moi',
     'about.introduction': 'Introduction',
-    'about.description': `🎒 La technologie n'a jamais été un simple intérêt, mais un terrain de jeu et de réflexion permanent.
-Avec plusieurs années d'expérience en développement logiciel, j'ai construit une approche pragmatique, orientée compréhension des besoins réels et résolution de problématiques concrètes.
+    'about.description': `💼 Ingénieur Logiciel basé au Canada, spécialisé en Go, TypeScript et React.
+Je pilote les projets de bout en bout — besoins → architecture → production — et m'épanouis en tant qu'ingénieur solo responsable de toutes les décisions techniques.
 
-💻 Ingénieur Logiciel de profession, j'interviens sur des projets web et applicatifs en apportant une vision globale : analyse, architecture, performance et maintenabilité. Curieux par nature, je combine rigueur technique et sens du produit pour concevoir des solutions fiables, évolutives et alignées avec les enjeux business.
+💻 Actuellement en charge des systèmes en production chez Midbec (Drummondville, QC) : migration d'un stack legacy vers Go + Next.js, conception de pipelines ETL à grande échelle, ownership complet de la roadmap technique.
 
-🎯 Aujourd'hui freelance, j'accompagne des équipes et des entreprises sur des projets ambitieux, avec un objectif clair : transformer des besoins complexes en solutions efficaces et durables. J'accorde une importance particulière à la qualité du code, à la clarté des décisions techniques et à l'impact réel des livrables.
+🎯 J'accorde une importance particulière à la simplicité du code, à la clarté des décisions techniques et à l'impact réel des livrables. KISS n'est pas juste un principe — c'est ma façon de travailler.
 
-📍 Basé au Québec 🇨🇦`,
+📍 Basé à Drummondville, Québec 🇨🇦 — ouvert aux opportunités à Toronto à partir de 2027.`,
     'about.whatIDo.title': 'Ce que je fais',
     'about.whatIDo.frontend.title': 'Frontend & Web',
     'about.whatIDo.frontend.description': 'Je conçois des applications web responsives, centrées utilisateur, pensées pour être rapides, lisibles et faciles à faire évoluer. Mon approche privilégie une architecture propre, une UX intuitive et des performances frontend qui suivent la croissance du produit.',
@@ -134,25 +136,27 @@ Avec plusieurs années d'expérience en développement logiciel, j'ai construit 
     'skills.testing': 'Tests',
     'skills.devops': 'DevOps',
     'skills.tools': 'Outils',
+    'skills.frameworks.chi': 'Chi',
+    'skills.frameworks.gin': 'Gin',
     'projects.title': 'Mes projets',
     'projects.button_label': 'Lien',
     'experience.title': 'Expérience',
-    'experience.list.midbec-2025.company': 'Midbec',
-    'experience.list.midbec-2025.position': 'Ingénieur Logiciel',
-    'experience.list.midbec-2025.period': '2025 - Actuellement',
-    'experience.list.midbec-2025.description': [
-      'Unique développeur de l\'entreprise, responsabilité complète sur l\'architecture et les décisions techniques.',
-      'Modernisation d\'un site web de plus de 50 ans : migration vers un frontend Next.js et un backend Chi, remplacement de l\'ETL Python legacy connecté à un ERP Delphi gérant plus de 2 millions de références.',
+    'experience.list.midbec-2026.company': 'Midbec',
+    'experience.list.midbec-2026.position': 'Ingénieur Logiciel',
+    'experience.list.midbec-2026.period': 'Mars 2026 - Actuellement',
+    'experience.list.midbec-2026.description': [
+      'Unique ingénieur de l\'entreprise — ownership complet sur l\'architecture, l\'infrastructure et toutes les décisions techniques.',
+      'Migration d\'un stack legacy PHP/Python vers un backend Go (Chi) et un frontend Next.js, en remplacement d\'un ETL connecté à un ERP Delphi gérant plus de 2 millions de références.',
       'Conception d\'un pipeline ETL Go pour synchroniser les données ERP dans PostgreSQL : réconciliation catalogue, résolution des prix et gestion des stocks à grande échelle.',
-      'Migration d\'une centaine de fichiers SCSS vers Tailwind CSS sans aucune régression visuelle. Plateforme en ligne, jamais désactivée.',
+      'Migration de plus de 100 fichiers SCSS vers Tailwind CSS sans aucune régression visuelle sur une plateforme en production, jamais désactivée.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
     'experience.list.neat-2025.position': 'Développeur Full Stack (Freelance)',
     'experience.list.neat-2025.period': '2025',
     'experience.list.neat-2025.description': [
       'Transformation d\'un site legacy jQuery en plateforme moderne avec Astro et TypeScript.',
-      'Conception d\'une architecture CMS headless alimentée par l\'API GraphQL WordPress, avec optimisation automatique des images et un pipeline CI/CD robuste pour la qualité et la fiabilité.',
-      'Amélioration des performances et de la maintenabilité, avec une expérience utilisateur mobile nettement meilleure.',
+      'Conception d\'une architecture CMS headless alimentée par l\'API GraphQL WordPress, avec optimisation automatique des images via Cloudinary et un pipeline CI/CD avec Playwright.',
+      'Réduction de 93% du JavaScript, +25% de trafic organique, amélioration de l\'UX mobile et de la maintenabilité.',
     ],
     'experience.list.konbini-2022.company': 'Konbini',
     'experience.list.konbini-2022.position': 'Développeur Frontend',
