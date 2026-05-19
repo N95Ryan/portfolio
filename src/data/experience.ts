@@ -2,9 +2,9 @@ import type { Experience } from '@types/index';
 
 export const experiences: Experience[] = [
   {
-    id: 'midbec-2025',
-    location: 'Drummondville, Quebec (Hybrid)',
-    technologies: ['Next.js', 'Chi', 'PostgreSQL', 'UnoPim', 'LXC containers'],
+    id: 'midbec-2026',
+    location: 'Drummondville, Quebec, Canada (Remote)',
+    technologies: ['Go', 'Chi', 'Next.js', 'PostgreSQL', 'LXC'],
   },
   {
     id: 'neat-2025',
