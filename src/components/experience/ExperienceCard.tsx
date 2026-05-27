@@ -20,7 +20,6 @@ export default function ExperienceCard({
 }: ExperienceCardProps) {
   const technologiesString = experience.technologies.join(" - ");
 
-  // Classes d'animation selon le côté (uniquement sur desktop md:)
   const animationClasses =
     side === "left" ? "md:animate-fade-in-left" : "md:animate-fade-in-right";
 

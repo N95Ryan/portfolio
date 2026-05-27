@@ -15,14 +15,17 @@ export const translations = {
     'nav.contact': 'Contact',
     'about.title': 'About Me',
     'about.introduction': 'Let me introduce myself',
-    'about.description': `💼 Software Engineer based in Canada, specialized in Go, TypeScript, and React.
-I own projects end-to-end — requirements → architecture → production — and thrive as the sole engineer making technical decisions that ship.
+    'about.description': `💼 Software Engineer based in Canada, specialized in Go and React.
+I own projects end-to-end. Requirements → Architecture → Production. 
+And I thrive as the sole engineer making technical decisions that ship products.
 
-💻 Currently building production systems at Midbec (Drummondville, QC): migrating a legacy stack to Go + Next.js, designing ETL pipelines at scale, and owning the full technical roadmap.
+💻 Currently building production systems at Midbec. 
+Migrating a legacy PHP/Python stack to Go/Next.js. 
+Designing ETL pipelines at scale. Owning the full technical roadmap.
 
-🎯 I place particular importance on code simplicity, clear technical decisions, and the real impact of deliverables. KISS is not just a principle — it's how I work.
+🎯 I place particular importance on code simplicity, clear technical decisions, and the real impact of deliverables. KISS is not just a principle for me, that's how I live my life.
 
-📍 Based in Drummondville, Quebec 🇨🇦 — open to opportunities in Toronto starting 2027.`,
+📍 Based in Drummondville, Quebec 🇨🇦 | Open to opportunities in Toronto starting 2027.`,
     'about.whatIDo.title': 'What I do',
     'about.whatIDo.frontend.title': 'Frontend & Web',
     'about.whatIDo.frontend.description': 'I specialize in building responsive, user-focused web applications designed to be fast, clear and easy to evolve. My work emphasizes clean architecture, intuitive UX and performance that scales with the product.',
@@ -53,9 +56,9 @@ I own projects end-to-end — requirements → architecture → production — a
     'experience.title': 'Experience',
     'experience.list.midbec-2026.company': 'Midbec',
     'experience.list.midbec-2026.position': 'Software Engineer',
-    'experience.list.midbec-2026.period': 'March 2026 - Present',
+    'experience.list.midbec-2026.period': '2026 - Present',
     'experience.list.midbec-2026.description': [
-      'Sole engineer at the company — full ownership over architecture, infrastructure, and all technical decisions.',
+      'Sole engineer at the company. Full ownership over architecture, infrastructure, and all technical decisions.',
       'Migrating a legacy PHP/Python stack to a Go (Chi) backend and Next.js frontend, replacing an ETL connected to a Delphi ERP managing 2M+ inventory records.',
       'Designing a Go ETL pipeline to synchronize ERP data into PostgreSQL: catalog reconciliation, pricing resolution, and inventory management at scale.',
       'Migrated 100+ SCSS files to Tailwind CSS with zero visual regressions on a live platform, never taken offline.',
@@ -106,13 +109,15 @@ I own projects end-to-end — requirements → architecture → production — a
     'about.title': 'À propos de moi',
     'about.introduction': 'Introduction',
     'about.description': `💼 Ingénieur Logiciel basé au Canada, spécialisé en Go, TypeScript et React.
-Je pilote les projets de bout en bout — besoins → architecture → production — et m'épanouis en tant qu'ingénieur solo responsable de toutes les décisions techniques.
+Je pilote les projets de bout en bout. Besoins → Architecture → Production. 
+Et m'épanouis en tant qu'ingénieur solo responsable de toutes les décisions techniques.
 
-💻 Actuellement en charge des systèmes en production chez Midbec (Drummondville, QC) : migration d'un stack legacy vers Go + Next.js, conception de pipelines ETL à grande échelle, ownership complet de la roadmap technique.
+💻 Actuellement en charge des systèmes en production chez Midbec. 
+Migration d'un stack legacy PHP/Python vers Go/Next.js. Conception de pipelines ETL à grande échelle.
 
-🎯 J'accorde une importance particulière à la simplicité du code, à la clarté des décisions techniques et à l'impact réel des livrables. KISS n'est pas juste un principe — c'est ma façon de travailler.
+🎯 J'accorde une importance particulière à la simplicité du code, à la clarté des décisions techniques et à l'impact réel des livrables. KISS n'est pas juste un principe pour moi, c'est ma façon de vivre.
 
-📍 Basé à Drummondville, Québec 🇨🇦 — ouvert aux opportunités à Toronto à partir de 2027.`,
+📍 Basé à Drummondville, Québec 🇨🇦 | Ouvert aux opportunités à Toronto à partir de 2027.`,
     'about.whatIDo.title': 'Ce que je fais',
     'about.whatIDo.frontend.title': 'Frontend & Web',
     'about.whatIDo.frontend.description': 'Je conçois des applications web responsives, centrées utilisateur, pensées pour être rapides, lisibles et faciles à faire évoluer. Mon approche privilégie une architecture propre, une UX intuitive et des performances frontend qui suivent la croissance du produit.',
@@ -143,9 +148,9 @@ Je pilote les projets de bout en bout — besoins → architecture → productio
     'experience.title': 'Expérience',
     'experience.list.midbec-2026.company': 'Midbec',
     'experience.list.midbec-2026.position': 'Ingénieur Logiciel',
-    'experience.list.midbec-2026.period': 'Mars 2026 - Actuellement',
+    'experience.list.midbec-2026.period': '2026 - Actuellement',
     'experience.list.midbec-2026.description': [
-      'Unique ingénieur de l\'entreprise — ownership complet sur l\'architecture, l\'infrastructure et toutes les décisions techniques.',
+      'Unique ingénieur de l\'entreprise. Ownership complet sur l\'architecture, l\'infrastructure et toutes les décisions techniques.',
       'Migration d\'un stack legacy PHP/Python vers un backend Go (Chi) et un frontend Next.js, en remplacement d\'un ETL connecté à un ERP Delphi gérant plus de 2 millions de références.',
       'Conception d\'un pipeline ETL Go pour synchroniser les données ERP dans PostgreSQL : réconciliation catalogue, résolution des prix et gestion des stocks à grande échelle.',
       'Migration de plus de 100 fichiers SCSS vers Tailwind CSS sans aucune régression visuelle sur une plateforme en production, jamais désactivée.',
