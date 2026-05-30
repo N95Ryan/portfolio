@@ -22,7 +22,6 @@ export default function ProjectCard({
   // Utiliser les données multilingues directement depuis projects.ts
   const projectName = project.name[lang];
   const projectDescription = project.description[lang];
-  const projectTechnologies = project.technologies;
 
   // Utiliser les couleurs directement depuis projects.ts
   const bgColor = project.bgcolor || "#ffffff";
@@ -144,21 +143,22 @@ export default function ProjectCard({
             {projectName}
           </h2>
 
-          {/* Refined technology badge */}
-          <div className="mb-4 sm:mb-5 flex-grow min-h-[2.5rem] flex items-start">
-            <span
-              className="text-xs sm:text-xs font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full inline-flex items-center gap-1.5 project-card-text tracking-wide break-words"
-              style={{
-                color: textColor,
-                backgroundColor: `${textColor}12`,
-                border: `1px solid ${textColor}18`,
-                letterSpacing: "0.01em",
-                wordBreak: "break-word",
-                overflowWrap: "break-word",
-              }}
-            >
-              {projectTechnologies}
-            </span>
+          {/* Technology badges */}
+          <div className="mb-4 sm:mb-5 flex-grow min-h-[2.5rem] flex flex-wrap gap-1.5 sm:gap-2 items-start">
+            {project.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="text-xs sm:text-xs font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full inline-flex items-center project-card-text tracking-wide whitespace-nowrap"
+                style={{
+                  color: textColor,
+                  backgroundColor: `${textColor}12`,
+                  border: `1px solid ${textColor}18`,
+                  letterSpacing: "0.01em",
+                }}
+              >
+                {tech}
+              </span>
+            ))}
           </div>
 
           {/* Premium button with micro-interactions */}
