@@ -11,7 +11,7 @@ export interface Project {
     en: string;
     fr: string;
   };
-  technologies: string;
+  technologies: string[];
   image: string;
   tags: string[];
   github?: string;
