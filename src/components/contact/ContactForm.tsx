@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Language } from "@types/index";
 import ContactTurnstile, {
   resetTurnstileWidget,
@@ -6,7 +6,6 @@ import ContactTurnstile, {
 
 interface ContactFormProps {
   lang: Language;
-  turnstileSiteKey: string;
   translations: {
     form: {
       name: string;
@@ -25,11 +24,12 @@ interface ContactFormProps {
 
 export default function ContactForm({
   lang,
-  turnstileSiteKey,
   translations,
 }: ContactFormProps) {
   const t = translations.form;
   const tMessages = translations.messages;
+  const [turnstileSiteKey, setTurnstileSiteKey] = useState("");
+  const [isTurnstileConfigLoading, setIsTurnstileConfigLoading] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -39,6 +39,38 @@ export default function ContactForm({
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadTurnstileConfig = async () => {
+      try {
+        const res = await fetch("/api/turnstile-config");
+        if (!res.ok) {
+          throw new Error("Turnstile config unavailable");
+        }
+
+        const data = (await res.json()) as { siteKey?: string };
+        if (isMounted) {
+          setTurnstileSiteKey(data.siteKey ?? "");
+        }
+      } catch {
+        if (isMounted) {
+          setError(tMessages.error_spam_check);
+        }
+      } finally {
+        if (isMounted) {
+          setIsTurnstileConfigLoading(false);
+        }
+      }
+    };
+
+    loadTurnstileConfig();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [tMessages.error_spam_check]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -200,14 +232,21 @@ export default function ContactForm({
             disabled={isSubmitting}
           />
         </div>
-        <ContactTurnstile
-          siteKey={turnstileSiteKey}
-          onTokenChange={setTurnstileToken}
-          onError={() => setError(tMessages.error_spam_check)}
-        />
+        {!isTurnstileConfigLoading && turnstileSiteKey && (
+          <ContactTurnstile
+            siteKey={turnstileSiteKey}
+            onTokenChange={setTurnstileToken}
+            onError={() => setError(tMessages.error_spam_check)}
+          />
+        )}
         <button
           type="submit"
-          disabled={isSubmitting || !turnstileToken}
+          disabled={
+            isSubmitting ||
+            isTurnstileConfigLoading ||
+            !turnstileSiteKey ||
+            !turnstileToken
+          }
           className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "..." : t.send}
