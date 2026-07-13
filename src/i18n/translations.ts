@@ -97,6 +97,7 @@ Designing ETL pipelines at scale. Owning the full technical roadmap.
     'contact.form.send': 'Send Message',
     'contact.messages.success': 'Thank you! Your message has been sent successfully.',
     'contact.messages.error_email_send': 'An error occurred while sending your message. Please try again.',
+    'contact.messages.error_spam_check': 'Please complete the security check before sending your message.',
     'contact.social.title': 'Or find me on',
   },
   fr: {
@@ -189,6 +190,7 @@ Migration d'un stack legacy PHP/Python vers Go/Next.js. Conception de pipelines 
     'contact.form.send': 'Envoyer le message',
     'contact.messages.success': 'Merci ! Votre message a été envoyé avec succès.',
     'contact.messages.error_email_send': 'Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.',
+    'contact.messages.error_spam_check': 'Veuillez compléter la vérification de sécurité avant d\'envoyer votre message.',
     'contact.social.title': 'Ou retrouvez-moi sur',
   },
 } as const;
