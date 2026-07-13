@@ -1,8 +1,12 @@
 import { useState } from "react";
 import type { Language } from "@types/index";
+import ContactTurnstile, {
+  resetTurnstileWidget,
+} from "@components/contact/ContactTurnstile";
 
 interface ContactFormProps {
   lang: Language;
+  turnstileSiteKey: string;
   translations: {
     form: {
       name: string;
@@ -14,17 +18,24 @@ interface ContactFormProps {
     messages: {
       success: string;
       error_email_send: string;
+      error_spam_check: string;
     };
   };
 }
 
-export default function ContactForm({ lang, translations }: ContactFormProps) {
+export default function ContactForm({
+  lang,
+  turnstileSiteKey,
+  translations,
+}: ContactFormProps) {
   const t = translations.form;
   const tMessages = translations.messages;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [company, setCompany] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,23 +44,36 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
     e.preventDefault();
     setResponse("");
     setError("");
+
+    if (!turnstileSiteKey) {
+      setError(tMessages.error_email_send);
+      return;
+    }
+
+    if (!turnstileToken) {
+      setError(tMessages.error_spam_check);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      console.log("Envoi de la requête au serveur...");
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, subject, message, lang }),
+        body: JSON.stringify({
+          name,
+          email,
+          subject,
+          message,
+          lang,
+          company,
+          turnstileToken,
+        }),
       });
-      console.log("Réponse reçue - Status:", res.status, res.statusText);
-      console.log("Content-Type:", res.headers.get("content-type"));
 
-      // Vérifier le Content-Type avant de parser
       const contentType = res.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
-        const text = await res.text();
-        console.error("Réponse non-JSON reçue:", text.substring(0, 200));
         setError(tMessages.error_email_send);
         return;
       }
@@ -57,10 +81,8 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
       let data;
       try {
         const text = await res.text();
-        console.log("Réponse brute:", text.substring(0, 500));
         data = JSON.parse(text);
-      } catch (jsonError) {
-        console.error("Erreur lors du parsing de la réponse JSON:", jsonError);
+      } catch {
         setError(tMessages.error_email_send);
         return;
       }
@@ -71,16 +93,19 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
         setEmail("");
         setSubject("");
         setMessage("");
+        setCompany("");
+        setTurnstileToken("");
+        resetTurnstileWidget();
       } else {
         const errorMsg = data?.message || tMessages.error_email_send;
-        console.error("Erreur API - Status:", res.status);
-        console.error("Erreur API - Message:", errorMsg);
-        console.error("Erreur API - Données complètes:", data);
         setError(errorMsg);
+        resetTurnstileWidget();
+        setTurnstileToken("");
       }
-    } catch (err) {
-      console.error("Erreur lors de l'envoi du formulaire:", err);
+    } catch {
       setError(tMessages.error_email_send);
+      resetTurnstileWidget();
+      setTurnstileToken("");
     } finally {
       setIsSubmitting(false);
     }
@@ -89,6 +114,21 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
   return (
     <div className="w-full p-6 bg-gray-900 bg-opacity-50 rounded-lg shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
+        <div
+          className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <label htmlFor="company">Company</label>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
         <div className="flex flex-col">
           <label htmlFor="name" className="text-lg font-medium text-white mb-2">
             {t.name}
@@ -100,6 +140,8 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
             onChange={(e) => setName(e.target.value)}
             className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
+            minLength={2}
+            maxLength={5000}
             disabled={isSubmitting}
           />
         </div>
@@ -134,6 +176,8 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
             onChange={(e) => setSubject(e.target.value)}
             className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
+            minLength={3}
+            maxLength={5000}
             disabled={isSubmitting}
           />
         </div>
@@ -151,12 +195,19 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
             className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             rows={5}
             required
+            minLength={10}
+            maxLength={5000}
             disabled={isSubmitting}
           />
         </div>
+        <ContactTurnstile
+          siteKey={turnstileSiteKey}
+          onTokenChange={setTurnstileToken}
+          onError={() => setError(tMessages.error_spam_check)}
+        />
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !turnstileToken}
           className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "..." : t.send}

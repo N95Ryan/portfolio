@@ -1,5 +1,10 @@
 import { Resend } from "resend";
 import type { APIRoute } from "astro";
+import {
+  isHoneypotTriggered,
+  validateContactContent,
+  verifyTurnstileToken,
+} from "@utils/contactSpam";
 
 export const prerender = false;
 
@@ -26,6 +31,7 @@ export const POST: APIRoute = async ({ request }) => {
     const resendApiKey = import.meta.env.RESEND_API_KEY;
     const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
     const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
+    const turnstileSecretKey = import.meta.env.TURNSTILE_SECRET_KEY;
 
     // Vérification de la clé API
     if (!resendApiKey) {
@@ -56,17 +62,49 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonResponse("Format de données invalide", 400);
     }
 
-    const { name, email, subject, message, lang } = body;
+    const { name, email, subject, message, lang, company, turnstileToken } = body;
+
+    if (isHoneypotTriggered(company)) {
+      return jsonResponse("Email envoyé avec succès", 200);
+    }
 
     // Validation
     if (!name || !email || !subject || !message) {
       return jsonResponse("Tous les champs sont requis", 400);
     }
 
+    const contentError = validateContactContent(name, subject, message);
+    if (contentError) {
+      return jsonResponse(contentError, 400);
+    }
+
     // Validation email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return jsonResponse("Adresse email invalide", 400);
+    }
+
+    if (!turnstileSecretKey) {
+      console.error("TURNSTILE_SECRET_KEY manquante");
+      return jsonResponse("Configuration serveur invalide", 500);
+    }
+
+    if (!turnstileToken || typeof turnstileToken !== "string") {
+      return jsonResponse("Vérification anti-spam requise", 400);
+    }
+
+    const remoteIp =
+      request.headers.get("cf-connecting-ip") ??
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+
+    const isHuman = await verifyTurnstileToken(
+      turnstileToken,
+      turnstileSecretKey,
+      remoteIp,
+    );
+
+    if (!isHuman) {
+      return jsonResponse("Vérification anti-spam échouée", 403);
     }
 
     // Envoi de l'email via Resend

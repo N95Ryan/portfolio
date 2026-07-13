@@ -9,6 +9,7 @@ const title = "Contact | Ryan PINA-SILASSE";
 const description = "Contactez-moi pour des opportunités d'ingénierie logicielle à Toronto, Ontario ou partout au Canada. Disponible pour postes permanents et projets freelance. Spécialiste React et Go.";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
 ---
 
 <MainLayout title={title} description={description}>
@@ -31,6 +32,7 @@ const t = useTranslations(lang);
         <ContactForm 
           client:load
           lang={lang}
+          turnstileSiteKey={turnstileSiteKey}
           translations={{
             form: {
               name: t("contact.form.name"),
@@ -42,6 +44,7 @@ const t = useTranslations(lang);
             messages: {
               success: t("contact.messages.success"),
               error_email_send: t("contact.messages.error_email_send"),
+              error_spam_check: t("contact.messages.error_spam_check"),
             },
           }}
         />
