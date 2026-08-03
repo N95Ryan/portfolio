@@ -95,7 +95,7 @@ Designing ETL pipelines at scale. Owning the full technical roadmap.
     'contact.form.subject': 'Subject',
     'contact.form.message': 'Message',
     'contact.form.send': 'Send Message',
-    'contact.messages.success': 'Thank you! Your message has been sent successfully.',
+    'contact.messages.success': 'Thank you ! Your message has been sent successfully.',
     'contact.messages.error_email_send': 'An error occurred while sending your message. Please try again.',
     'contact.messages.error_spam_check': 'Please complete the security check before sending your message.',
     'contact.social.title': 'Or find me on',
