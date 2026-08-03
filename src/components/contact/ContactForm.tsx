@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Language } from "@types/index";
-import ContactTurnstile, {
-  resetTurnstileWidget,
-} from "@components/contact/ContactTurnstile";
+import { FIELD_LIMITS } from "@utils/contactSpam";
 
 interface ContactFormProps {
   lang: Language;
@@ -17,7 +15,6 @@ interface ContactFormProps {
     messages: {
       success: string;
       error_email_send: string;
-      error_spam_check: string;
     };
   };
 }
@@ -28,65 +25,24 @@ export default function ContactForm({
 }: ContactFormProps) {
   const t = translations.form;
   const tMessages = translations.messages;
-  const [turnstileSiteKey, setTurnstileSiteKey] = useState("");
-  const [isTurnstileConfigLoading, setIsTurnstileConfigLoading] = useState(true);
+  const [formLoadedAt, setFormLoadedAt] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [company, setCompany] = useState("");
-  const [turnstileToken, setTurnstileToken] = useState("");
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    let isMounted = true;
-
-    const loadTurnstileConfig = async () => {
-      try {
-        const res = await fetch("/api/turnstile-config");
-        if (!res.ok) {
-          throw new Error("Turnstile config unavailable");
-        }
-
-        const data = (await res.json()) as { siteKey?: string };
-        if (isMounted) {
-          setTurnstileSiteKey(data.siteKey ?? "");
-        }
-      } catch {
-        if (isMounted) {
-          setError(tMessages.error_spam_check);
-        }
-      } finally {
-        if (isMounted) {
-          setIsTurnstileConfigLoading(false);
-        }
-      }
-    };
-
-    loadTurnstileConfig();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [tMessages.error_spam_check]);
+    setFormLoadedAt(Date.now());
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setResponse("");
     setError("");
-
-    if (!turnstileSiteKey) {
-      setError(tMessages.error_email_send);
-      return;
-    }
-
-    if (!turnstileToken) {
-      setError(tMessages.error_spam_check);
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -100,7 +56,7 @@ export default function ContactForm({
           message,
           lang,
           company,
-          turnstileToken,
+          formLoadedAt,
         }),
       });
 
@@ -126,18 +82,13 @@ export default function ContactForm({
         setSubject("");
         setMessage("");
         setCompany("");
-        setTurnstileToken("");
-        resetTurnstileWidget();
+        setFormLoadedAt(Date.now());
       } else {
         const errorMsg = data?.message || tMessages.error_email_send;
         setError(errorMsg);
-        resetTurnstileWidget();
-        setTurnstileToken("");
       }
     } catch {
       setError(tMessages.error_email_send);
-      resetTurnstileWidget();
-      setTurnstileToken("");
     } finally {
       setIsSubmitting(false);
     }
@@ -173,7 +124,7 @@ export default function ContactForm({
             className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
             minLength={2}
-            maxLength={5000}
+            maxLength={FIELD_LIMITS.name}
             disabled={isSubmitting}
           />
         </div>
@@ -191,6 +142,7 @@ export default function ContactForm({
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
+            maxLength={FIELD_LIMITS.email}
             disabled={isSubmitting}
           />
         </div>
@@ -209,7 +161,7 @@ export default function ContactForm({
             className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
             minLength={3}
-            maxLength={5000}
+            maxLength={FIELD_LIMITS.subject}
             disabled={isSubmitting}
           />
         </div>
@@ -228,25 +180,13 @@ export default function ContactForm({
             rows={5}
             required
             minLength={10}
-            maxLength={5000}
+            maxLength={FIELD_LIMITS.message}
             disabled={isSubmitting}
           />
         </div>
-        {!isTurnstileConfigLoading && turnstileSiteKey && (
-          <ContactTurnstile
-            siteKey={turnstileSiteKey}
-            onTokenChange={setTurnstileToken}
-            onError={() => setError(tMessages.error_spam_check)}
-          />
-        )}
         <button
           type="submit"
-          disabled={
-            isSubmitting ||
-            isTurnstileConfigLoading ||
-            !turnstileSiteKey ||
-            !turnstileToken
-          }
+          disabled={isSubmitting}
           className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "..." : t.send}

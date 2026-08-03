@@ -1,39 +1,37 @@
 import { Resend } from "resend";
 import type { APIRoute } from "astro";
 import {
+  FIELD_LIMITS,
   isHoneypotTriggered,
   validateContactContent,
-  verifyTurnstileToken,
+  validateSubmissionTiming,
 } from "@utils/contactSpam";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  // Fonction helper pour garantir une réponse JSON
   const jsonResponse = (message: string, status: number = 500, details?: any) => {
     return new Response(
-      JSON.stringify({ 
+      JSON.stringify({
         message,
-        ...(details && { details })
+        ...(details && { details }),
       }),
-      { 
+      {
         status,
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          "Cache-Control": "no-cache"
-        }
-      }
+          "Cache-Control": "no-cache",
+        },
+      },
     );
   };
 
   try {
-    // Récupération des variables d'environnement
     const resendApiKey = import.meta.env.RESEND_API_KEY;
     const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
-    const resendFromEmail = import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
-    const turnstileSecretKey = import.meta.env.TURNSTILE_SECRET_KEY;
+    const resendFromEmail =
+      import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
 
-    // Vérification de la clé API
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
       return jsonResponse("Configuration serveur invalide - RESEND_API_KEY manquante", 500);
@@ -44,10 +42,8 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonResponse("Configuration serveur invalide - Format de clé API invalide", 500);
     }
 
-    // Initialisation de Resend
     const resend = new Resend(resendApiKey);
 
-    // Vérification du Content-Type
     const contentType = request.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       console.error("Content-Type invalide:", contentType);
@@ -62,13 +58,17 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonResponse("Format de données invalide", 400);
     }
 
-    const { name, email, subject, message, lang, company, turnstileToken } = body;
+    const { name, email, subject, message, lang, company, formLoadedAt } = body;
 
     if (isHoneypotTriggered(company)) {
       return jsonResponse("Email envoyé avec succès", 200);
     }
 
-    // Validation
+    const timingError = validateSubmissionTiming(formLoadedAt);
+    if (timingError) {
+      return jsonResponse(timingError, 400);
+    }
+
     if (!name || !email || !subject || !message) {
       return jsonResponse("Tous les champs sont requis", 400);
     }
@@ -78,36 +78,11 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonResponse(contentError, 400);
     }
 
-    // Validation email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(email) || email.length > FIELD_LIMITS.email) {
       return jsonResponse("Adresse email invalide", 400);
     }
 
-    if (!turnstileSecretKey) {
-      console.error("TURNSTILE_SECRET_KEY manquante");
-      return jsonResponse("Configuration serveur invalide", 500);
-    }
-
-    if (!turnstileToken || typeof turnstileToken !== "string") {
-      return jsonResponse("Vérification anti-spam requise", 400);
-    }
-
-    const remoteIp =
-      request.headers.get("cf-connecting-ip") ??
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-
-    const isHuman = await verifyTurnstileToken(
-      turnstileToken,
-      turnstileSecretKey,
-      remoteIp,
-    );
-
-    if (!isHuman) {
-      return jsonResponse("Vérification anti-spam échouée", 403);
-    }
-
-    // Envoi de l'email via Resend
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
       to: [resendToEmail],
@@ -165,46 +140,43 @@ ${message}
 
     if (error) {
       console.error("Resend error:", error);
-      
-      // Extraire le message d'erreur de manière plus détaillée
+
       let errorMessage = "Erreur lors de l'envoi de l'email";
       let errorCode = null;
-      
-      if (error && typeof error === 'object') {
-        if ('message' in error) {
+
+      if (error && typeof error === "object") {
+        if ("message" in error) {
           errorMessage = String(error.message);
         }
-        if ('name' in error) {
+        if ("name" in error) {
           errorCode = String(error.name);
         }
       }
-      
-      // Message spécifique pour l'erreur de domaine non vérifié
-      if (errorMessage.includes("only send testing emails to your own email address") || 
-          errorCode === 'validation_error' ||
-          errorMessage.includes("domain") ||
-          errorMessage.includes("not verified")) {
-        errorMessage = "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS.";
+
+      if (
+        errorMessage.includes("only send testing emails to your own email address") ||
+        errorCode === "validation_error" ||
+        errorMessage.includes("domain") ||
+        errorMessage.includes("not verified")
+      ) {
+        errorMessage =
+          "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS.";
       }
-      
+
       return jsonResponse(errorMessage, 500, {
         errorCode,
-        ...(import.meta.env.DEV && { error })
+        ...(import.meta.env.DEV && { error }),
       });
     }
 
     return jsonResponse("Email envoyé avec succès", 200, { data });
   } catch (error) {
     console.error("Erreur API:", error);
-    
-    return jsonResponse(
-      "Erreur serveur",
-      500,
-      {
-        error: error instanceof Error ? error.message : String(error),
-        type: error instanceof Error ? error.constructor.name : typeof error,
-        ...(import.meta.env.DEV && { stack: error instanceof Error ? error.stack : undefined })
-      }
-    );
+
+    return jsonResponse("Erreur serveur", 500, {
+      error: error instanceof Error ? error.message : String(error),
+      type: error instanceof Error ? error.constructor.name : typeof error,
+      ...(import.meta.env.DEV && { stack: error instanceof Error ? error.stack : undefined }),
+    });
   }
 };
