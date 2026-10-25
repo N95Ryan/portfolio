@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import type { APIRoute } from "astro";
+import { env as cloudflareEnv } from "cloudflare:workers";
 import {
   FIELD_LIMITS,
   isHoneypotTriggered,
@@ -27,10 +28,11 @@ export const POST: APIRoute = async ({ request }) => {
   };
 
   try {
-    const resendApiKey = import.meta.env.RESEND_API_KEY;
-    const resendToEmail = import.meta.env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
+    const env = cloudflareEnv as Record<string, string | undefined>;
+    const resendApiKey = env.RESEND_API_KEY;
+    const resendToEmail = env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
     const resendFromEmail =
-      import.meta.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
+      env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
 
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
