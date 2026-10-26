@@ -21,7 +21,6 @@ const frameworks: SkillItem[] = [
   // { key: "nodedotjs" },
 ];
 const databaseCloud: SkillItem[] = [
-  { key: "restApis" },
   { key: "postgresql" },
   { key: "supabase" },
 ];
@@ -32,10 +31,10 @@ const mobile: SkillItem[] = [
 ];
 
 const tools: SkillItem[] = [
+  { key: "restApis" },
+  { key: "graphql" },
   { key: "vite" },
   { key: "bun" },
-  { key: "graphql" },
-  { key: "postman" },
 ];
 
 const devops: SkillItem[] = [
@@ -49,6 +48,7 @@ const testing: SkillItem[] = [
   { key: "vitest" },
   { key: "playwright" },
   { key: "lighthouse" },
+  { key: "postman" },
 ];
 
 export const skillsDetails = {
