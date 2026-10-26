@@ -33,7 +33,7 @@ export default function FooterSocialLinks() {
         <SiX className="text-2xl md:text-3xl" title="X (Twitter)" />
       </a>
 
-      <a
+      {/* <a
         href="https://bento.me/nayru"
         target="_blank"
         rel="noopener noreferrer"
@@ -41,9 +41,9 @@ export default function FooterSocialLinks() {
         className="text-white hover:text-purple-400 transition-colors duration-300"
       >
         <SiBento className="text-2xl md:text-3xl" title="Bento" />
-      </a>
+      </a> */}
 
-      <a
+      {/* <a
         href="https://www.malt.fr/profile/ryanpinasilasse"
         target="_blank"
         rel="noopener noreferrer"
@@ -51,7 +51,7 @@ export default function FooterSocialLinks() {
         className="text-white hover:text-purple-400 transition-colors duration-300"
       >
         <SiMalt className="text-2xl md:text-3xl" title="Malt" />
-      </a>
+      </a> */}
     </div>
   );
 }

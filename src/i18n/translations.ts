@@ -21,20 +21,20 @@ And I thrive as the sole engineer making technical decisions that ship products.
 
 💻 Currently building production systems at Midbec. 
 Migrating a legacy PHP/Python stack to Go/Next.js. 
-Designing ETL pipelines at scale. Owning the full technical roadmap.
+Owning the full technical roadmap.
 
 🎯 I place particular importance on code simplicity, clear technical decisions, and the real impact of deliverables. KISS is not just a principle for me, that's how I live my life.
 
-📍 Based in Drummondville, Quebec 🇨🇦 | Open to opportunities in Toronto starting 2027.`,
+📍 Based in Drummondville, Quebec 🇨🇦`,
     'about.whatIDo.title': 'What I do',
     'about.whatIDo.frontend.title': 'Frontend & Web',
-    'about.whatIDo.frontend.description': 'I specialize in building responsive, user-focused web applications designed to be fast, clear and easy to evolve. My work emphasizes clean architecture, intuitive UX and performance that scales with the product.',
+    'about.whatIDo.frontend.description': 'I build fast, maintainable web applications with React, Next.js and Astro. Recent results: desktop Lighthouse 55 → 95 at Midbec, and a 93% JS bundle reduction at Neat Barber.',
     'about.whatIDo.backend.title': 'Backend & APIs',
-    'about.whatIDo.backend.description': 'Developing backend solutions using Go environment, I build reliable APIs and services designed for performance and clarity. I focus on simple architecture, explicit data flows and systems you can reason about months later without friction.',
+    'about.whatIDo.backend.description': 'I build Go services and REST APIs (Chi, PostgreSQL) with simple architecture and explicit data flows, systems you can reason about months later. At Midbec, I\'m migrating a legacy PHP platform domain by domain and integrating ERP, PIM and parts-lookup systems.',
     'about.whatIDo.mobile.title': 'Mobile Development',
-    'about.whatIDo.mobile.description': 'Designing and developing cross-platform mobile applications using React Native and Expo, focusing on performance and user experience.',
+    'about.whatIDo.mobile.description': 'I build cross-platform mobile apps with React Native and Expo, backed by a Go API. Flip, my judo companion app, covers auth, Stripe subscriptions and a technique library.',
     'about.whatIDo.testing.title': 'Testing & Quality',
-    'about.whatIDo.testing.description': 'Writing comprehensive tests and ensuring code quality. If something breaks, I\'ll find it and fix it before users notice.',
+    'about.whatIDo.testing.description': 'I test what matters: 70+ automated tests on the ERP-backed checkout, plus Playwright E2E and Lighthouse CI performance budgets in the pipeline.',
     'hero.tagline.needs': 'Needs',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
@@ -89,7 +89,7 @@ Designing ETL pipelines at scale. Owning the full technical roadmap.
       'Migrated 100+ SCSS files to Tailwind CSS with zero visual regressions on a live platform, never taken offline.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
-    'experience.list.neat-2025.position': 'Full Stack Developer (Freelance)',
+    'experience.list.neat-2025.position': 'Full Stack Engineer (Freelance)',
     'experience.list.neat-2025.period': '2025',
     'experience.list.neat-2025.description': [
       'Led the transformation of a legacy jQuery site into a modern platform using Astro and TypeScript.',
@@ -139,20 +139,20 @@ Je pilote les projets de bout en bout. Besoins → Architecture → Production.
 Et m'épanouis en tant qu'ingénieur solo responsable de toutes les décisions techniques.
 
 💻 Actuellement en charge des systèmes en production chez Midbec. 
-Migration d'un stack legacy PHP/Python vers Go/Next.js. Conception de pipelines ETL à grande échelle.
+Migration d'un stack legacy PHP/Python vers Go/Next.js.
 
 🎯 J'accorde une importance particulière à la simplicité du code, à la clarté des décisions techniques et à l'impact réel des livrables. KISS n'est pas juste un principe pour moi, c'est ma façon de vivre.
 
-📍 Basé à Drummondville, Québec 🇨🇦 | Ouvert aux opportunités à Toronto à partir de 2027.`,
+📍 Basé à Drummondville, Québec 🇨🇦`,
     'about.whatIDo.title': 'Ce que je fais',
     'about.whatIDo.frontend.title': 'Frontend & Web',
-    'about.whatIDo.frontend.description': 'Je conçois des applications web responsives, centrées utilisateur, pensées pour être rapides, lisibles et faciles à faire évoluer. Mon approche privilégie une architecture propre, une UX intuitive et des performances frontend qui suivent la croissance du produit.',
+    'about.whatIDo.frontend.description': 'Je construis des applications web rapides et maintenables avec React, Next.js et Astro. Résultats récents : Lighthouse desktop de 55 à 95 chez Midbec, et 93 % de JS en moins chez Neat Barber.',
     'about.whatIDo.backend.title': 'Backend & APIs',
-    'about.whatIDo.backend.description': 'Je développe des solutions backend avec l\'environnement Go, je construis des APIs et services fiables, orientés performance et clarté. Je mets l\'accent sur une architecture simple, des flux de données explicites et des systèmes compréhensibles dans la durée.',
+    'about.whatIDo.backend.description': 'Je construis des services Go et des APIs REST (Chi, PostgreSQL) avec une architecture simple et des flux de données explicites, des systèmes que l\'on comprend encore des mois plus tard. Chez Midbec, je migre une plateforme PHP legacy domaine par domaine et j\'intègre des systèmes ERP, PIM et de recherche de pièces.',
     'about.whatIDo.mobile.title': 'Développement Mobile',
-    'about.whatIDo.mobile.description': 'Je conçois et développe des applications mobiles multiplateformes avec React Native et Expo, en veillant à la performance et à la qualité de l\'expérience utilisateur.',
+    'about.whatIDo.mobile.description': 'Je développe des applications mobiles cross-platform avec React Native et Expo, adossées à une API Go. Flip, mon application de judo, couvre l\'authentification, les abonnements Stripe et une bibliothèque de techniques.',
     'about.whatIDo.testing.title': 'Tests & Qualité',
-    'about.whatIDo.testing.description': 'J\'écris des tests complets et veille en permanence à la qualité du code. Lorsqu\'un problème survient, je l\'identifie à la source et le corrige avant qu\'il n\'impacte les utilisateurs.',
+    'about.whatIDo.testing.description': 'Je teste ce qui compte : plus de 70 tests automatisés sur le checkout connecté à l\'ERP, et Playwright E2E et budgets de performance Lighthouse CI dans le pipeline.',
     'hero.tagline.needs': 'Besoins',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
@@ -207,7 +207,7 @@ Migration d'un stack legacy PHP/Python vers Go/Next.js. Conception de pipelines 
       'Migration de plus de 100 fichiers SCSS vers Tailwind CSS sans aucune régression visuelle sur une plateforme en production, jamais désactivée.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
-    'experience.list.neat-2025.position': 'Développeur Full Stack (Freelance)',
+    'experience.list.neat-2025.position': 'Ingénieur Full Stack (Freelance)',
     'experience.list.neat-2025.period': '2025',
     'experience.list.neat-2025.description': [
       'Transformation d\'un site legacy jQuery en plateforme moderne avec Astro et TypeScript.',
