@@ -23,6 +23,6 @@ const serializableSkills = skills.map((skill) => ({ key: skill.key }));
   <div
     class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 justify-items-center mx-8 lg:mx-[20rem] gap-6"
   >
-    <SkillsList client:load skills={serializableSkills} />
+    <SkillsList client:load skills={serializableSkills} lang={lang} />
   </div>
 </div>

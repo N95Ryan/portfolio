@@ -3,7 +3,7 @@ export type SkillItem = {
 };
 
 const languages: SkillItem[] = [
-  { key: "javascript" },
+  // { key: "javascript" },
   { key: "typescript" },
   { key: "golang" },
 ];
@@ -14,14 +14,16 @@ const frameworks: SkillItem[] = [
   { key: "astro" },
   { key: "tanstack" },
   { key: "tailwind" },
-  // { key: "nodedotjs" },
-  { key: "gin" },
+  { key: "reduxToolkit" },
   { key: "chi" },
+  { key: "gin" },
+  // { key: "nextIntl" },
+  // { key: "nodedotjs" },
 ];
 const databaseCloud: SkillItem[] = [
+  { key: "restApis" },
   { key: "postgresql" },
   { key: "supabase" },
-  { key: "cloudinary" },
 ];
 
 const mobile: SkillItem[] = [
@@ -31,14 +33,16 @@ const mobile: SkillItem[] = [
 
 const tools: SkillItem[] = [
   { key: "vite" },
+  { key: "bun" },
   { key: "graphql" },
   { key: "postman" },
 ];
 
 const devops: SkillItem[] = [
   { key: "docker" },
+  { key: "cloudflare" },
   { key: "githubActions" },
-  { key: "vercel" },
+  { key: "gitlabCi" },
 ];
 
 const testing: SkillItem[] = [
