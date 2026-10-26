@@ -1,13 +1,19 @@
 import SkillIcon from "./SkillIcon";
-import type { IconType } from "react-icons";
+import type { SkillIconComponent } from "./icons/types";
 
 interface SkillCardProps {
   title: string;
-  Icon: IconType;
+  Icon: SkillIconComponent;
   color: string;
+  multicolor?: boolean;
 }
 
-export default function SkillCard({ title, Icon, color }: SkillCardProps) {
+export default function SkillCard({
+  title,
+  Icon,
+  color,
+  multicolor,
+}: SkillCardProps) {
   return (
     <div
       className="
@@ -30,7 +36,7 @@ export default function SkillCard({ title, Icon, color }: SkillCardProps) {
         {title}
       </div>
       <div className="text-white">
-        <SkillIcon Icon={Icon} color={color} />
+        <SkillIcon Icon={Icon} color={color} multicolor={multicolor} />
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import SkillCard from "./SkillCard";
 import {
-  SiJavascript,
   SiTypescript,
   SiGo,
   SiReact,
@@ -16,52 +15,76 @@ import {
   SiPostman,
   SiGraphql,
   SiVite,
-  SiCloudinary,
+  SiBun,
   SiReactquery,
   SiVitest,
-  SiGithubactions,
-  SiVercel,
+  SiCloudflare,
   SiLighthouse,
-  SiCypress,
 } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
-import type { IconType } from "react-icons";
+import type { SkillIconComponent } from "./icons/types";
+import PlaywrightIcon from "./icons/PlaywrightIcon";
+import GoChiIcon from "./icons/GoChiIcon";
+import ReduxToolkitIcon from "./icons/ReduxToolkitIcon";
+import GitLabCiIcon from "./icons/GitLabCiIcon";
+import GitHubIcon from "./icons/GitHubIcon";
+import NextIntlIcon from "./icons/NextIntlIcon";
+import RestApisIcon from "./icons/RestApisIcon";
+import { defaultLang, translations } from "@i18n/translations";
 
-// Mapping centralisé des icônes, couleurs et noms d'affichage
-const skillsMap: Record<
-  string,
-  { icon: IconType; color: string; name: string }
-> = {
-  javascript: { icon: SiJavascript, color: "#F0DB4F", name: "JavaScript" },
-  typescript: { icon: SiTypescript, color: "#007acc", name: "TypeScript" },
-  golang: { icon: SiGo, color: "#00acd7", name: "Go" },
-  react: { icon: SiReact, color: "#61DAFB", name: "React" },
-  nextjs: { icon: SiNextdotjs, color: "#fff", name: "Next.js" },
-  astro: { icon: SiAstro, color: "#e93dc9", name: "Astro" },
-  tanstack: { icon: SiReactquery, color: "#FF4154", name: "TanStack" },
-  tailwind: { icon: SiTailwindcss, color: "#06B6D4", name: "Tailwind CSS" },
-  nodedotjs: { icon: SiNodedotjs, color: "#539e43", name: "Node.js" },
-  gin: { icon: SiGin, color: "#00acd7", name: "Gin" },
-  chi: { icon: TbApi, color: "#00acd7", name: "Chi" },
-  reactNative: { icon: SiReact, color: "#61DAFB", name: "React Native" },
-  expo: { icon: SiExpo, color: "#fff", name: "Expo" },
-  postgresql: { icon: SiPostgresql, color: "#336791", name: "PostgreSQL" },
-  supabase: { icon: SiSupabase, color: "#3ECF8E", name: "Supabase" },
-  cloudinary: { icon: SiCloudinary, color: "#3448C5", name: "Cloudinary" },
-  vite: { icon: SiVite, color: "#fff000", name: "Vite" },
-  graphql: { icon: SiGraphql, color: "#E10098", name: "GraphQL" },
-  postman: { icon: SiPostman, color: "#FF6C37", name: "Postman" },
-  docker: { icon: SiDocker, color: "#2496ED", name: "Docker" },
-  githubActions: {
-    icon: SiGithubactions,
-    color: "#2088FF",
-    name: "GitHub Actions",
-  },
-  vercel: { icon: SiVercel, color: "#fff", name: "Vercel" },
-  vitest: { icon: SiVitest, color: "#6E9F18", name: "Vitest" },
-  playwright: { icon: SiCypress, color: "#2EAD33", name: "Playwright" },
-  lighthouse: { icon: SiLighthouse, color: "#F44B21", name: "Lighthouse" },
+type Lang = keyof typeof translations;
+type SkillItemKey = keyof (typeof translations)[typeof defaultLang];
+
+type SkillConfig = {
+  icon: SkillIconComponent;
+  color: string;
+  multicolor?: boolean;
 };
+
+/** Icônes et couleurs par clé. L’ordre à l’écran = tableaux dans `src/data/skillDetails.ts`. */
+const skillsMap: Record<string, SkillConfig> = {
+  // javascript: { icon: SiJavascript, color: "#F0DB4F" },
+  typescript: { icon: SiTypescript, color: "#007acc" },
+  golang: { icon: SiGo, color: "#00acd7" },
+  react: { icon: SiReact, color: "#61DAFB" },
+  nextjs: { icon: SiNextdotjs, color: "#fff" },
+  astro: { icon: SiAstro, color: "#e93dc9" },
+  tanstack: { icon: SiReactquery, color: "#FF4154" },
+  tailwind: { icon: SiTailwindcss, color: "#06B6D4" },
+  chi: { icon: GoChiIcon, color: "#01933F", multicolor: true },
+  gin: { icon: SiGin, color: "#00acd7" },
+  reduxToolkit: { icon: ReduxToolkitIcon, color: "#764ABC" },
+  nextIntl: { icon: NextIntlIcon, color: "#38BDF8" },
+  nodedotjs: { icon: SiNodedotjs, color: "#539e43" },
+  reactNative: { icon: SiReact, color: "#61DAFB" },
+  expo: { icon: SiExpo, color: "#fff" },
+  postgresql: { icon: SiPostgresql, color: "#336791" },
+  supabase: { icon: SiSupabase, color: "#3ECF8E" },
+  restApis: { icon: RestApisIcon, color: "#94A3B8" },
+  vite: { icon: SiVite, color: "#fff000" },
+  bun: { icon: SiBun, color: "#FBF0DF" },
+  graphql: { icon: SiGraphql, color: "#E10098" },
+  postman: { icon: SiPostman, color: "#FF6C37" },
+  docker: { icon: SiDocker, color: "#2496ED" },
+  cloudflare: { icon: SiCloudflare, color: "#F38020" },
+  githubActions: { icon: GitHubIcon, color: "#fff" },
+  gitlabCi: { icon: GitLabCiIcon, color: "#FC6D26" },
+  vitest: { icon: SiVitest, color: "#6E9F18" },
+  playwright: { icon: PlaywrightIcon, color: "#2EAD33", multicolor: true },
+  lighthouse: { icon: SiLighthouse, color: "#F44B21" },
+};
+
+function skillLabel(lang: Lang, key: string): string {
+  const itemKey = `skills.items.${key}` as SkillItemKey;
+  const localized = translations[lang][itemKey];
+  if (typeof localized === "string") {
+    return localized;
+  }
+  const fallback = translations[defaultLang][itemKey];
+  if (typeof fallback === "string") {
+    return fallback;
+  }
+  return key;
+}
 
 interface SkillData {
   key: string;
@@ -69,9 +92,10 @@ interface SkillData {
 
 interface SkillsListProps {
   skills: SkillData[];
+  lang: Lang;
 }
 
-export default function SkillsList({ skills }: SkillsListProps) {
+export default function SkillsList({ skills, lang }: SkillsListProps) {
   return (
     <>
       {skills.map((skill) => {
@@ -85,9 +109,10 @@ export default function SkillsList({ skills }: SkillsListProps) {
         return (
           <SkillCard
             key={skill.key}
-            title={skillConfig.name}
+            title={skillLabel(lang, skill.key)}
             Icon={skillConfig.icon}
             color={skillConfig.color}
+            multicolor={skillConfig.multicolor}
           />
         );
       })}

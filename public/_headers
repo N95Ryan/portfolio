@@ -1,3 +1,5 @@
+# Security and cache headers for Cloudflare Workers
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
