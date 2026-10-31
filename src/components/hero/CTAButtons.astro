@@ -6,10 +6,17 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const cvPath = lang === "fr" ? "/CV_fr.pdf" : "/CV_en.pdf";
+
+interface Props {
+  buttonsDelayMs: number;
+}
+
+const { buttonsDelayMs } = Astro.props;
 ---
 
 <div
-  class="flex flex-col md:flex-row justify-center items-center gap-4 mt-16 md:mt-24 animate-fade-up animate-delay-[2900ms] animate-duration-700"
+  class="flex flex-col md:flex-row justify-center items-center gap-4 mt-10 md:mt-12 animate-fade-up motion-reduce:opacity-100 motion-reduce:animate-none animate-duration-700"
+  style={`animation-delay: ${buttonsDelayMs}ms`}
 >
   <a
     href={cvPath}

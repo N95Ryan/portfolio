@@ -1,0 +1,170 @@
+---
+import type { HeroTimeline } from "./heroTimeline";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+interface Props {
+  timeline: HeroTimeline;
+}
+
+const { timeline } = Astro.props;
+
+type TerminalMetricLine = {
+  kind: "metric";
+  label: string;
+  from: string;
+  to: string;
+  comment: string;
+};
+
+type TerminalPlainLine = {
+  kind: "plain";
+  text: string;
+};
+
+type TerminalLine = TerminalPlainLine | TerminalMetricLine;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const terminalLines: TerminalLine[] = [
+  { kind: "plain", text: "establishing connection..." },
+  {
+    kind: "metric",
+    label: "api_latency_cached:",
+    from: "820ms",
+    to: "6ms",
+    comment: "midbec",
+  },
+  {
+    kind: "metric",
+    label: "lighthouse_desktop:",
+    from: "55",
+    to: "95",
+    comment: "midbec",
+  },
+  {
+    kind: "metric",
+    label: "js_bundle:",
+    from: "600KB",
+    to: "40KB",
+    comment: "neat barber",
+  },
+];
+
+const frameDelayMs = timeline.frameDelayMs;
+const frameDurationMs = 320;
+const lineStartDelayMs = timeline.lineStartDelayMs;
+const lineStaggerMs = timeline.lineStaggerMs;
+const lineDurationMs = 340;
+const explanationDelayMs = timeline.explanationDelayMs;
+const footnoteDurationMs = 320;
+---
+
+<div class="w-full max-w-md mt-6">
+  <div
+    class="hero-terminal-intro"
+    style={`animation-delay: ${frameDelayMs}ms; animation-duration: ${frameDurationMs}ms`}
+  >
+    <p class="text-center text-xs uppercase tracking-wider text-gray-500 mb-2">
+      {t("hero.terminal.label")}
+    </p>
+
+    <div
+      class="hero-terminal w-full px-4 py-3 bg-gray-900/80 border border-white/10 rounded-lg font-mono text-xs sm:text-sm text-left"
+      aria-label="Recent production metrics"
+    >
+      {
+        terminalLines.map((line, i) => (
+          <div
+            class="hero-terminal-line text-gray-300 leading-relaxed"
+            style={`animation-delay: ${lineStartDelayMs + i * lineStaggerMs}ms; animation-duration: ${lineDurationMs}ms`}
+          >
+            {line.kind === "plain" ? (
+              line.text
+            ) : (
+              <>
+                <span class="text-gray-300">
+                  {line.label} {line.from}{" "}
+                </span>
+                <span class="text-cyan-400">→</span>
+                <span class="text-gray-300"> {line.to}</span>
+                <span class="text-gray-500 hidden sm:inline">
+                  {"   // "}
+                  {line.comment}
+                </span>
+              </>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <p
+    class="hero-terminal-footnote text-center text-xs text-gray-500 max-w-md mt-2 mx-auto leading-relaxed"
+    style={`animation-delay: ${explanationDelayMs}ms; animation-duration: ${footnoteDurationMs}ms`}
+  >
+    {t("hero.terminal.description")}
+  </p>
+</div>
+
+<style>
+  .hero-terminal-intro {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: hero-terminal-enter-up ease both;
+  }
+
+  .hero-terminal-line {
+    position: relative;
+    padding-left: 1.1rem;
+    opacity: 0;
+    transform: translateX(-5px);
+    animation: hero-terminal-line-in ease both;
+  }
+
+  .hero-terminal-line::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: rgb(34 211 238);
+  }
+
+  .hero-terminal-footnote {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: hero-terminal-enter-up ease both;
+  }
+
+  @keyframes hero-terminal-enter-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hero-terminal-line-in {
+    from {
+      opacity: 0;
+      transform: translateX(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-terminal-intro,
+    .hero-terminal-line,
+    .hero-terminal-footnote {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+</style>

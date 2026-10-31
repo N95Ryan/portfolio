@@ -1,4 +1,4 @@
-import { SiGithub, SiLinkedin, SiX, SiBento, SiMalt } from "react-icons/si";
+import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
 
 export default function FooterSocialLinks() {
   return (
@@ -32,26 +32,6 @@ export default function FooterSocialLinks() {
       >
         <SiX className="text-2xl md:text-3xl" title="X (Twitter)" />
       </a>
-
-      {/* <a
-        href="https://bento.me/nayru"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Bento"
-        className="text-white hover:text-purple-400 transition-colors duration-300"
-      >
-        <SiBento className="text-2xl md:text-3xl" title="Bento" />
-      </a> */}
-
-      {/* <a
-        href="https://www.malt.fr/profile/ryanpinasilasse"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Malt"
-        className="text-white hover:text-purple-400 transition-colors duration-300"
-      >
-        <SiMalt className="text-2xl md:text-3xl" title="Malt" />
-      </a> */}
     </div>
   );
 }

@@ -6,7 +6,6 @@ import {
   SiNextdotjs,
   SiAstro,
   SiTailwindcss,
-  SiNodedotjs,
   SiGin,
   SiExpo,
   SiPostgresql,
@@ -27,7 +26,6 @@ import GoChiIcon from "./icons/GoChiIcon";
 import ReduxToolkitIcon from "./icons/ReduxToolkitIcon";
 import GitLabCiIcon from "./icons/GitLabCiIcon";
 import GitHubIcon from "./icons/GitHubIcon";
-import NextIntlIcon from "./icons/NextIntlIcon";
 import RestApisIcon from "./icons/RestApisIcon";
 import { defaultLang, translations } from "@i18n/translations";
 
@@ -53,8 +51,6 @@ const skillsMap: Record<string, SkillConfig> = {
   chi: { icon: GoChiIcon, color: "#01933F", multicolor: true },
   gin: { icon: SiGin, color: "#00acd7" },
   reduxToolkit: { icon: ReduxToolkitIcon, color: "#764ABC" },
-  nextIntl: { icon: NextIntlIcon, color: "#38BDF8" },
-  nodedotjs: { icon: SiNodedotjs, color: "#539e43" },
   reactNative: { icon: SiReact, color: "#61DAFB" },
   expo: { icon: SiExpo, color: "#fff" },
   postgresql: { icon: SiPostgresql, color: "#336791" },

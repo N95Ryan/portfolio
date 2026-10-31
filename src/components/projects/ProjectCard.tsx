@@ -46,7 +46,7 @@ export default function ProjectCard({
   return (
     <div className="w-full h-full group perspective-1000">
       <div
-        className="relative rounded-3xl overflow-hidden transition-all duration-700 ease-out backdrop-blur-sm h-full flex flex-col min-h-[400px]"
+        className="relative rounded-3xl overflow-hidden transition-all duration-700 ease-out bg-gray-950/90 h-full flex flex-col min-h-[400px]"
         style={{
           boxShadow:
             "0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.06), 0 16px 48px rgba(0, 0, 0, 0.03)",
@@ -85,10 +85,10 @@ export default function ProjectCard({
 
           {/* Sophisticated Gradient Overlay */}
           <div
-            className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-[600ms] ease-out backdrop-blur-[2px]"
+            className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-[600ms] ease-out"
             style={{
               background:
-                "linear-gradient(135deg, rgba(0, 0, 0, 0.94) 0%, rgba(20, 20, 30, 0.92) 50%, rgba(0, 0, 0, 0.94) 100%)",
+                "linear-gradient(135deg, rgba(0, 0, 0, 0.97) 0%, rgba(20, 20, 30, 0.95) 50%, rgba(0, 0, 0, 0.97) 100%)",
             }}
           >
             <div className="transform scale-90 group-hover:scale-100 transition-transform duration-500">

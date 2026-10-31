@@ -17,15 +17,14 @@ export default function SkillCard({
   return (
     <div
       className="
-        bg-gradient-to-br from-gray-800 to-gray-900 
-        hover:from-gray-700 hover:to-gray-800
+        bg-gradient-to-br from-gray-800 to-gray-950
+        hover:from-gray-700 hover:to-gray-900
         p-4 text-white rounded-xl 
         flex flex-col items-center justify-center space-y-2 
         w-full sm:w-64 h-48
         shadow-xl hover:shadow-2xl
         transition-all duration-500 ease-out
         hover:scale-105
-        backdrop-blur-sm
       "
       style={{
         boxShadow:

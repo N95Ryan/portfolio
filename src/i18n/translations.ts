@@ -15,22 +15,21 @@ export const translations = {
     'nav.contact': 'Contact',
     'about.title': 'About Me',
     'about.introduction': 'Let me introduce myself',
-    'about.description': `💼 Software Engineer based in Canada, specialized in Go and React.
-I own projects end-to-end. Requirements → Architecture → Production. 
+    'about.description': `💼 Full-Stack Software Engineer based in Canada, specialized in Go and React. 6 years building production web applications in France and Canada.
+I own projects end-to-end. Requirements → Architecture → Production.
 And I thrive as the sole engineer making technical decisions that ship products.
 
-💻 Currently building production systems at Midbec. 
-Migrating a legacy PHP/Python stack to Go/Next.js. 
-Owning the full technical roadmap.
+💻 Currently at Midbec, migrating a legacy PHP 5.6 e-commerce platform (9M+ requests/month) to Go, Next.js and PostgreSQL.
+Domain by domain, no big-bang rewrite. Owning the full technical roadmap.
 
-🎯 I place particular importance on code simplicity, clear technical decisions, and the real impact of deliverables. KISS is not just a principle for me, that's how I live my life.
+🎯 I start from the business problem, validate every external contract before building, and measure the result. I place particular importance on code simplicity and clear technical decisions. KISS is not just a principle for me, that's how I live my life.
 
 📍 Based in Drummondville, Quebec 🇨🇦`,
     'about.whatIDo.title': 'What I do',
     'about.whatIDo.frontend.title': 'Frontend & Web',
     'about.whatIDo.frontend.description': 'I build fast, maintainable web applications with React, Next.js and Astro. Recent results: desktop Lighthouse 55 → 95 at Midbec, and a 93% JS bundle reduction at Neat Barber.',
     'about.whatIDo.backend.title': 'Backend & APIs',
-    'about.whatIDo.backend.description': 'I build Go services and REST APIs (Chi, PostgreSQL) with simple architecture and explicit data flows, systems you can reason about months later. At Midbec, I\'m migrating a legacy PHP platform domain by domain and integrating ERP, PIM and parts-lookup systems.',
+    'about.whatIDo.backend.description': 'I build Go services and REST APIs (Chi, PostgreSQL) with simple architecture and explicit data flows, systems you can reason about months later. Behind them: an ERP-backed checkout with customer-specific B2B pricing, and a native Go proxy in front of a parts-lookup system.',
     'about.whatIDo.mobile.title': 'Mobile Development',
     'about.whatIDo.mobile.description': 'I build cross-platform mobile apps with React Native and Expo, backed by a Go API. Flip, my judo companion app, covers auth, Stripe subscriptions and a technique library.',
     'about.whatIDo.testing.title': 'Testing & Quality',
@@ -38,9 +37,14 @@ Owning the full technical roadmap.
     'hero.tagline.needs': 'Needs',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
-    'hero.jobTitle': 'Software Engineer',
+    'hero.jobTitle': 'Full-Stack Software Engineer',
+    'hero.jobStack': 'Go · React · Next.js',
+    'hero.summary':
+      'I own simple, reliable production systems end-to-end, from architecture to production.',
+    'hero.terminal.label': 'Track record',
+    'hero.terminal.description':
+      'Performance score, JavaScript size and cached API response time, measured on real projects.',
     'cta.open_cv': 'Open CV',
-    'cta.mail_contact': 'Contact Me',
     'skills.title': 'Skills',
     'skills.languages': 'Languages',
     'skills.frameworks': 'Frameworks',
@@ -57,7 +61,6 @@ Owning the full technical roadmap.
     'skills.items.tanstack': 'TanStack',
     'skills.items.tailwind': 'Tailwind CSS',
     'skills.items.reduxToolkit': 'Redux Toolkit',
-    'skills.items.nextIntl': 'next-intl',
     'skills.items.chi': 'Chi',
     'skills.items.gin': 'Gin',
     'skills.items.reactNative': 'React Native',
@@ -72,7 +75,7 @@ Owning the full technical roadmap.
     'skills.items.docker': 'Docker',
     'skills.items.githubActions': 'GitHub Actions',
     'skills.items.gitlabCi': 'GitLab CI/CD',
-    'skills.items.cloudflare': 'Cloudflare Workers',
+    'skills.items.cloudflare': 'Cloudflare',
     'skills.items.vitest': 'Vitest',
     'skills.items.playwright': 'Playwright',
     'skills.items.lighthouse': 'Lighthouse',
@@ -81,29 +84,30 @@ Owning the full technical roadmap.
     'experience.title': 'Experience',
     'experience.list.midbec-2026.company': 'Midbec',
     'experience.list.midbec-2026.position': 'Software Engineer',
-    'experience.list.midbec-2026.period': '2026 - Present',
+    'experience.list.midbec-2026.period': 'Mar. 2026 - Present',
     'experience.list.midbec-2026.description': [
-      'Sole engineer at the company. Full ownership over architecture, infrastructure, and all technical decisions.',
-      'Migrating a legacy PHP/Python stack to a Go (Chi) backend and Next.js frontend, replacing an ETL connected to a Delphi ERP managing 2M+ inventory records.',
-      'Designing a Go ETL pipeline to synchronize ERP data into PostgreSQL: catalog reconciliation, pricing resolution, and inventory management at scale.',
-      'Migrated 100+ SCSS files to Tailwind CSS with zero visual regressions on a live platform, never taken offline.',
+      'Sole Software Engineer owning the first major overhaul in 10 years of a legacy PHP 5.6 e-commerce platform (9M+ requests/month), migrating it to Go and Next.js from audit (15+ critical risks identified) and architecture to implementation. Strangler fig approach: domain by domain, no big-bang rewrite.',
+      'Built the ERP-backed checkout and customer-specific B2B pricing: server-side order creation, province-aware taxes (GST/QST/HST), carrier selection and ERP-confirmed totals. Designed to fail closed (no invented amounts, order blocked on calculation errors) and covered by 70+ automated tests.',
+      'Reverse-engineered third-party systems (ERP, parts lookup, PIM) through network inspection and API probing, validating each contract before migrating.',
+      'Results: raised desktop Lighthouse Performance from 55 to 95 (lab) by migrating 100+ SCSS files to Tailwind v4 with no visual regressions, and cut parts-lookup API latency from 820ms to 6ms on cached calls with token caching in a native Go proxy.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
-    'experience.list.neat-2025.position': 'Full Stack Engineer (Freelance)',
-    'experience.list.neat-2025.period': '2025',
+    'experience.list.neat-2025.position': 'Full-Stack Engineer (Freelance)',
+    'experience.list.neat-2025.period': 'Jan. 2025 - Dec. 2025',
     'experience.list.neat-2025.description': [
-      'Led the transformation of a legacy jQuery site into a modern platform using Astro and TypeScript.',
-      'Designed a headless CMS architecture powered by WordPress GraphQL API, with automated image optimization via Cloudinary and a CI/CD pipeline using Playwright for quality and reliability.',
-      '93% JavaScript reduction, +25% organic traffic growth, improved mobile UX and maintainability.',
+      'Rebuilt a legacy jQuery site solo, end to end: audit → architecture → delivery, with a zero downtime migration.',
+      'Designed a headless CMS architecture: WordPress GraphQL with typed queries, and Cloudinary for asset delivery.',
+      'Added Playwright E2E tests and Lighthouse CI to the pipeline, enforcing performance budgets on every deploy.',
+      'Results: 93% JS reduction (600KB → 40KB), Lighthouse 68 → 94 and +25% organic traffic, all measured with Lighthouse and analytics.',
     ],
     'experience.list.konbini-2022.company': 'Konbini',
     'experience.list.konbini-2022.position': 'Frontend Developer',
-    'experience.list.konbini-2022.period': '2022 - 2024',
+    'experience.list.konbini-2022.period': 'Oct. 2022 - Oct. 2024',
     'experience.list.konbini-2022.description': [
-      'Rebuild the homepage, migrating to a Next.js SSR architecture with a GraphQL-powered data layer.',
-      'Allow the editorial team to seamlessly publish real-time content updates via WordPress GraphQL API.',
-      'Develop custom integrations, including Twitch live stream detection and dynamic partner content injection with fallback logic.',
-      'Deliver a more engaging, flexible, and responsive platform for both users and editors.',
+      'Rebuilt the homepage with SSR + GraphQL for real-time editorial updates and faster page loads.',
+      'Built a Twitch live detection integration, so live streams surface on the site without manual intervention.',
+      'Built a dynamic partner content injection system with fallback logic, eliminating manual intervention for content updates.',
+      'Results: shipped production features under tight editorial deadlines on a platform with 500K+ monthly users.',
     ],
     'experience.list.french-innov-2020.company': 'French Innov',
     'experience.list.french-innov-2020.position': 'Web Developer',
@@ -122,7 +126,6 @@ Owning the full technical roadmap.
     'contact.form.send': 'Send Message',
     'contact.messages.success': 'Thank you ! Your message has been sent successfully.',
     'contact.messages.error_email_send': 'An error occurred while sending your message. Please try again.',
-    'contact.messages.error_spam_check': 'Please complete the security check before sending your message.',
     'contact.social.title': 'Or find me on',
   },
   fr: {
@@ -134,21 +137,21 @@ Owning the full technical roadmap.
     'nav.contact': 'Contact',
     'about.title': 'À propos de moi',
     'about.introduction': 'Introduction',
-    'about.description': `💼 Ingénieur Logiciel basé au Canada, spécialisé en Go, TypeScript et React.
+    'about.description': `💼 Ingénieur logiciel full-stack basé au Canada, spécialisé en Go et React. 6 ans à construire des applications web en production en France et au Canada.
 Je pilote les projets de bout en bout. Besoins → Architecture → Production. 
 Et m'épanouis en tant qu'ingénieur solo responsable de toutes les décisions techniques.
 
-💻 Actuellement en charge des systèmes en production chez Midbec. 
-Migration d'un stack legacy PHP/Python vers Go/Next.js.
+💻 Actuellement chez Midbec, migration d'une plateforme e-commerce legacy PHP 5.6 (9M+ requêtes/mois) vers Go, Next.js et PostgreSQL.
+Domaine par domaine, sans réécriture big-bang. Je porte la feuille de route technique de bout en bout.
 
-🎯 J'accorde une importance particulière à la simplicité du code, à la clarté des décisions techniques et à l'impact réel des livrables. KISS n'est pas juste un principe pour moi, c'est ma façon de vivre.
+🎯 Je pars du problème métier, je valide chaque contrat externe avant de construire, et je mesure le résultat. J'accorde une importance particulière à la simplicité du code, à la clarté des décisions techniques et à l'impact réel des livrables. KISS n'est pas juste un principe pour moi, c'est ma façon de vivre.
 
 📍 Basé à Drummondville, Québec 🇨🇦`,
     'about.whatIDo.title': 'Ce que je fais',
     'about.whatIDo.frontend.title': 'Frontend & Web',
     'about.whatIDo.frontend.description': 'Je construis des applications web rapides et maintenables avec React, Next.js et Astro. Résultats récents : Lighthouse desktop de 55 à 95 chez Midbec, et 93 % de JS en moins chez Neat Barber.',
     'about.whatIDo.backend.title': 'Backend & APIs',
-    'about.whatIDo.backend.description': 'Je construis des services Go et des APIs REST (Chi, PostgreSQL) avec une architecture simple et des flux de données explicites, des systèmes que l\'on comprend encore des mois plus tard. Chez Midbec, je migre une plateforme PHP legacy domaine par domaine et j\'intègre des systèmes ERP, PIM et de recherche de pièces.',
+    'about.whatIDo.backend.description': 'Je construis des services Go et des APIs REST (Chi, PostgreSQL) avec une architecture simple et des flux de données explicites, des systèmes que l\'on comprend encore des mois plus tard. Derrière eux : un checkout connecté à l\'ERP avec tarification B2B par client, et un proxy Go natif devant un système de recherche de pièces.',
     'about.whatIDo.mobile.title': 'Développement Mobile',
     'about.whatIDo.mobile.description': 'Je développe des applications mobiles cross-platform avec React Native et Expo, adossées à une API Go. Flip, mon application de judo, couvre l\'authentification, les abonnements Stripe et une bibliothèque de techniques.',
     'about.whatIDo.testing.title': 'Tests & Qualité',
@@ -156,9 +159,14 @@ Migration d'un stack legacy PHP/Python vers Go/Next.js.
     'hero.tagline.needs': 'Besoins',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
-    'hero.jobTitle': 'Ingénieur Logiciel',
+    'hero.jobTitle': 'Ingénieur logiciel full-stack',
+    'hero.jobStack': 'Go · React · Next.js',
+    'hero.summary':
+      "Je prends en charge de bout en bout des systèmes de production simples et fiables, de l'architecture à la mise en production.",
+    'hero.terminal.label': 'Résultats mesurés',
+    'hero.terminal.description':
+      "Score de performance, poids du JavaScript et temps de réponse d'une API en cache, mesurés sur des projets réels.",
     'cta.open_cv': 'Ouvrir le CV',
-    'cta.mail_contact': 'Me contacter',
     'skills.title': 'Compétences',
     'skills.languages': 'Langages',
     'skills.frameworks': 'Frameworks',
@@ -175,7 +183,6 @@ Migration d'un stack legacy PHP/Python vers Go/Next.js.
     'skills.items.tanstack': 'TanStack',
     'skills.items.tailwind': 'Tailwind CSS',
     'skills.items.reduxToolkit': 'Redux Toolkit',
-    'skills.items.nextIntl': 'next-intl',
     'skills.items.chi': 'Chi',
     'skills.items.gin': 'Gin',
     'skills.items.reactNative': 'React Native',
@@ -190,7 +197,7 @@ Migration d'un stack legacy PHP/Python vers Go/Next.js.
     'skills.items.docker': 'Docker',
     'skills.items.githubActions': 'GitHub Actions',
     'skills.items.gitlabCi': 'GitLab CI/CD',
-    'skills.items.cloudflare': 'Cloudflare Workers',
+    'skills.items.cloudflare': 'Cloudflare',
     'skills.items.vitest': 'Vitest',
     'skills.items.playwright': 'Playwright',
     'skills.items.lighthouse': 'Lighthouse',
@@ -198,30 +205,31 @@ Migration d'un stack legacy PHP/Python vers Go/Next.js.
     'projects.button_label': 'Lien',
     'experience.title': 'Expérience',
     'experience.list.midbec-2026.company': 'Midbec',
-    'experience.list.midbec-2026.position': 'Ingénieur Logiciel',
-    'experience.list.midbec-2026.period': '2026 - Actuellement',
+    'experience.list.midbec-2026.position': 'Ingénieur logiciel',
+    'experience.list.midbec-2026.period': 'mars 2026 - Présent',
     'experience.list.midbec-2026.description': [
-      'Unique ingénieur de l\'entreprise. Ownership complet sur l\'architecture, l\'infrastructure et toutes les décisions techniques.',
-      'Migration d\'un stack legacy PHP/Python vers un backend Go (Chi) et un frontend Next.js, en remplacement d\'un ETL connecté à un ERP Delphi gérant plus de 2 millions de références.',
-      'Conception d\'un pipeline ETL Go pour synchroniser les données ERP dans PostgreSQL : réconciliation catalogue, résolution des prix et gestion des stocks à grande échelle.',
-      'Migration de plus de 100 fichiers SCSS vers Tailwind CSS sans aucune régression visuelle sur une plateforme en production, jamais désactivée.',
+      'Seul ingénieur logiciel, j\'ai pris en charge la première refonte majeure en 10 ans d\'une plateforme e-commerce legacy PHP 5.6 (9M+ requêtes/mois), en la migrant vers Go et Next.js, de l\'audit (15+ risques critiques identifiés) à l\'architecture jusqu\'à l\'implémentation. Approche strangler fig : domaine par domaine, sans réécriture big-bang.',
+      'J\'ai conçu et développé le checkout connecté à l\'ERP et la tarification B2B spécifique à chaque client : création de commande côté serveur, taxes selon la province (GST/QST/HST), sélection du transporteur et totaux confirmés par l\'ERP. Conçu pour échouer en mode fermé (aucun montant inventé, commande bloquée en cas d\'erreur de calcul) et couvert par plus de 70 tests automatisés.',
+      'J\'ai reverse-engineeré des systèmes tiers (ERP, recherche de pièces, PIM) par inspection réseau et tests d\'API, en validant chaque contrat avant migration.',
+      'Résultats : passage du score Lighthouse Performance desktop de 55 à 95 (lab) en migrant plus de 100 fichiers SCSS vers Tailwind v4 sans régression visuelle, et réduction de la latence de l\'API de recherche de pièces de 820ms à 6ms sur les appels en cache grâce au cache de tokens dans un proxy Go natif.',
     ],
     'experience.list.neat-2025.company': 'Neat Barber',
-    'experience.list.neat-2025.position': 'Ingénieur Full Stack (Freelance)',
-    'experience.list.neat-2025.period': '2025',
+    'experience.list.neat-2025.position': 'Ingénieur full-stack (Freelance)',
+    'experience.list.neat-2025.period': 'janv. 2025 - déc. 2025',
     'experience.list.neat-2025.description': [
-      'Transformation d\'un site legacy jQuery en plateforme moderne avec Astro et TypeScript.',
-      'Conception d\'une architecture CMS headless alimentée par l\'API GraphQL WordPress, avec optimisation automatique des images via Cloudinary et un pipeline CI/CD avec Playwright.',
-      'Réduction de 93% du JavaScript, +25% de trafic organique, amélioration de l\'UX mobile et de la maintenabilité.',
+      'J\'ai reconstruit seul un site legacy jQuery de bout en bout : audit → architecture → livraison, avec une migration sans interruption de service.',
+      'J\'ai conçu une architecture CMS headless : WordPress GraphQL avec requêtes typées, et Cloudinary pour la diffusion des assets.',
+      'J\'ai ajouté des tests E2E Playwright et Lighthouse CI au pipeline, avec des budgets de performance appliqués à chaque déploiement.',
+      'Résultats : réduction de 93% du JS (600KB → 40KB), Lighthouse 68 → 94 et +25% de trafic organique, le tout mesuré avec Lighthouse et les analytics.',
     ],
     'experience.list.konbini-2022.company': 'Konbini',
     'experience.list.konbini-2022.position': 'Développeur Frontend',
-    'experience.list.konbini-2022.period': '2022 - 2024',
+    'experience.list.konbini-2022.period': 'oct. 2022 - oct. 2024',
     'experience.list.konbini-2022.description': [
-      'Refonte de la page d\'accueil, migration vers une architecture Next.js SSR avec une couche de données alimentée par GraphQL.',
-      'Permettre à l\'équipe éditoriale de publier des mises à jour de contenu en temps réel via l\'API GraphQL WordPress.',
-      'Développement d\'intégrations personnalisées, incluant la détection de streams Twitch en direct et l\'injection dynamique de contenu partenaire avec logique de fallback.',
-      'Livraison d\'une plateforme plus engageante, flexible et réactive pour les utilisateurs et les éditeurs.',
+      'J\'ai refait la page d\'accueil avec SSR + GraphQL pour des mises à jour éditoriales en temps réel et des chargements plus rapides.',
+      'J\'ai développé une intégration de détection de live Twitch, pour que les streams en direct remontent sur le site sans intervention manuelle.',
+      'J\'ai conçu un système d\'injection dynamique de contenu partenaire avec logique de fallback, supprimant l\'intervention manuelle pour les mises à jour de contenu.',
+      'Résultats : livraison de fonctionnalités en production sous des délais éditoriaux serrés sur une plateforme comptant plus de 500K+ utilisateurs mensuels.',
     ],
     'experience.list.french-innov-2020.company': 'French Innov',
     'experience.list.french-innov-2020.position': 'Développeur Web',
@@ -240,7 +248,6 @@ Migration d'un stack legacy PHP/Python vers Go/Next.js.
     'contact.form.send': 'Envoyer le message',
     'contact.messages.success': 'Merci ! Votre message a été envoyé avec succès.',
     'contact.messages.error_email_send': 'Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.',
-    'contact.messages.error_spam_check': 'Veuillez compléter la vérification de sécurité avant d\'envoyer votre message.',
     'contact.social.title': 'Ou retrouvez-moi sur',
   },
 } as const;

@@ -27,14 +27,13 @@ export default function ExperienceCard({
     <div
       className={`
         ${animationClasses}
-        bg-gradient-to-br from-gray-800 to-gray-900 
-        hover:from-gray-700 hover:to-gray-800
+        bg-gradient-to-br from-gray-800 to-gray-950
+        hover:from-gray-700 hover:to-gray-900
         p-4 sm:p-5 md:p-6 rounded-lg w-full max-w-3xl 
          hover:border-indigo-500
         shadow-xl hover:shadow-2xl
         transition-all duration-500 ease-out
         hover:scale-105
-        backdrop-blur-sm
       `}
       style={{
         boxShadow:
