@@ -60,5 +60,3 @@ export const skillsDetails = {
   testing,
   devops,
 };
-
-export default skillsDetails;
