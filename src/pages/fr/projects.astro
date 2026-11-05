@@ -6,13 +6,11 @@ import { projects } from "@data/projects";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const title = "Projets | Ryan PINA-SILASSE";
-const description =
-  "Vitrine de projets de développement web et mobile utilisant React, Next.js, Go, TypeScript et technologies modernes. Applications et exemples de travaux professionnels.";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title}>
   <BackgroundAnimation />
   <div class="flex flex-col min-h-screen py-16 px-4">
     <div id="projects">

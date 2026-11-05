@@ -1,5 +1,6 @@
 ---
 import "@styles/global.css";
+import { SITE_META_DESCRIPTION } from "@utils/constants";
 
 interface Props {
   title?: string;
@@ -9,7 +10,7 @@ interface Props {
 
 const {
   title = "Ryan PINA-SILASSE | Software Engineer",
-  description = "Software Engineer specializing in Go, React and Next.js. I own simple, reliable production systems end-to-end. Based in Quebec.",
+  description = SITE_META_DESCRIPTION,
   lang = "en",
 } = Astro.props;
 

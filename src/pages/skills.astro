@@ -6,8 +6,6 @@ import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { skillsDetails } from "@/data/skillDetails";
 
 const title = "Skills | Ryan PINA-SILASSE";
-const description =
-  "Software engineer skilled in React, Go , Astro and modern web technologies. Experience with mobile development, cloud platforms, and DevOps tools.";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -23,7 +21,7 @@ const {
 } = skillsDetails;
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title}>
   <BackgroundAnimation />
   <div class="flex flex-col min-h-screen py-16 px-4">
     <div id="skills">
