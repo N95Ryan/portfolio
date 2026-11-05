@@ -1,5 +1,6 @@
 import SkillCard from "./SkillCard";
 import {
+  SiJavascript,
   SiTypescript,
   SiGo,
   SiReact,
@@ -19,6 +20,10 @@ import {
   SiVitest,
   SiCloudflare,
   SiLighthouse,
+  SiGit,
+  SiAmazonwebservices,
+  SiTerraform,
+  SiRender,
 } from "react-icons/si";
 import type { SkillIconComponent } from "./icons/types";
 import PlaywrightIcon from "./icons/PlaywrightIcon";
@@ -40,7 +45,7 @@ type SkillConfig = {
 
 /** Icônes et couleurs par clé. L’ordre à l’écran = tableaux dans `src/data/skillDetails.ts`. */
 const skillsMap: Record<string, SkillConfig> = {
-  // javascript: { icon: SiJavascript, color: "#F0DB4F" },
+  javascript: { icon: SiJavascript, color: "#F0DB4F" },
   typescript: { icon: SiTypescript, color: "#007acc" },
   golang: { icon: SiGo, color: "#00acd7" },
   react: { icon: SiReact, color: "#61DAFB" },
@@ -61,7 +66,11 @@ const skillsMap: Record<string, SkillConfig> = {
   graphql: { icon: SiGraphql, color: "#E10098" },
   postman: { icon: SiPostman, color: "#FF6C37" },
   docker: { icon: SiDocker, color: "#2496ED" },
+  aws: { icon: SiAmazonwebservices, color: "#FF9900" },
+  terraform: { icon: SiTerraform, color: "#844FBA" },
+  git: { icon: SiGit, color: "#F05032" },
   cloudflare: { icon: SiCloudflare, color: "#F38020" },
+  render: { icon: SiRender, color: "#fff" },
   githubActions: { icon: GitHubIcon, color: "#fff" },
   gitlabCi: { icon: GitLabCiIcon, color: "#FC6D26" },
   vitest: { icon: SiVitest, color: "#6E9F18" },

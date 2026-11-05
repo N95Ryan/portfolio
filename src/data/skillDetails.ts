@@ -3,26 +3,18 @@ export type SkillItem = {
 };
 
 const languages: SkillItem[] = [
-  // { key: "javascript" },
-  { key: "typescript" },
   { key: "golang" },
+  { key: "typescript" },
+  { key: "javascript" },
 ];
 
-const frameworks: SkillItem[] = [
+const frontend: SkillItem[] = [
   { key: "react" },
   { key: "nextjs" },
   { key: "astro" },
-  { key: "tanstack" },
   { key: "tailwind" },
+  { key: "tanstack" },
   { key: "reduxToolkit" },
-  { key: "chi" },
-  { key: "gin" },
-  // { key: "nextIntl" },
-  // { key: "nodedotjs" },
-];
-const databaseCloud: SkillItem[] = [
-  { key: "postgresql" },
-  { key: "supabase" },
 ];
 
 const mobile: SkillItem[] = [
@@ -30,18 +22,16 @@ const mobile: SkillItem[] = [
   { key: "expo" },
 ];
 
-const tools: SkillItem[] = [
+const backend: SkillItem[] = [
+  { key: "gin" },
+  { key: "chi" },
   { key: "restApis" },
   { key: "graphql" },
-  { key: "vite" },
-  { key: "bun" },
 ];
 
-const devops: SkillItem[] = [
-  { key: "docker" },
-  { key: "cloudflare" },
-  { key: "githubActions" },
-  { key: "gitlabCi" },
+const database: SkillItem[] = [
+  { key: "postgresql" },
+  { key: "supabase" },
 ];
 
 const testing: SkillItem[] = [
@@ -51,12 +41,29 @@ const testing: SkillItem[] = [
   { key: "postman" },
 ];
 
+const devops: SkillItem[] = [
+  { key: "docker" },
+  { key: "aws" },
+  { key: "terraform" },
+  { key: "cloudflare" },
+  { key: "render" },
+  { key: "githubActions" },
+  { key: "gitlabCi" },
+];
+
+const tools: SkillItem[] = [
+  { key: "git" },
+  { key: "vite" },
+  { key: "bun" },
+];
+
 export const skillsDetails = {
   languages,
-  frameworks,
+  frontend,
   mobile,
-  tools,
-  databaseCloud,
+  backend,
+  database,
   testing,
   devops,
+  tools,
 };

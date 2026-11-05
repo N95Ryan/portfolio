@@ -9,6 +9,7 @@ interface ExperienceCardProps {
     position: string;
     period: string;
     description: string[];
+    technologiesLabel: string;
   };
   side: "left" | "right";
 }
@@ -52,10 +53,10 @@ export default function ExperienceCard({
 
       {/* Technologies utilisées */}
       <p className="text-gray-300 text-sm sm:text-base mb-2 sm:mb-3">
-        Stack: <span className="font-medium text-indigo-300"></span>
-        <span className="block sm:inline mt-1 sm:mt-0">
-          {technologiesString}
-        </span>
+        <span className="font-medium text-indigo-300">
+          {translations.technologiesLabel}
+        </span>{" "}
+        <span className="block sm:inline mt-1 sm:mt-0">{technologiesString}</span>
       </p>
 
       {/* Description - Liste à puces */}

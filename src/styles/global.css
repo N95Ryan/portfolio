@@ -5,11 +5,8 @@
 /* Variables CSS */
 :root {
   --color-primary: #9333ea;
-  --color-secondary: #4f46e5;
-  --color-accent: #06b6d4;
   --color-background: #121212;
   --color-foreground: #ffffff;
-  --color-muted: #9ca3af;
 }
 
 /* Styles globaux */
