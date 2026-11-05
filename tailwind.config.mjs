@@ -11,24 +11,11 @@ export default {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
       animation: {
-        ripple: 'ripple 3400ms ease infinite',
         'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
         'fade-in-right': 'fadeInRight 0.8s ease-out forwards',
       },
       keyframes: {
-        ripple: {
-          '0%, 100%': {
-            transform: 'translate(-50%, -50%) scale(1)',
-          },
-          '50%': {
-            transform: 'translate(-50%, -50%) scale(0.9)',
-          },
-        },
         fadeInLeft: {
           '0%': {
             opacity: '0',

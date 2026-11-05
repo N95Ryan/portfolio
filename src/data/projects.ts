@@ -3,7 +3,6 @@ import type { Project } from '@types/index';
 export const projects: Project[] = [
   {
     id: '0',
-    title: 'Flip',
     name: {
       en: 'Flip',
       fr: 'Flip',
@@ -19,11 +18,9 @@ export const projects: Project[] = [
     textColor: '#F7F2E9',
     linkColor: '#F7F2E9',
     linkTextColor: '#34344A',
-    tags: [],
   },
   // {
   //   id: '1',
-  //   title: 'Midbec Journey',
   //   name: {
   //     en: 'Midbec Journey',
   //     fr: 'Midbec Journey',
@@ -39,11 +36,9 @@ export const projects: Project[] = [
   //   textColor: '#ffffff',
   //   linkColor: '#ffffff',
   //   linkTextColor: '#be0c16',
-  //   tags: [],
   // },
   {
     id: '2',
-    title: 'Leaf',
     name: {
       en: 'Leaf',
       fr: 'Leaf',
@@ -59,11 +54,9 @@ export const projects: Project[] = [
     textColor: '#ffffff',
     linkColor: '#343a40',
     linkTextColor: '#ffffff',
-    tags: [],
   },
   {
     id: '3',
-    title: 'The 8bits Hangman',
     name: {
       en: 'The 8bits Hangman',
       fr: 'The 8bits Hangman',
@@ -79,6 +72,5 @@ export const projects: Project[] = [
     textColor: '#000000',
     linkColor: '#f4a45d',
     linkTextColor: '#000000',
-    tags: [],
   },
 ];

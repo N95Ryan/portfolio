@@ -2,7 +2,6 @@
 
 export interface Project {
   id: string;
-  title: string;
   name: {
     en: string;
     fr: string;
@@ -13,10 +12,6 @@ export interface Project {
   };
   technologies: string[];
   image: string;
-  tags: string[];
-  github?: string;
-  demo?: string;
-  featured?: boolean;
   bgcolor: string;
   textColor: string;
   link: string;
