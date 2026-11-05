@@ -57,6 +57,8 @@ const tools: SkillItem[] = [
   { key: "bun" },
 ];
 
+const aiTools: SkillItem[] = [{ key: "claude" }, { key: "cursor" }];
+
 export const skillsDetails = {
   languages,
   frontend,
@@ -66,4 +68,5 @@ export const skillsDetails = {
   testing,
   devops,
   tools,
+  aiTools,
 };
