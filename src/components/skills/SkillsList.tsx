@@ -32,6 +32,8 @@ import ReduxToolkitIcon from "./icons/ReduxToolkitIcon";
 import GitLabCiIcon from "./icons/GitLabCiIcon";
 import GitHubIcon from "./icons/GitHubIcon";
 import RestApisIcon from "./icons/RestApisIcon";
+import ClaudeIcon from "./icons/ClaudeIcon";
+import CursorIcon from "./icons/CursorIcon";
 import { defaultLang, translations } from "@i18n/translations";
 
 type Lang = keyof typeof translations;
@@ -76,6 +78,8 @@ const skillsMap: Record<string, SkillConfig> = {
   vitest: { icon: SiVitest, color: "#6E9F18" },
   playwright: { icon: PlaywrightIcon, color: "#2EAD33", multicolor: true },
   lighthouse: { icon: SiLighthouse, color: "#F44B21" },
+  claude: { icon: ClaudeIcon, color: "#CC785C" },
+  cursor: { icon: CursorIcon, color: "#fff" },
 };
 
 function skillLabel(lang: Lang, key: string): string {
