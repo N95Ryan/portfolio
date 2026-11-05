@@ -6,13 +6,11 @@ import { experiences } from "@data/experience";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const title = "Expérience | Ryan PINA-SILASSE";
-const description =
-  "6 ans d'expérience professionnelle comme Ingénieur Logiciel et Développeur Full Stack au Canada et en France. Actuellement chez Midbec (Québec).";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title}>
   <BackgroundAnimation />
   <div class="flex flex-col min-h-screen py-16 px-4">
     <div id="experience">

@@ -6,13 +6,11 @@ import { experiences } from "@data/experience";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const title = "Experience | Ryan PINA-SILASSE";
-const description =
-  "6 years of professional experience as a Software Engineer across Canada and France. Currently at Midbec (Quebec). Building production-grade web applications in React, Go, and Next.js.";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title}>
   <BackgroundAnimation />
   <div class="flex flex-col min-h-screen py-16 px-4">
     <div id="experience">
