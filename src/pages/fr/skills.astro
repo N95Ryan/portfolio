@@ -11,8 +11,16 @@ const description =
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { languages, frameworks, mobile, tools, databaseCloud, testing, devops } =
-  skillsDetails;
+const {
+  languages,
+  frontend,
+  mobile,
+  backend,
+  database,
+  testing,
+  devops,
+  tools,
+} = skillsDetails;
 ---
 
 <MainLayout title={title} description={description}>
@@ -26,13 +34,10 @@ const { languages, frameworks, mobile, tools, databaseCloud, testing, devops } =
     </div>
 
     <SkillsSection skills={languages} category="languages" lang={lang} />
-    <SkillsSection skills={frameworks} category="frameworks" lang={lang} />
+    <SkillsSection skills={frontend} category="frontend" lang={lang} />
     <SkillsSection skills={mobile} category="mobile" lang={lang} />
-    <SkillsSection
-      skills={databaseCloud}
-      category="databaseCloud"
-      lang={lang}
-    />
+    <SkillsSection skills={backend} category="backend" lang={lang} />
+    <SkillsSection skills={database} category="database" lang={lang} />
     <SkillsSection skills={testing} category="testing" lang={lang} />
     <SkillsSection skills={devops} category="devops" lang={lang} />
     <SkillsSection skills={tools} category="tools" lang={lang} />

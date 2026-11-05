@@ -15,25 +15,40 @@ export const translations = {
     'nav.contact': 'Contact',
     'about.title': 'About Me',
     'about.introduction': 'Let me introduce myself',
-    'about.description': `💼 Full-Stack Software Engineer based in Canada, specialized in Go and React. 6 years building production web applications in France and Canada.
-I own projects end-to-end. Requirements → Architecture → Production.
-And I thrive as the sole engineer making technical decisions that ship products.
-
-💻 Currently at Midbec, migrating a legacy PHP 5.6 e-commerce platform (9M+ requests/month) to Go, Next.js and PostgreSQL.
-Domain by domain, no big-bang rewrite. Owning the full technical roadmap.
-
-🎯 I start from the business problem, validate every external contract before building, and measure the result. I place particular importance on code simplicity and clear technical decisions. KISS is not just a principle for me, that's how I live my life.
-
-📍 Based in Drummondville, Quebec 🇨🇦`,
-    'about.whatIDo.title': 'What I do',
-    'about.whatIDo.frontend.title': 'Frontend & Web',
-    'about.whatIDo.frontend.description': 'I build fast, maintainable web applications with React, Next.js and Astro. Recent results: desktop Lighthouse 55 → 95 at Midbec, and a 93% JS bundle reduction at Neat Barber.',
-    'about.whatIDo.backend.title': 'Backend & APIs',
-    'about.whatIDo.backend.description': 'I build Go services and REST APIs (Chi, PostgreSQL) with simple architecture and explicit data flows, systems you can reason about months later. Behind them: an ERP-backed checkout with customer-specific B2B pricing, and a native Go proxy in front of a parts-lookup system.',
-    'about.whatIDo.mobile.title': 'Mobile Development',
-    'about.whatIDo.mobile.description': 'I build cross-platform mobile apps with React Native and Expo, backed by a Go API. Flip, my judo companion app, covers auth, Stripe subscriptions and a technique library.',
-    'about.whatIDo.testing.title': 'Testing & Quality',
-    'about.whatIDo.testing.description': 'I test what matters: 70+ automated tests on the ERP-backed checkout, plus Playwright E2E and Lighthouse CI performance budgets in the pipeline.',
+    'about.paragraph1':
+      "💼 Hi, I'm Ryan. I'm a full-stack software engineer, 6 years into building production web applications in both France and Canada. And what I enjoy most hasn't changed: taking a business problem and turning it into something simple that works.",
+    'about.paragraph2':
+      "💻 I'm currently the only engineer at Midbec, a home appliance parts distributor, where I'm migrating a 10-year-old PHP 5.6 platform to a Go / Next.js stack, brick by brick, without interrupting the service. I own the technical roadmap, from the first decision to production.",
+    'about.paragraph3':
+      "KISS isn't just a principle for me, it's who I am.",
+    'about.location': '📍 Based in Drummondville, Quebec',
+    'about.howIWork.title': 'How I work',
+    'about.howIWork.listen.step': 'Listen',
+    'about.howIWork.listen.principle': 'Problem before stack',
+    'about.howIWork.listen.description':
+      "An online store can't simply close while its systems are being replaced. I migrated a home appliance parts distributor's store to a new technology stack, brick by brick, without interrupting its operations.",
+    'about.howIWork.learn.step': 'Learn',
+    'about.howIWork.learn.principle': 'Verify, then build',
+    'about.howIWork.learn.description':
+      "B2B customers needed to see their own prices before checkout. I connected the online checkout to the company's management system (ERP), and tested how it worked before writing a single line of code.",
+    'about.howIWork.apply.step': 'Apply',
+    'about.howIWork.apply.principle': 'Own what ships',
+    'about.howIWork.apply.description':
+      'I built Flip, a complete mobile app dedicated to judo, entirely by myself. I handled the data, architecture, infrastructure and deployment. Its App Store release is in progress.',
+    'about.howIWork.measure.step': 'Measure',
+    'about.howIWork.measure.principle': 'Numbers over opinions',
+    'about.howIWork.measure.description':
+      "I completely rebuilt a high-end Parisian barbershop's website: 15x less JavaScript, a performance score that went from 68 to 94, and 25% more organic traffic.",
+    'about.howIWork.repeat.step': 'Repeat',
+    'about.howIWork.repeat.description':
+      'Then I start again, with what I learned.',
+    'about.whereHeading.title': "Where I'm heading",
+    'about.whereHeading.line':
+      '📚 Deepening my expertise in Go → system design → cloud-native engineering',
+    'about.whereHeading.paragraph1':
+      "Go is the language that fits my vision and the way I work best: simple, explicit, easy to reason about. That's why I specialized in it: from an e-commerce platform to Flip's API, it became the core of my backend work.",
+    'about.whereHeading.paragraph2':
+      'System design is what keeps a system simple as it grows. Cloud-native engineering (AWS, Terraform) is what keeps it reliable in production.',
     'hero.tagline.needs': 'Needs',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
@@ -47,12 +62,14 @@ Domain by domain, no big-bang rewrite. Owning the full technical roadmap.
     'cta.open_cv': 'Open CV',
     'skills.title': 'Skills',
     'skills.languages': 'Languages',
-    'skills.frameworks': 'Frameworks',
+    'skills.frontend': 'Frontend',
     'skills.mobile': 'Mobile',
-    'skills.databaseCloud': 'Database & Cloud', 
+    'skills.backend': 'Backend',
+    'skills.database': 'Database',
     'skills.testing': 'Testing',
-    'skills.devops': 'DevOps',
+    'skills.devops': 'DevOps & Cloud',
     'skills.tools': 'Tools',
+    'skills.items.javascript': 'JavaScript',
     'skills.items.typescript': 'TypeScript',
     'skills.items.golang': 'Go',
     'skills.items.react': 'React',
@@ -73,9 +90,13 @@ Domain by domain, no big-bang rewrite. Owning the full technical roadmap.
     'skills.items.graphql': 'GraphQL',
     'skills.items.postman': 'Postman',
     'skills.items.docker': 'Docker',
+    'skills.items.aws': 'AWS',
+    'skills.items.terraform': 'Terraform',
+    'skills.items.git': 'Git',
     'skills.items.githubActions': 'GitHub Actions',
     'skills.items.gitlabCi': 'GitLab CI/CD',
     'skills.items.cloudflare': 'Cloudflare',
+    'skills.items.render': 'Render',
     'skills.items.vitest': 'Vitest',
     'skills.items.playwright': 'Playwright',
     'skills.items.lighthouse': 'Lighthouse',
@@ -137,25 +158,40 @@ Domain by domain, no big-bang rewrite. Owning the full technical roadmap.
     'nav.contact': 'Contact',
     'about.title': 'À propos de moi',
     'about.introduction': 'Introduction',
-    'about.description': `💼 Ingénieur logiciel full-stack basé au Canada, spécialisé en Go et React. 6 ans à construire des applications web en production en France et au Canada.
-Je pilote les projets de bout en bout. Besoins → Architecture → Production. 
-Et m'épanouis en tant qu'ingénieur solo responsable de toutes les décisions techniques.
-
-💻 Actuellement chez Midbec, migration d'une plateforme e-commerce legacy PHP 5.6 (9M+ requêtes/mois) vers Go, Next.js et PostgreSQL.
-Domaine par domaine, sans réécriture big-bang. Je porte la feuille de route technique de bout en bout.
-
-🎯 Je pars du problème métier, je valide chaque contrat externe avant de construire, et je mesure le résultat. J'accorde une importance particulière à la simplicité du code, à la clarté des décisions techniques et à l'impact réel des livrables. KISS n'est pas juste un principe pour moi, c'est ma façon de vivre.
-
-📍 Basé à Drummondville, Québec 🇨🇦`,
-    'about.whatIDo.title': 'Ce que je fais',
-    'about.whatIDo.frontend.title': 'Frontend & Web',
-    'about.whatIDo.frontend.description': 'Je construis des applications web rapides et maintenables avec React, Next.js et Astro. Résultats récents : Lighthouse desktop de 55 à 95 chez Midbec, et 93 % de JS en moins chez Neat Barber.',
-    'about.whatIDo.backend.title': 'Backend & APIs',
-    'about.whatIDo.backend.description': 'Je construis des services Go et des APIs REST (Chi, PostgreSQL) avec une architecture simple et des flux de données explicites, des systèmes que l\'on comprend encore des mois plus tard. Derrière eux : un checkout connecté à l\'ERP avec tarification B2B par client, et un proxy Go natif devant un système de recherche de pièces.',
-    'about.whatIDo.mobile.title': 'Développement Mobile',
-    'about.whatIDo.mobile.description': 'Je développe des applications mobiles cross-platform avec React Native et Expo, adossées à une API Go. Flip, mon application de judo, couvre l\'authentification, les abonnements Stripe et une bibliothèque de techniques.',
-    'about.whatIDo.testing.title': 'Tests & Qualité',
-    'about.whatIDo.testing.description': 'Je teste ce qui compte : plus de 70 tests automatisés sur le checkout connecté à l\'ERP, et Playwright E2E et budgets de performance Lighthouse CI dans le pipeline.',
+    'about.paragraph1':
+      "💼 Salut, moi c'est Ryan. Je suis ingénieur logiciel full-stack, avec maintenant 6 ans d'expérience dans le développement d'applications web en production, en France comme au Canada. Et ce que j'aime le plus n'a pas changé : prendre un problème métier et en faire quelque chose de simple qui fonctionne.",
+    'about.paragraph2':
+      "💻 Actuellement, je suis l'unique ingénieur chez Midbec, un distributeur de pièces détachées pour électroménager. Je migre une ancienne plateforme PHP 5.6 (10 ans d'âge) vers une stack Go / Next.js, brique par brique, sans interruption du service. Je suis responsable de la roadmap technique, de la première décision jusqu'à la mise en production.",
+    'about.paragraph3':
+      "Pour moi, KISS n'est pas qu'un principe : c'est simplement ma façon d'être.",
+    'about.location': '📍 Basé à Drummondville, au Québec',
+    'about.howIWork.title': 'Comment je travaille',
+    'about.howIWork.listen.step': 'Écouter',
+    'about.howIWork.listen.principle': 'Le problème avant la stack',
+    'about.howIWork.listen.description':
+      "Un site marchand ne peut pas simplement fermer pendant le remplacement de ses systèmes. J'ai migré la boutique d'un distributeur de pièces détachées pour électroménager vers une nouvelle stack technique, brique par brique, sans interrompre son fonctionnement.",
+    'about.howIWork.learn.step': 'Apprendre',
+    'about.howIWork.learn.principle': 'Vérifier, puis construire',
+    'about.howIWork.learn.description':
+      "Les clients B2B devaient pouvoir consulter leurs tarifs personnalisés avant de passer commande. J'ai connecté le checkout en ligne au système de gestion de l'entreprise (ERP), et j'ai testé son fonctionnement avant d'écrire la première ligne de code.",
+    'about.howIWork.apply.step': 'Appliquer',
+    'about.howIWork.apply.principle': 'Assumer ce qui part en prod',
+    'about.howIWork.apply.description':
+      "J'ai développé Flip, une application mobile complète dédiée au judo, entièrement par moi-même. J'ai pris en charge les données, l'architecture, l'infrastructure et le déploiement. Sa publication sur l'App Store est en cours.",
+    'about.howIWork.measure.step': 'Mesurer',
+    'about.howIWork.measure.principle': 'Les chiffres plutôt que les avis',
+    'about.howIWork.measure.description':
+      "J'ai entièrement reconstruit le site d'un barbershop haut de gamme parisien : 15 fois moins de JavaScript, un score de performance passé de 68 à 94 et 25 % de trafic organique supplémentaire.",
+    'about.howIWork.repeat.step': 'Répéter',
+    'about.howIWork.repeat.description':
+      "Puis je recommence, fort de ce que j'ai appris.",
+    'about.whereHeading.title': 'Où je vais',
+    'about.whereHeading.line':
+      '📚 J\'approfondis mon expertise en Go → system design → cloud-native engineering',
+    'about.whereHeading.paragraph1':
+      "Go est le langage qui colle le mieux à ma vision et à ma façon de travailler : simple, explicite, facile à raisonner. C'est pourquoi je me suis spécialisé dedans : d'une plateforme e-commerce jusqu'à l'API de Flip, il est devenu le cœur de mon travail backend.",
+    'about.whereHeading.paragraph2':
+      "Le system design, c'est ce qui permet de garder un système simple quand il grandit. Le cloud-native (AWS, Terraform), c'est ce qui permet de le faire tourner de façon fiable en production.",
     'hero.tagline.needs': 'Besoins',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
@@ -169,12 +205,14 @@ Domaine par domaine, sans réécriture big-bang. Je porte la feuille de route te
     'cta.open_cv': 'Ouvrir le CV',
     'skills.title': 'Compétences',
     'skills.languages': 'Langages',
-    'skills.frameworks': 'Frameworks',
+    'skills.frontend': 'Frontend',
     'skills.mobile': 'Mobile',
-    'skills.databaseCloud': 'Base de données & Cloud',
+    'skills.backend': 'Backend',
+    'skills.database': 'Base de données',
     'skills.testing': 'Tests',
-    'skills.devops': 'DevOps',
+    'skills.devops': 'DevOps & Cloud',
     'skills.tools': 'Outils',
+    'skills.items.javascript': 'JavaScript',
     'skills.items.typescript': 'TypeScript',
     'skills.items.golang': 'Go',
     'skills.items.react': 'React',
@@ -195,9 +233,13 @@ Domaine par domaine, sans réécriture big-bang. Je porte la feuille de route te
     'skills.items.graphql': 'GraphQL',
     'skills.items.postman': 'Postman',
     'skills.items.docker': 'Docker',
+    'skills.items.aws': 'AWS',
+    'skills.items.terraform': 'Terraform',
+    'skills.items.git': 'Git',
     'skills.items.githubActions': 'GitHub Actions',
     'skills.items.gitlabCi': 'GitLab CI/CD',
     'skills.items.cloudflare': 'Cloudflare',
+    'skills.items.render': 'Render',
     'skills.items.vitest': 'Vitest',
     'skills.items.playwright': 'Playwright',
     'skills.items.lighthouse': 'Lighthouse',
