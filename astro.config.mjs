@@ -9,7 +9,9 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://www.ryan-pina.dev',
   output: 'static',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'passthrough',
+  }),
   // Sessions non utilisées : évite le provisionnement d'un KV "SESSION" au déploiement
   session: false,
   integrations: [
