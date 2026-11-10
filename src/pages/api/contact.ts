@@ -7,6 +7,7 @@ import {
   validateContactContent,
   validateSubmissionTiming,
 } from "@utils/contactSpam";
+import { escapeHtml } from "@utils/escapeHtml";
 
 export const prerender = false;
 
@@ -85,6 +86,11 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonResponse("Adresse email invalide", 400);
     }
 
+    const safeName = escapeHtml(String(name));
+    const safeEmail = escapeHtml(String(email));
+    const safeSubject = escapeHtml(String(subject));
+    const safeMessage = escapeHtml(String(message));
+
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
       to: [resendToEmail],
@@ -103,10 +109,10 @@ export const POST: APIRoute = async ({ request }) => {
             
             <!-- Message Content -->
             <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #202124;">
-              <p style="margin: 0 0 8px;"><strong>De:</strong> ${name} (${email})</p>
-              <p style="margin: 0 0 16px;"><strong>Sujet:</strong> ${subject}</p>
+              <p style="margin: 0 0 8px;"><strong>De:</strong> ${safeName} (${safeEmail})</p>
+              <p style="margin: 0 0 16px;"><strong>Sujet:</strong> ${safeSubject}</p>
               <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e8eaed;">
-                <p style="margin: 0 0 16px; white-space: pre-wrap;">${message}</p>
+                <p style="margin: 0 0 16px; white-space: pre-wrap;">${safeMessage}</p>
               </div>
             </div>
             
