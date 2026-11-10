@@ -7,6 +7,7 @@ import {
   validateContactContent,
   validateSubmissionTiming,
 } from "@utils/contactSpam";
+import { escapeHtml } from "@utils/escapeHtml";
 
 export const prerender = false;
 
@@ -28,11 +29,10 @@ export const POST: APIRoute = async ({ request }) => {
   };
 
   try {
-    const env = cloudflareEnv as Record<string, string | undefined>;
-    const resendApiKey = env.RESEND_API_KEY;
-    const resendToEmail = env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
+    const resendApiKey = cloudflareEnv.RESEND_API_KEY;
+    const resendToEmail = cloudflareEnv.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
     const resendFromEmail =
-      env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
+      cloudflareEnv.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
 
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
@@ -85,6 +85,11 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonResponse("Adresse email invalide", 400);
     }
 
+    const safeName = escapeHtml(String(name));
+    const safeEmail = escapeHtml(String(email));
+    const safeSubject = escapeHtml(String(subject));
+    const safeMessage = escapeHtml(String(message));
+
     const { data, error } = await resend.emails.send({
       from: resendFromEmail,
       to: [resendToEmail],
@@ -103,10 +108,10 @@ export const POST: APIRoute = async ({ request }) => {
             
             <!-- Message Content -->
             <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #202124;">
-              <p style="margin: 0 0 8px;"><strong>De:</strong> ${name} (${email})</p>
-              <p style="margin: 0 0 16px;"><strong>Sujet:</strong> ${subject}</p>
+              <p style="margin: 0 0 8px;"><strong>De:</strong> ${safeName} (${safeEmail})</p>
+              <p style="margin: 0 0 16px;"><strong>Sujet:</strong> ${safeSubject}</p>
               <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e8eaed;">
-                <p style="margin: 0 0 16px; white-space: pre-wrap;">${message}</p>
+                <p style="margin: 0 0 16px; white-space: pre-wrap;">${safeMessage}</p>
               </div>
             </div>
             
@@ -143,42 +148,52 @@ ${message}
     if (error) {
       console.error("Resend error:", error);
 
-      let errorMessage = "Erreur lors de l'envoi de l'email";
-      let errorCode = null;
+      const genericMessage = "Erreur lors de l'envoi de l'email";
+      let errorCode: string | null = null;
+      let resendMessage = genericMessage;
 
       if (error && typeof error === "object") {
         if ("message" in error) {
-          errorMessage = String(error.message);
+          resendMessage = String(error.message);
         }
         if ("name" in error) {
           errorCode = String(error.name);
         }
       }
 
-      if (
-        errorMessage.includes("only send testing emails to your own email address") ||
+      const isDomainVerificationIssue =
+        resendMessage.includes("only send testing emails to your own email address") ||
         errorCode === "validation_error" ||
-        errorMessage.includes("domain") ||
-        errorMessage.includes("not verified")
-      ) {
-        errorMessage =
-          "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS.";
-      }
+        resendMessage.includes("domain") ||
+        resendMessage.includes("not verified");
 
-      return jsonResponse(errorMessage, 500, {
-        errorCode,
-        ...(import.meta.env.DEV && { error }),
-      });
+      const clientMessage = isDomainVerificationIssue
+        ? "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS."
+        : import.meta.env.DEV
+          ? resendMessage
+          : genericMessage;
+
+      return jsonResponse(
+        clientMessage,
+        500,
+        import.meta.env.DEV ? { errorCode, error } : undefined,
+      );
     }
 
     return jsonResponse("Email envoyé avec succès", 200, { data });
   } catch (error) {
     console.error("Erreur API:", error);
 
-    return jsonResponse("Erreur serveur", 500, {
-      error: error instanceof Error ? error.message : String(error),
-      type: error instanceof Error ? error.constructor.name : typeof error,
-      ...(import.meta.env.DEV && { stack: error instanceof Error ? error.stack : undefined }),
-    });
+    return jsonResponse(
+      "Erreur serveur",
+      500,
+      import.meta.env.DEV
+        ? {
+            error: error instanceof Error ? error.message : String(error),
+            type: error instanceof Error ? error.constructor.name : typeof error,
+            stack: error instanceof Error ? error.stack : undefined,
+          }
+        : undefined,
+    );
   }
 };

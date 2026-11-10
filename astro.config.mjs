@@ -8,8 +8,10 @@ import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.ryan-pina.dev',
-  output: 'server',
-  adapter: cloudflare(),
+  output: 'static',
+  adapter: cloudflare({
+    imageService: 'passthrough',
+  }),
   // Sessions non utilisées : évite le provisionnement d'un KV "SESSION" au déploiement
   session: false,
   integrations: [

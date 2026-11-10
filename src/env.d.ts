@@ -1,11 +1,7 @@
 /// <reference types="astro/client" />
+/// <reference path="../worker-configuration.d.ts" />
 
-interface ImportMetaEnv {
-  readonly RESEND_API_KEY: string;
-  readonly RESEND_TO_EMAIL?: string;
-  readonly RESEND_FROM_EMAIL?: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
+interface Env {
+  RESEND_TO_EMAIL?: string;
+  RESEND_FROM_EMAIL?: string;
 }

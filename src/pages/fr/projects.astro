@@ -25,7 +25,6 @@ const t = useTranslations(lang);
       {
         projects.map((project) => (
           <ProjectCard
-            client:load
             projectId={project.id}
             lang={lang}
             buttonLabel={t("projects.button_label")}
