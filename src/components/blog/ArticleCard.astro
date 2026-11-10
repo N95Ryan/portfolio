@@ -1,22 +1,27 @@
 ---
-import { formatArticleDate, blogArticlePath } from "@lib/blog";
+import { formatArticleDate } from "@lib/blog";
 import type { Article } from "@lib/notion";
+import { useTranslatedPath } from "@i18n/utils";
 
 interface Props {
   article: Article;
 }
 
 const { article } = Astro.props;
-const href = blogArticlePath(article.lang, article.slug);
+const translatePath = useTranslatedPath(article.lang);
+const href = translatePath(`/blog/${article.slug}`);
 const formattedDate = formatArticleDate(article.date, article.lang);
 ---
 
 <article
-  class="rounded-lg border border-indigo-900/60 bg-gray-900/40 p-6 transition-colors hover:border-indigo-600/80"
+  class="group relative rounded-lg border border-indigo-900/60 bg-gray-900/40 p-6 transition-colors hover:border-indigo-500/90 focus-within:border-indigo-500/90"
 >
   <time class="text-sm text-gray-400" datetime={article.date}>{formattedDate}</time>
   <h2 class="mt-2 text-2xl font-semibold text-indigo-400">
-    <a href={href} class="hover:text-purple-300 transition-colors">
+    <a
+      href={href}
+      class="transition-colors group-hover:text-purple-300 after:absolute after:inset-0 after:rounded-lg after:content-[''] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-400"
+    >
       {article.title}
     </a>
   </h2>
