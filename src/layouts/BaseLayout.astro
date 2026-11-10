@@ -7,6 +7,7 @@ interface Props {
   description?: string;
   lang?: "en" | "fr";
   ogType?: "website" | "article";
+  alternates?: { en: string; fr: string };
 }
 
 const {
@@ -14,6 +15,7 @@ const {
   description = SITE_META_DESCRIPTION,
   lang = "en",
   ogType = "website",
+  alternates,
 } = Astro.props;
 
 const canonicalURL = Astro.site
@@ -21,13 +23,18 @@ const canonicalURL = Astro.site
   : `${Astro.url.origin}${Astro.url.pathname}`;
 
 // Hreflang URLs
+const siteBase = Astro.site || Astro.url.origin;
 const currentPath = Astro.url.pathname;
-const enURL = currentPath.startsWith("/fr/")
-  ? new URL(currentPath.replace("/fr/", "/"), Astro.site || Astro.url.origin)
-  : new URL(currentPath, Astro.site || Astro.url.origin);
-const frURL = currentPath.startsWith("/fr/")
-  ? new URL(currentPath, Astro.site || Astro.url.origin)
-  : new URL(`/fr${currentPath}`, Astro.site || Astro.url.origin);
+const enURL = alternates
+  ? new URL(alternates.en, siteBase)
+  : currentPath.startsWith("/fr/")
+    ? new URL(currentPath.replace("/fr/", "/"), siteBase)
+    : new URL(currentPath, siteBase);
+const frURL = alternates
+  ? new URL(alternates.fr, siteBase)
+  : currentPath.startsWith("/fr/")
+    ? new URL(currentPath, siteBase)
+    : new URL(`/fr${currentPath}`, siteBase);
 
 // Schema.org JSON-LD
 const schemaData = {
