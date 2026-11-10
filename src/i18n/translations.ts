@@ -52,8 +52,7 @@ export const translations = {
     'hero.tagline.needs': 'Needs',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
-    'hero.jobTitle': 'Full-Stack Software Engineer',
-    'hero.jobStack': 'Go · React · Next.js',
+    'hero.jobTitle': 'Full-stack Software Engineer specializing in Go and React',
     'hero.summary':
       'I own simple, reliable production systems end-to-end, from architecture to production.',
     'hero.terminal.label': 'Track record',
@@ -199,8 +198,7 @@ export const translations = {
     'hero.tagline.needs': 'Besoins',
     'hero.tagline.challenges': 'Challenges',
     'hero.tagline.solutions': 'Solutions',
-    'hero.jobTitle': 'Ingénieur logiciel full-stack',
-    'hero.jobStack': 'Go · React · Next.js',
+    'hero.jobTitle': 'Ingénieur logiciel full-stack spécialisé dans Go et React',
     'hero.summary':
       "Je prends en charge de bout en bout des systèmes de production simples et fiables, de l'architecture à la mise en production.",
     'hero.terminal.label': 'Résultats mesurés',

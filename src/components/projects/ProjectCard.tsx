@@ -7,13 +7,29 @@ interface ProjectCardProps {
   buttonLabel: string;
 }
 
-const darkenHexColor = (color: string): string => {
-  const hex = color.replace("#", "");
+const parseHexRgb = (color: string): [number, number, number] | null => {
+  const hex = color.replace("#", "").trim();
+  if (hex.length !== 6) return null;
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
+  if ([r, g, b].some(Number.isNaN)) return null;
+  return [r, g, b];
+};
+
+const darkenHexColor = (color: string): string => {
+  const rgb = parseHexRgb(color);
+  if (!rgb) return color;
   const darken = (val: number) => Math.max(0, Math.floor(val * 0.85));
-  return `rgb(${darken(r)}, ${darken(g)}, ${darken(b)})`;
+  return `rgb(${darken(rgb[0])}, ${darken(rgb[1])}, ${darken(rgb[2])})`;
+};
+
+const isLightHexColor = (color: string): boolean => {
+  const rgb = parseHexRgb(color);
+  if (!rgb) return false;
+  const [r, g, b] = rgb;
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.6;
 };
 
 export default function ProjectCard({
@@ -33,7 +49,9 @@ export default function ProjectCard({
   const bgColor = project.bgcolor || "#ffffff";
   const textColor = project.textColor || "#000000";
   const linkColor = project.linkColor || "#343a40";
-  const linkTextColor = project.linkTextColor || "#ffffff";
+  const linkTextColor =
+    project.linkTextColor?.trim() ||
+    (isLightHexColor(linkColor) ? "#343a40" : "#ffffff");
   const linkHoverColor = darkenHexColor(linkColor);
 
   return (
@@ -131,6 +149,7 @@ export default function ProjectCard({
               rel="noopener noreferrer"
               className="relative px-5 sm:px-6 md:px-7 py-2.5 sm:py-3 transition-all duration-300 text-xs sm:text-sm font-medium rounded-xl overflow-hidden group/btn whitespace-nowrap bg-[var(--link-color)] text-[var(--link-text-color)] shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.06)] hover:bg-[var(--link-hover-color)] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.12),0_2px_4px_rgba(0,0,0,0.08)] active:translate-y-0 active:scale-[0.98]"
               style={{
+                color: linkTextColor,
                 ["--link-color" as string]: linkColor,
                 ["--link-hover-color" as string]: linkHoverColor,
                 ["--link-text-color" as string]: linkTextColor,

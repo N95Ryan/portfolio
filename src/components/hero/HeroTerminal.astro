@@ -1,12 +1,5 @@
 ---
-import type { HeroTimeline } from "./heroTimeline";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-
-interface Props {
-  timeline: HeroTimeline;
-}
-
-const { timeline } = Astro.props;
 
 type TerminalMetricLine = {
   kind: "metric";
@@ -50,21 +43,10 @@ const terminalLines: TerminalLine[] = [
     comment: "neat barber",
   },
 ];
-
-const frameDelayMs = timeline.frameDelayMs;
-const frameDurationMs = 320;
-const lineStartDelayMs = timeline.lineStartDelayMs;
-const lineStaggerMs = timeline.lineStaggerMs;
-const lineDurationMs = 340;
-const explanationDelayMs = timeline.explanationDelayMs;
-const footnoteDurationMs = 320;
 ---
 
 <div class="w-full max-w-md mt-6">
-  <div
-    class="hero-terminal-intro"
-    style={`animation-delay: ${frameDelayMs}ms; animation-duration: ${frameDurationMs}ms`}
-  >
+  <div>
     <p class="text-center text-xs uppercase tracking-wider text-gray-500 mb-2">
       {t("hero.terminal.label")}
     </p>
@@ -74,11 +56,8 @@ const footnoteDurationMs = 320;
       aria-label="Recent production metrics"
     >
       {
-        terminalLines.map((line, i) => (
-          <div
-            class="hero-terminal-line text-gray-300 leading-relaxed"
-            style={`animation-delay: ${lineStartDelayMs + i * lineStaggerMs}ms; animation-duration: ${lineDurationMs}ms`}
-          >
+        terminalLines.map((line) => (
+          <div class="hero-terminal-line text-gray-300 leading-relaxed">
             {line.kind === "plain" ? (
               line.text
             ) : (
@@ -101,26 +80,16 @@ const footnoteDurationMs = 320;
   </div>
 
   <p
-    class="hero-terminal-footnote text-center text-xs text-gray-500 max-w-md mt-2 mx-auto leading-relaxed"
-    style={`animation-delay: ${explanationDelayMs}ms; animation-duration: ${footnoteDurationMs}ms`}
+    class="text-center text-xs text-gray-500 max-w-md mt-2 mx-auto leading-relaxed"
   >
     {t("hero.terminal.description")}
   </p>
 </div>
 
 <style>
-  .hero-terminal-intro {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: hero-terminal-enter-up ease both;
-  }
-
   .hero-terminal-line {
     position: relative;
     padding-left: 1.1rem;
-    opacity: 0;
-    transform: translateX(-5px);
-    animation: hero-terminal-line-in ease both;
   }
 
   .hero-terminal-line::before {
@@ -128,43 +97,5 @@ const footnoteDurationMs = 320;
     position: absolute;
     left: 0;
     color: rgb(34 211 238);
-  }
-
-  .hero-terminal-footnote {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: hero-terminal-enter-up ease both;
-  }
-
-  @keyframes hero-terminal-enter-up {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes hero-terminal-line-in {
-    from {
-      opacity: 0;
-      transform: translateX(-5px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-terminal-intro,
-    .hero-terminal-line,
-    .hero-terminal-footnote {
-      opacity: 1;
-      transform: none;
-      animation: none;
-    }
   }
 </style>

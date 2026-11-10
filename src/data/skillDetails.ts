@@ -5,26 +5,21 @@ export type SkillItem = {
 const languages: SkillItem[] = [
   { key: "golang" },
   { key: "typescript" },
-  { key: "javascript" },
 ];
 
 const frontend: SkillItem[] = [
   { key: "react" },
   { key: "nextjs" },
   { key: "astro" },
+  { key: "expo" },
   { key: "tailwind" },
   { key: "tanstack" },
   { key: "reduxToolkit" },
 ];
 
-const mobile: SkillItem[] = [
-  { key: "reactNative" },
-  { key: "expo" },
-];
-
 const backend: SkillItem[] = [
-  { key: "gin" },
   { key: "chi" },
+  { key: "gin" },
   { key: "restApis" },
   { key: "graphql" },
 ];
@@ -43,9 +38,9 @@ const testing: SkillItem[] = [
 
 const devops: SkillItem[] = [
   { key: "docker" },
+  { key: "cloudflare" },
   { key: "aws" },
   { key: "terraform" },
-  { key: "cloudflare" },
   { key: "render" },
   { key: "githubActions" },
   { key: "gitlabCi" },
@@ -57,12 +52,14 @@ const tools: SkillItem[] = [
   { key: "bun" },
 ];
 
-const aiTools: SkillItem[] = [{ key: "claude" }, { key: "cursor" }];
+const aiTools: SkillItem[] = [
+  { key: "claude" },
+  { key: "cursor" },
+];
 
 export const skillsDetails = {
   languages,
   frontend,
-  mobile,
   backend,
   database,
   testing,

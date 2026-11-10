@@ -3,14 +3,12 @@ import type { Experience } from '@types/index';
 export const experiences: Experience[] = [
   {
     id: 'midbec-2026',
-    location: 'Drummondville, Quebec, Canada (Hybrid)',
+    location: 'Drummondville, QC, Canada',
     technologies: [
-      'Go',
-      'Chi',
+      'Go (chi)',
       'PostgreSQL',
       'Next.js',
       'React',
-      'TypeScript',
       'TanStack Query',
       'Redux Toolkit',
       'Tailwind CSS',
@@ -19,7 +17,7 @@ export const experiences: Experience[] = [
   },
   {
     id: 'neat-2025',
-    location: 'Paris, France (Remote)',
+    location: 'Paris, France',
     technologies: [
       'Astro',
       'TypeScript',
@@ -31,7 +29,7 @@ export const experiences: Experience[] = [
   },
   {
     id: 'konbini-2022',
-    location: 'Paris, France (Hybrid)',
+    location: 'Paris, France',
     technologies: [
       'TypeScript',
       'Next.js',

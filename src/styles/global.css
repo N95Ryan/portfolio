@@ -59,7 +59,8 @@ body {
   background: #666;
 }
 
-/* Styles pour les cartes de projets - force les couleurs depuis les styles inline */
-.project-card-content * {
+/* Couleur de carte pour titre et tags (pas le CTA, qui a sa propre couleur) */
+.project-card-content .project-card-title,
+.project-card-content .project-card-text {
   color: inherit;
 }
