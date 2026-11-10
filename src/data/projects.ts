@@ -11,7 +11,7 @@ export const projects: Project[] = [
       en: 'Judo pocket companion. Free technique library, premium training journal behind a Stripe paywall. Built end-to-end, from the Go API to the App Store.',
       fr: 'Application compagnon pour judokas. Bibliothèque de techniques gratuite, journal d\'entraînement premium derrière un paywall Stripe. Construit de bout en bout, de l\'API Go à l\'App Store.',
     },
-    technologies: ['Go (Chi)', 'Expo', 'Neon', 'Stripe'],
+    technologies: ['Go (chi)', 'Expo', 'Neon', 'Stripe', 'AWS','Terraform'],
     image: '/images/projects/Flip.jpg',
     link: 'https://github.com/N95Ryan/Flip',
     bgcolor: '#34344A', 

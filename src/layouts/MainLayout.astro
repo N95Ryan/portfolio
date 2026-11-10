@@ -6,15 +6,17 @@ import { getLangFromUrl } from '@i18n/utils';
 
 interface Props {
   title?: string;
+  ogType?: "website" | "article";
+  alternates?: { en: string; fr: string };
   description?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, ogType, alternates, description } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<BaseLayout title={title} description={description} lang={lang}>
-  <Navigation />
+<BaseLayout title={title} lang={lang} ogType={ogType} alternates={alternates} description={description}>
+  <Navigation alternates={alternates} />
   <main>
     <slot />
   </main>

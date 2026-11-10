@@ -4,28 +4,39 @@ import { SITE_META_DESCRIPTION } from "@utils/constants";
 
 interface Props {
   title?: string;
-  description?: string;
   lang?: "en" | "fr";
+  ogType?: "website" | "article";
+  alternates?: { en: string; fr: string };
+  description?: string;
 }
 
 const {
   title = "Ryan PINA-SILASSE | Software Engineer",
-  description = SITE_META_DESCRIPTION,
   lang = "en",
+  ogType = "website",
+  alternates,
+  description: pageDescription,
 } = Astro.props;
+
+const description = pageDescription?.trim() || SITE_META_DESCRIPTION;
 
 const canonicalURL = Astro.site
   ? new URL(Astro.url.pathname, Astro.site)
   : `${Astro.url.origin}${Astro.url.pathname}`;
 
 // Hreflang URLs
+const siteBase = Astro.site || Astro.url.origin;
 const currentPath = Astro.url.pathname;
-const enURL = currentPath.startsWith("/fr/")
-  ? new URL(currentPath.replace("/fr/", "/"), Astro.site || Astro.url.origin)
-  : new URL(currentPath, Astro.site || Astro.url.origin);
-const frURL = currentPath.startsWith("/fr/")
-  ? new URL(currentPath, Astro.site || Astro.url.origin)
-  : new URL(`/fr${currentPath}`, Astro.site || Astro.url.origin);
+const enURL = alternates
+  ? new URL(alternates.en, siteBase)
+  : currentPath.startsWith("/fr/")
+    ? new URL(currentPath.replace("/fr/", "/"), siteBase)
+    : new URL(currentPath, siteBase);
+const frURL = alternates
+  ? new URL(alternates.fr, siteBase)
+  : currentPath.startsWith("/fr/")
+    ? new URL(currentPath, siteBase)
+    : new URL(`/fr${currentPath}`, siteBase);
 
 // Schema.org JSON-LD
 const schemaData = {
@@ -99,7 +110,7 @@ const schemaData = {
     <meta name="ICBM" content="45.888179, -72.483898" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

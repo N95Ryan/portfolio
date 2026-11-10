@@ -1,0 +1,44 @@
+---
+import { formatArticleDate } from "@lib/blog";
+import type { Article } from "@lib/notion";
+import { useTranslatedPath } from "@i18n/utils";
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const translatePath = useTranslatedPath(article.lang);
+const href = translatePath(`/blog/${article.slug}`);
+const formattedDate = formatArticleDate(article.date, article.lang);
+---
+
+<article
+  class="group relative rounded-lg border border-indigo-900/60 bg-gray-900/40 p-6 transition-colors hover:border-indigo-500/90 focus-within:border-indigo-500/90"
+>
+  <time class="text-sm text-gray-400" datetime={article.date}>{formattedDate}</time>
+  <h2 class="mt-2 text-2xl font-semibold text-indigo-400">
+    <a
+      href={href}
+      class="transition-colors group-hover:text-purple-300 after:absolute after:inset-0 after:rounded-lg after:content-[''] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-400"
+    >
+      {article.title}
+    </a>
+  </h2>
+  {
+    article.description && (
+      <p class="mt-3 text-gray-300 leading-relaxed">{article.description}</p>
+    )
+  }
+  {
+    article.tags.length > 0 && (
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {article.tags.map((tag) => (
+          <li class="rounded-full bg-indigo-950/80 px-3 py-1 text-xs text-indigo-300">
+            {tag}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</article>

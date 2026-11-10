@@ -11,23 +11,17 @@ interface ExperienceCardProps {
     description: string[];
     technologiesLabel: string;
   };
-  side: "left" | "right";
 }
 
 export default function ExperienceCard({
   experience,
   translations,
-  side,
 }: ExperienceCardProps) {
   const technologiesString = experience.technologies.join(" - ");
-
-  const animationClasses =
-    side === "left" ? "md:animate-fade-in-left" : "md:animate-fade-in-right";
 
   return (
     <div
       className={`
-        ${animationClasses}
         bg-gradient-to-br from-gray-800 to-gray-950
         hover:from-gray-700 hover:to-gray-900
         p-4 sm:p-5 md:p-6 rounded-lg w-full max-w-3xl 

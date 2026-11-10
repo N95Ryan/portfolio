@@ -3,6 +3,12 @@ import { getLangFromUrl, useTranslations, useTranslatedPath } from "@i18n/utils"
 import { NAVIGATION_ITEMS } from "@utils/constants";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 
+interface Props {
+  alternates?: { en: string; fr: string };
+}
+
+const { alternates } = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
@@ -52,7 +58,7 @@ const translatePath = useTranslatedPath(lang);
 
       <!-- Language Switcher (Right) -->
       <div class="flex items-center">
-        <LanguageSwitcher />
+        <LanguageSwitcher alternates={alternates} />
       </div>
     </div>
 

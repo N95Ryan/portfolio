@@ -11,6 +11,20 @@ export default {
   ],
   theme: {
     extend: {
+      typography: ({ theme }) => ({
+        invert: {
+          css: {
+            '--tw-prose-body': theme('colors.gray.300'),
+            '--tw-prose-headings': theme('colors.indigo.300'),
+            '--tw-prose-links': theme('colors.indigo.400'),
+            '--tw-prose-bold': theme('colors.white'),
+            '--tw-prose-code': theme('colors.purple.200'),
+            '--tw-prose-quote-border': theme('colors.purple.600'),
+            '--tw-prose-pre-bg': theme('colors.gray.950'),
+            '--tw-prose-pre-code': theme('colors.purple.100'),
+          },
+        },
+      }),
       animation: {
         'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
         'fade-in-right': 'fadeInRight 0.8s ease-out forwards',
@@ -41,5 +55,6 @@ export default {
   },
   plugins: [
     require('tailwindcss-animated'),
+    require('@tailwindcss/typography'),
   ],
 };

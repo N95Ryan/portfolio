@@ -2,9 +2,22 @@
 import { languages } from "@i18n/translations";
 import { getLangFromUrl, useTranslatedPath } from "@i18n/utils";
 
+interface Props {
+  alternates?: { en: string; fr: string };
+}
+
+const { alternates } = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 const currentPath = Astro.url.pathname.replace(`/${lang}`, "") || "/";
+
+function languageHref(locale: string): string {
+  if (alternates && (locale === "en" || locale === "fr")) {
+    return alternates[locale];
+  }
+  return translatePath(currentPath, locale);
+}
 ---
 
 <div class="relative group">
@@ -28,7 +41,7 @@ const currentPath = Astro.url.pathname.replace(`/${lang}`, "") || "/";
     {
       Object.entries(languages).map(([code, name]) => (
         <a
-          href={translatePath(currentPath, code)}
+          href={languageHref(code)}
           class:list={[
             "block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg",
             { "bg-indigo-700 text-white font-medium": lang === code },
