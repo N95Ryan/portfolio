@@ -6,12 +6,14 @@ interface Props {
   title?: string;
   description?: string;
   lang?: "en" | "fr";
+  ogType?: "website" | "article";
 }
 
 const {
   title = "Ryan PINA-SILASSE | Software Engineer",
   description = SITE_META_DESCRIPTION,
   lang = "en",
+  ogType = "website",
 } = Astro.props;
 
 const canonicalURL = Astro.site
@@ -99,7 +101,7 @@ const schemaData = {
     <meta name="ICBM" content="45.888179, -72.483898" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
