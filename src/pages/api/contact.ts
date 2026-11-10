@@ -29,11 +29,10 @@ export const POST: APIRoute = async ({ request }) => {
   };
 
   try {
-    const env = cloudflareEnv as Record<string, string | undefined>;
-    const resendApiKey = env.RESEND_API_KEY;
-    const resendToEmail = env.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
+    const resendApiKey = cloudflareEnv.RESEND_API_KEY;
+    const resendToEmail = cloudflareEnv.RESEND_TO_EMAIL || "n95jsryan@gmail.com";
     const resendFromEmail =
-      env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
+      cloudflareEnv.RESEND_FROM_EMAIL || "Portfolio Contact <contact@ryan-pina.dev>";
 
     if (!resendApiKey) {
       console.error("RESEND_API_KEY manquante");
