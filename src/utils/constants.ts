@@ -9,5 +9,6 @@ export const NAVIGATION_ITEMS = [
   { key: 'nav.skills', href: "/skills" },
   { key: 'nav.experience', href: "/experience" },
   { key: 'nav.projects', href: "/projects" },
+  { key: 'nav.blog', href: "/blog" },
   { key: 'nav.contact', href: "/contact" },
 ] as const;

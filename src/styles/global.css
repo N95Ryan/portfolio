@@ -64,3 +64,12 @@ body {
 .project-card-content .project-card-text {
   color: inherit;
 }
+
+.blog-prose pre {
+  border: 1px solid rgb(49 46 129 / 0.6);
+  border-radius: 0.5rem;
+}
+
+.blog-prose :where(a):hover {
+  color: rgb(216 180 254);
+}
