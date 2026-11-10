@@ -6,6 +6,7 @@ export function formatArticleDate(isoDate: string, lang: ArticleLang): string {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   }).format(date);
 }
 
