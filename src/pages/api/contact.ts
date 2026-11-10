@@ -149,42 +149,52 @@ ${message}
     if (error) {
       console.error("Resend error:", error);
 
-      let errorMessage = "Erreur lors de l'envoi de l'email";
-      let errorCode = null;
+      const genericMessage = "Erreur lors de l'envoi de l'email";
+      let errorCode: string | null = null;
+      let resendMessage = genericMessage;
 
       if (error && typeof error === "object") {
         if ("message" in error) {
-          errorMessage = String(error.message);
+          resendMessage = String(error.message);
         }
         if ("name" in error) {
           errorCode = String(error.name);
         }
       }
 
-      if (
-        errorMessage.includes("only send testing emails to your own email address") ||
+      const isDomainVerificationIssue =
+        resendMessage.includes("only send testing emails to your own email address") ||
         errorCode === "validation_error" ||
-        errorMessage.includes("domain") ||
-        errorMessage.includes("not verified")
-      ) {
-        errorMessage =
-          "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS.";
-      }
+        resendMessage.includes("domain") ||
+        resendMessage.includes("not verified");
 
-      return jsonResponse(errorMessage, 500, {
-        errorCode,
-        ...(import.meta.env.DEV && { error }),
-      });
+      const clientMessage = isDomainVerificationIssue
+        ? "Le domaine n'est pas encore vérifié. Veuillez vérifier le domaine dans Resend et attendre la propagation DNS."
+        : import.meta.env.DEV
+          ? resendMessage
+          : genericMessage;
+
+      return jsonResponse(
+        clientMessage,
+        500,
+        import.meta.env.DEV ? { errorCode, error } : undefined,
+      );
     }
 
     return jsonResponse("Email envoyé avec succès", 200, { data });
   } catch (error) {
     console.error("Erreur API:", error);
 
-    return jsonResponse("Erreur serveur", 500, {
-      error: error instanceof Error ? error.message : String(error),
-      type: error instanceof Error ? error.constructor.name : typeof error,
-      ...(import.meta.env.DEV && { stack: error instanceof Error ? error.stack : undefined }),
-    });
+    return jsonResponse(
+      "Erreur serveur",
+      500,
+      import.meta.env.DEV
+        ? {
+            error: error instanceof Error ? error.message : String(error),
+            type: error instanceof Error ? error.constructor.name : typeof error,
+            stack: error instanceof Error ? error.stack : undefined,
+          }
+        : undefined,
+    );
   }
 };
