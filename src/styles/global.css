@@ -73,3 +73,10 @@ body {
 .blog-prose :where(a):hover {
   color: rgb(216 180 254);
 }
+
+.blog-prose img {
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+  border-radius: 0.5rem;
+}

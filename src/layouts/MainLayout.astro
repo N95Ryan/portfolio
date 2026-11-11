@@ -9,13 +9,14 @@ interface Props {
   ogType?: "website" | "article";
   alternates?: { en: string; fr: string };
   description?: string;
+  ogImage?: string;
 }
 
-const { title, ogType, alternates, description } = Astro.props;
+const { title, ogType, alternates, description, ogImage } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<BaseLayout title={title} lang={lang} ogType={ogType} alternates={alternates} description={description}>
+<BaseLayout title={title} lang={lang} ogType={ogType} alternates={alternates} description={description} ogImage={ogImage}>
   <Navigation alternates={alternates} />
   <main>
     <slot />
