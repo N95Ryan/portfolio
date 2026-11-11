@@ -1,6 +1,6 @@
 import { defineMiddleware } from "astro:middleware";
 
-const BLOG_CACHE_TTL_SECONDS = 300;
+const BLOG_CACHE_TTL_SECONDS = 60;
 
 function isBlogHtmlRoute(pathname: string): boolean {
   if (pathname === "/blog" || pathname.startsWith("/blog/")) {
@@ -13,7 +13,7 @@ function isBlogHtmlRoute(pathname: string): boolean {
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  if (!isBlogHtmlRoute(context.url.pathname)) {
+  if (import.meta.env.DEV || !isBlogHtmlRoute(context.url.pathname)) {
     return next();
   }
 

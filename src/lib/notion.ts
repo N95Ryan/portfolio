@@ -217,7 +217,6 @@ export async function getPublishedArticles(lang: ArticleLang): Promise<Article[]
 async function pageToHtml(pageId: string): Promise<string> {
   const notion = getNotionClient();
   const n2m = new NotionToMarkdown({ notionClient: notion });
-  n2m.setCustomTransformer("image", async () => "");
   const mdBlocks = await n2m.pageToMarkdown(pageId);
   const mdString = n2m.toMarkdownString(mdBlocks);
   return await marked.parse(mdString.parent);
