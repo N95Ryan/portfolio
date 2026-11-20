@@ -1,8 +1,28 @@
 import type { Project } from '@types/index';
 
 export const projects: Project[] = [
+
   {
-    id: '0',
+    id: '1',
+    name: {
+      en: 'Nimbus',
+      fr: 'Nimbus',
+    },
+    description: {
+      en: 'My personal cloud and homelab, running on a UGREEN NAS. RAID 5 storage for my photos and files, private remote access through Tailscale, and Docker to self-host my side-project backends.',
+      fr: 'Mon cloud et homelab personnel, sur un NAS UGREEN. Stockage RAID 5 pour mes photos et fichiers, accès à distance privé via Tailscale, et Docker pour auto-héberger les backends de mes side projects.',
+    },
+    technologies: ['Docker', 'Tailscale'],
+    image: '/images/projects/Nimbus.jpg',
+    link: 'https://github.com/N95Ryan/nimbus',
+    bgcolor: '#6c47da',
+    textColor: '#ffffff',
+    linkColor: '#09348e',
+    linkTextColor: '#ffffff',
+  },
+
+  {
+    id: '2',
     name: {
       en: 'Flip',
       fr: 'Flip',
@@ -38,7 +58,7 @@ export const projects: Project[] = [
   //   linkTextColor: '#be0c16',
   // },
   {
-    id: '2',
+    id: '3',
     name: {
       en: 'Leaf',
       fr: 'Leaf',
@@ -56,7 +76,7 @@ export const projects: Project[] = [
     linkTextColor: '#ffffff',
   },
   {
-    id: '3',
+    id: '4',
     name: {
       en: 'The 8bits Hangman',
       fr: 'The 8bits Hangman',
